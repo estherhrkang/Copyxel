@@ -24,7 +24,6 @@ export const authenticate = () => async (dispatch) => {
     if (data.errors) {
       return;
     }
-  
     dispatch(setUser(data));
   }
 }
@@ -54,7 +53,6 @@ export const login = (email, password) => async (dispatch) => {
   } else {
     return ['An error occurred. Please try again.']
   }
-
 }
 
 export const logout = () => async (dispatch) => {
@@ -68,7 +66,6 @@ export const logout = () => async (dispatch) => {
     dispatch(removeUser());
   }
 };
-
 
 export const signUp = (username, email, password) => async (dispatch) => {
   const response = await fetch('/api/auth/signup', {
@@ -94,6 +91,35 @@ export const signUp = (username, email, password) => async (dispatch) => {
     }
   } else {
     return ['An error occurred. Please try again.']
+  }
+}
+
+export const editUser = (user) => async (dispatch) => {
+  const response = await fetch(`/api/users/${user.id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(user)
+  })
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(setUser(data));
+  }
+}
+
+export const deleteUser = (user) => async (dispatch) => {
+  const response = await fetch(`/api/users/${user.id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(user)
+  })
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(removeUser(data));
+    return data;
   }
 }
 
