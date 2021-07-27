@@ -1,6 +1,6 @@
 from .db import db
-from .users_drawing import users_drawing
-from .favorite import favorite
+from .users_drawings import users_drawings
+from .favorites import favorites
 from datetime import datetime
 
 
@@ -12,8 +12,8 @@ class Drawing(db.Model):
     rows = db.Column(db.String, nullable=False)
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
-    users = db.relationship('User', secondary=users_drawing, back_populates='drawings')
-    users = db.relationship('User', secondary=favorite, back_populates='drawings')
+    users = db.relationship('User', secondary=users_drawings, back_populates='drawings')
+    users = db.relationship('User', secondary=favorites, back_populates='drawings')
     comments = db.relationship('Comment', back_populates='drawing')
 
     def to_dict(self):

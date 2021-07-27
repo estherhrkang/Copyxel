@@ -48,7 +48,7 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('user_id', 'drawing_id')
     )
-    op.add_column('users', sa.Column('profile_img', sa.String(length=255), nullable=False))
+    op.add_column('users', sa.Column('profile_img', sa.String(length=255)))
     # ### end Alembic commands ###
 
 
