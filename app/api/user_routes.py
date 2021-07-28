@@ -36,7 +36,7 @@ def updateUser(id):
 
 
 # delete a specific user
-@user_routes.route('/<int:id', methods=['DELETE'])
+@user_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def deleteUser(id):
     user = User.query.get(id)
