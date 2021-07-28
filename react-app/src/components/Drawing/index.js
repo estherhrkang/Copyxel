@@ -13,7 +13,7 @@ export default function Drawing() {
     const history = useHistory();
     const dispatch = useDispatch();
     const [title, setTitle] = useState('');
-    const [colorChoice, setColorChoice] = useState('#ed2364');
+    const [colorChoice, setColorChoice] = useState('#607d8b');
 
     const handleSubmit = async () => {
         const payload = {
