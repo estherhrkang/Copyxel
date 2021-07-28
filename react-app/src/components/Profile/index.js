@@ -45,7 +45,7 @@ export default function Profile() {
     };
 
     return(
-        <div>
+        <div className={styles.profile}>
             <div className={styles.editForm}>
                 {showEditForm ? (
                     <>

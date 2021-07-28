@@ -9,7 +9,7 @@ export default function SampleDrawing() {
     return(
         <div className={styles.sampleDrawing}>
             <h1>Sample Drawing</h1>
-            <button type='button' onClick={() => history.push('/drawing/new')}>BEGIN DRAWING</button>
+            <button type='button' onClick={() => history.push('/drawing/new')}>Begin drawing</button>
         </div>
     )
 }

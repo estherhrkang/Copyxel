@@ -7,11 +7,12 @@
 
 .navLink {
     text-decoration: none;
-    color: black;
+    color: #7ca2cf;
+
 }
 
 .navLink:hover {
-    color: grey;
+    color: #2c62aa;
     cursor: pointer;
 }
 

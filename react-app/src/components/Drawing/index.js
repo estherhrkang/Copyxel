@@ -117,7 +117,7 @@ export default function Drawing() {
 
     return (
         <div className={styles.drawingContainer}>
-            <h1>BEGIN DRAWING!</h1>
+            <h1>Begin drawing!</h1>
             <div className={styles.drawing}>
                 <form>
                     <input 
@@ -137,8 +137,8 @@ export default function Drawing() {
             </div>
 
             {/* if no color on canvas, disable see results button */}
-            <button type='button' onClick={handleSubmit}>SEE RESULTS</button>
-            <button type='button' onClick={() => history.push('/drawing')}>CHOOSE A DIFFERENT DRAWING</button>
+            <button type='button' onClick={handleSubmit}>See results</button>
+            <button type='button' onClick={() => history.push('/drawing')}>Choose a different drawing</button>
         </div>
     )
 }

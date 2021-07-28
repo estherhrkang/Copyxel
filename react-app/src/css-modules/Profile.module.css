@@ -1,4 +1,18 @@
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.editForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
 .editForm img {
-    max-height: 3rem;
+    max-height: 4rem;
     width: auto;
 }

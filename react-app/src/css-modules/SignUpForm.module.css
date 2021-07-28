@@ -9,13 +9,3 @@
     display: flex;
     justify-content: space-between;
 }
-
-.signupForm button {
-    border: none;
-
-}
-
-.signupForm button:hover {
-    cursor: pointer;
-
-}

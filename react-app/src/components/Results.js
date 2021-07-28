@@ -8,8 +8,8 @@ export default function Results() {
     return (
         <div className={styles.results}>
             <h1>Show sample drawing and user's drawing</h1>
-            <button type='button' onClick={() => history.push('/')}>SEE FRIENDS' DRAWINGS</button>
-            <button type='button' onClick={() => history.push('/drawing')}>DRAW AGAIN?</button>
+            <button type='button' onClick={() => history.push('/')}>See friends' drawings</button>
+            <button type='button' onClick={() => history.push('/drawing')}>Draw again?</button>
         </div>
     )
 }

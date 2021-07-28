@@ -9,13 +9,3 @@
     display: flex;
     justify-content: space-between;
 }
-
-.loginForm button {
-    border: none;
-
-}
-
-.loginForm button:hover {
-    cursor: pointer;
-
-}
