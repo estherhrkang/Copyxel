@@ -1,36 +1,49 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
-import styles from '../../css-modules/Drawing.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { createDrawing, deleteDrawing } from '../../store/drawing';
+import Row from './Row';
+
 import { CirclePicker } from 'react-color';
 import { RiEraserLine } from 'react-icons/ri';
-import Row from './Row';
+import styles from '../../css-modules/Drawing.module.css';
 
 
 export default function Drawing() {
     const history = useHistory();
+    const dispatch = useDispatch();
+    const [title, setTitle] = useState('');
     const [colorChoice, setColorChoice] = useState('#ed2364');
 
+    const handleSubmit = async () => {
+        const payload = {
+            title,
+            rows
+        }
+        await dispatch(createDrawing(payload))
+        history.push('/drawing/results')
+    }
 
-    const [pixelColor, setPixelColor] = useState('#fff');
-    const [oldColor, setOldColor] = useState(pixelColor);
-    const [canChangeColor, setCanChangeColor] = useState(true);
+    // const [pixelColor, setPixelColor] = useState('#fff');
+    // const [oldColor, setOldColor] = useState(pixelColor);
+    // const [canChangeColor, setCanChangeColor] = useState(true);
 
-    function applyColor() {
-        setPixelColor(colorChoice);
-        setCanChangeColor(false);
-    };
+    // function applyColor() {
+    //     setPixelColor(colorChoice);
+    //     setCanChangeColor(false);
+    // };
 
-    function changeColorOnHover() {
-        setOldColor(pixelColor);
-        setPixelColor(colorChoice);
-    };
+    // function changeColorOnHover() {
+    //     setOldColor(pixelColor);
+    //     setPixelColor(colorChoice);
+    // };
 
-    function resetColor() {
-        if (canChangeColor) setPixelColor(oldColor);
-        setCanChangeColor(true);
-    };
+    // function resetColor() {
+    //     if (canChangeColor) setPixelColor(oldColor);
+    //     setCanChangeColor(true);
+    // };
 
-    let rows = [];
+    let rows = []; // <-defined above 
     // let pixels = [];
 
     let rowsDB = [];
@@ -106,6 +119,14 @@ export default function Drawing() {
         <div className={styles.drawingContainer}>
             <h1>BEGIN DRAWING!</h1>
             <div className={styles.drawing}>
+                <form>
+                    <input 
+                        type='text'
+                        placeholder='Name your drawing!'
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
+                </form>
                 <div className={styles.drawingPanel}>
                     <div className={styles.pixels}>{rows}</div>
                 </div>
@@ -116,7 +137,7 @@ export default function Drawing() {
             </div>
 
             {/* if no color on canvas, disable see results button */}
-            <button type='button' onClick={() => history.push('/drawing/results')}>SEE RESULTS</button>
+            <button type='button' onClick={handleSubmit}>SEE RESULTS</button>
             <button type='button' onClick={() => history.push('/drawing')}>CHOOSE A DIFFERENT DRAWING</button>
         </div>
     )

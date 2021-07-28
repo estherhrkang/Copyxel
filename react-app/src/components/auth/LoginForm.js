@@ -30,13 +30,6 @@ export default function LoginForm() {
     const username = 'demo';
     const password = 'password';
     dispatch(login(username, password));
-    // const data = await dispatch(login(username, password));
-    // history.push('/');
-    
-    // if (data) {
-    //   setErrors(data);
-    // } else {
-    // }
   }
 
   return (
