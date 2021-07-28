@@ -10,26 +10,93 @@ export default function Drawing() {
     const history = useHistory();
     const [colorChoice, setColorChoice] = useState('#ed2364');
 
-    let rows = [];
-    // let pixels = [];
 
-    for (let i = 0; i < 16; i++) {
-        rows.push(<Row key={i} colorChoice={colorChoice}/>)
+    const [pixelColor, setPixelColor] = useState('#fff');
+    const [oldColor, setOldColor] = useState(pixelColor);
+    const [canChangeColor, setCanChangeColor] = useState(true);
+
+    function applyColor() {
+        setPixelColor(colorChoice);
+        setCanChangeColor(false);
+    };
+
+    function changeColorOnHover() {
+        setOldColor(pixelColor);
+        setPixelColor(colorChoice);
+    };
+
+    function resetColor() {
+        if (canChangeColor) setPixelColor(oldColor);
+        setCanChangeColor(true);
+    };
+
+    let rows = [];
+    let pixels = [];
+
+    let rowDB = [];
+    // let pixelDB = [];
+
+    for (let i = 0; i < 5; i++) {
+        rowDB[i] = [];
+        // 2)
         // rows.push(
-        //     <div key={i}>{pixels}</div>
+        //     <div className={styles.row}>
+        //     {pixels}
+        //     </div>
         // )
+
+        for (let j = 0; j < 5; j++) {
+            rowDB[i][j] = j;
+            // 3)
+            // rows[i].push(
+            //     <div className={styles.row}>
+            //          {rows[i][j].push(
+            //              <div className={styles.pixel}
+            //                 onClick={applyColor}
+            //                 onMouseEnter={changeColorOnHover}
+            //                 onMouseLeave={resetColor}
+            //                 style={{ backgroundColor: pixelColor }}
+            //             >
+            //             </div>
+            //          )}
+            //     </div>
+            // )
+            
+            // 2)
+            // pixels.push(
+            //     <div className={styles.pixel}
+            //         onClick={applyColor}
+            //         onMouseEnter={changeColorOnHover}
+            //         onMouseLeave={resetColor}
+            //         style={{ backgroundColor: pixelColor }}
+            //     >
+            //     </div>
+            // )
+
+            // 1)
+            // rows[i][j] = (
+            //     <div className={styles.row}>
+            //          <div className={styles.pixel}
+            //             onClick={applyColor}
+            //             onMouseEnter={changeColorOnHover}
+            //             onMouseLeave={resetColor}
+            //             style={{ backgroundColor: pixelColor }}
+            //         >
+            //         </div>
+            //     </div>
+            // )
+
+        }
+
+        // 0) working code
+        // rows.push(<Row key={i} row={drawing[i]} colorChoice={colorChoice}/>)
     }
 
-    // for (let j = 0; j < 16; j++) {
-    //     pixels.push(
-    //         <div
+    // console.log('ROWS', rows);
+    // console.log('DRAWING', drawing);
 
-    //         ></div>
-    //     )
-    // }
-
-
-
+    console.log('rowDB----------', rowDB);
+    // console.log('pixelDB----------', pixelDB);
 
 
     return (
