@@ -5,7 +5,7 @@ import Home from './components/Home';
 import LoginForm from './components/auth/LoginForm';
 import SignupForm from './components/auth/SignupForm';
 import SampleDrawing from './components/SampleDrawing';
-import Canvas from './components/Canvas';
+import Drawing from './components/Drawing';
 import NavBar from './components/NavBar';
 import Results from './components/Results';
 import ProtectedRoute from './components/auth/ProtectedRoute';
@@ -43,7 +43,7 @@ export default function App() {
           <SampleDrawing />
         </ProtectedRoute>
         <ProtectedRoute path='/drawing/new' exact={true}>
-          <Canvas />
+          <Drawing />
         </ProtectedRoute>
         <ProtectedRoute path='/drawing/results' exact={true}>
           <Results />

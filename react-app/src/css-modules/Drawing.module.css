@@ -1,0 +1,25 @@
+.drawing {
+    background-color: bisque;
+    border: 1px solid black;
+    border-radius: 0.25rem;
+    padding: 1rem 4rem 2rem 4rem;
+    margin-top: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.colorPicker {
+    margin-bottom: 1.5rem !important;
+}
+
+.drawingPanel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pixels {
+    margin-bottom: 2rem;
+}
