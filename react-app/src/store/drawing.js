@@ -14,7 +14,7 @@ const removeDrawing = (drawing) => ({
 const initialState = { drawing: null };
 
 export const getAllDrawings = () => async (dispatch) => {
-    const response = await fetch('/api/drawings/all');
+    const response = await fetch('/api/drawings/');
     if (response.ok) {
         const data = await response.json();
         dispatch(setDrawing(data));
@@ -34,7 +34,7 @@ export const getDrawing = (drawing) => async (dispatch) => {
 };
 
 export const createDrawing = (drawing) => async (dispatch) => {
-    const response = await fetch('/api/drawings', {
+    const response = await fetch('/api/drawings/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(drawing)

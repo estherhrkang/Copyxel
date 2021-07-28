@@ -17,7 +17,6 @@ def validation_errors_to_error_messages(validation_errors):
             errorMessages.append(f'{field} : {error}')
     return errorMessages
 
-
 # get all drawings by all users
 @drawing_routes.route('/')
 @login_required
@@ -56,10 +55,8 @@ def createDrawing():
 # edit a drawing
 @drawing_routes.route('/', methods=['PUT'])
 @login_required
-def editDrawing(drawing):
-    # destructure id...
-
-
+def editDrawing():
+    
     return
 
 # delete a drawing
