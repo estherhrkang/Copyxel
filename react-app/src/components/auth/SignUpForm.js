@@ -27,7 +27,7 @@ export default function SignupForm() {
   if (user) return <Redirect to='/' />;
 
   return (
-    <div>
+    <div className={styles.signupForm}>
       <h1>put logo here</h1>
       <form onSubmit={onSignUp}>
         <div>

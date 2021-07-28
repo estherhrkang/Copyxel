@@ -31,13 +31,15 @@ export default function Drawing() {
     };
 
     let rows = [];
-    let pixels = [];
+    // let pixels = [];
 
-    let rowDB = [];
-    // let pixelDB = [];
+    let rowsDB = [];
+    // let pixelsDB = [];
 
     for (let i = 0; i < 5; i++) {
-        rowDB[i] = [];
+        // rowsDB[i] = [];
+        // rows[i] = [];
+
         // 2)
         // rows.push(
         //     <div className={styles.row}>
@@ -45,13 +47,14 @@ export default function Drawing() {
         //     </div>
         // )
 
-        for (let j = 0; j < 5; j++) {
-            rowDB[i][j] = j;
+        // for (let j = 0; j < 5; j++) {
+            // rowsDB[i][j] = j;
+
             // 3)
-            // rows[i].push(
+            // rows[i] = (
             //     <div className={styles.row}>
-            //          {rows[i][j].push(
-            //              <div className={styles.pixel}
+            //          {rows[i][j] = (
+            //             <div className={styles.pixel}
             //                 onClick={applyColor}
             //                 onMouseEnter={changeColorOnHover}
             //                 onMouseLeave={resetColor}
@@ -86,21 +89,21 @@ export default function Drawing() {
             //     </div>
             // )
 
-        }
+        // }
 
         // 0) working code
-        // rows.push(<Row key={i} row={drawing[i]} colorChoice={colorChoice}/>)
+        rows.push(<Row key={i} colorChoice={colorChoice}/>)
     }
 
     // console.log('ROWS', rows);
     // console.log('DRAWING', drawing);
 
-    console.log('rowDB----------', rowDB);
-    // console.log('pixelDB----------', pixelDB);
+    // console.log('rowsDB----------', rowsDB);
+    // console.log('pixelsDB----------', pixelsDB);
 
 
     return (
-        <div>
+        <div className={styles.drawingContainer}>
             <h1>BEGIN DRAWING!</h1>
             <div className={styles.drawing}>
                 <div className={styles.drawingPanel}>

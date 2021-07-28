@@ -40,7 +40,7 @@ export default function LoginForm() {
   }
 
   return (
-    <div>
+    <div className={styles.loginForm}>
       <h1>put logo here</h1>
       <form onSubmit={onLogin}>
         <div>
@@ -67,6 +67,8 @@ export default function LoginForm() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+        </div>
+        <div>
           <button type='submit'>Log in</button>
           <button type='button' onClick={demoLogin}>Demo</button>
         </div>

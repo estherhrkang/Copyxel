@@ -1,0 +1,17 @@
+.navBar ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+.navLink {
+    text-decoration: none;
+    color: black;
+}
+
+.navLink:hover {
+    color: grey;
+    cursor: pointer;
+}
+

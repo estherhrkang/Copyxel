@@ -1,0 +1,21 @@
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.loginForm div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.loginForm button {
+    border: none;
+
+}
+
+.loginForm button:hover {
+    cursor: pointer;
+
+}

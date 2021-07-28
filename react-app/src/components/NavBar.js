@@ -8,21 +8,19 @@ export default function NavBar() {
   const user = useSelector(state => state.session.user);
 
   return (
-    <nav>
+    <nav className={styles.navBar}>
         <ul>
             <li>
-              <NavLink to='/' exact={true} activeClassName='active'>
+              <NavLink to='/' exact={true} className={styles.navLink} activeClassName='active'>
                 Home
               </NavLink>
             </li>
             {user && (
-              <>
-                <li>
-                  <NavLink to='/profile' exact={true} activeClassName='active'>
-                    Profile
-                  </NavLink>
-                </li>
-              </>
+              <li>
+                <NavLink to='/profile' exact={true} className={styles.navLink} activeClassName='active'>
+                  Profile
+                </NavLink>
+              </li>
             )}
         </ul>
     </nav>
