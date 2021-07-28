@@ -119,7 +119,6 @@ export const deleteUser = (user) => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     dispatch(removeUser(data));
-    return data;
   }
 }
 
