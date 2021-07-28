@@ -47,7 +47,7 @@ export default function LoginForm() {
           ))}
         </div>
         <div>
-          <label htmlFor='username'>USERNAME</label>
+          <label htmlFor='username'>Username</label>
           <input
             name='username'
             type='text'
@@ -57,7 +57,7 @@ export default function LoginForm() {
           />
         </div>
         <div>
-          <label htmlFor='password'>PASSWORD</label>
+          <label htmlFor='password'>Password</label>
           <input
             name='password'
             type='password'
@@ -65,12 +65,12 @@ export default function LoginForm() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button type='submit'>LOG IN</button>
-          <button type='button' onClick={demoLogin}>DEMO LOG IN</button>
+          <button type='submit'>Log in</button>
+          <button type='button' onClick={demoLogin}>Demo</button>
         </div>
         <div>
           Don't have an account?
-          <button type='button' onClick={() => history.push('/signup')}>SIGN UP</button>
+          <button type='button' onClick={() => history.push('/signup')}>Sign up</button>
         </div>
       </form>
     </div>

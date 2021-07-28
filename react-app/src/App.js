@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import Home from './components/Home';
 import LoginForm from './components/auth/LoginForm';
 import SignupForm from './components/auth/SignupForm';
+import Profile from './components/Profile';
 import SampleDrawing from './components/SampleDrawing';
 import Drawing from './components/Drawing';
 import NavBar from './components/NavBar';
@@ -39,6 +40,9 @@ export default function App() {
         <Route path='/signup' exact={true}>
           <SignupForm />
         </Route>
+        <ProtectedRoute path='/profile' exact={true}>
+          <Profile />
+        </ProtectedRoute>
         <ProtectedRoute path='/drawing' exact={true}>
           <SampleDrawing />
         </ProtectedRoute>

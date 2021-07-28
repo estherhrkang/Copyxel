@@ -11,11 +11,26 @@ export default function Drawing() {
     const [colorChoice, setColorChoice] = useState('#ed2364');
 
     let rows = [];
+    // let pixels = [];
+
     for (let i = 0; i < 16; i++) {
         rows.push(<Row key={i} colorChoice={colorChoice}/>)
+        // rows.push(
+        //     <div key={i}>{pixels}</div>
+        // )
     }
 
-    console.log(rows);
+    // for (let j = 0; j < 16; j++) {
+    //     pixels.push(
+    //         <div
+
+    //         ></div>
+    //     )
+    // }
+
+
+
+
 
     return (
         <div>

@@ -36,7 +36,7 @@ export default function SignupForm() {
           ))}
         </div>
         <div>
-          <label>USERNAME</label>
+          <label>Username</label>
           <input
             type='text'
             name='username'
@@ -45,7 +45,7 @@ export default function SignupForm() {
           ></input>
         </div>
         <div>
-          <label>EMAIL</label>
+          <label>Email</label>
           <input
             type='text'
             name='email'
@@ -54,7 +54,7 @@ export default function SignupForm() {
           ></input>
         </div>
         <div>
-          <label>PASSWORD</label>
+          <label>Password</label>
           <input
             type='password'
             name='password'
@@ -63,7 +63,7 @@ export default function SignupForm() {
           ></input>
         </div>
         <div>
-          <label>CONFIRM PASSWORD</label>
+          <label>Confirm password</label>
           <input
             type='password'
             name='repeat_password'
@@ -72,11 +72,11 @@ export default function SignupForm() {
             required={true}
           ></input>
         </div>
-        <button type='submit'>SIGN UP</button>
+        <button type='submit'>Sign up</button>
       </form>
       <div>
         Already have an account?
-        <button type='button' onClick={() => history.push('/login')}>LOG IN</button>
+        <button type='button' onClick={() => history.push('/login')}>Log in</button>
       </div>
     </div>
   );
