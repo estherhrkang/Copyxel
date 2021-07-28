@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import LogoutButton from './auth/LogoutButton';
 import Profile from './Profile';
 import styles from '../css-modules/NavBar.module.css';
 
@@ -22,9 +21,6 @@ export default function NavBar() {
                   <NavLink to='/profile' exact={true} activeClassName='active'>
                     Profile
                   </NavLink>
-                </li>
-                <li>
-                  <LogoutButton />
                 </li>
               </>
             )}
