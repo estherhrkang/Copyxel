@@ -38,7 +38,6 @@ def oneDrawing(id):
 @drawing_routes.route('/', methods=['POST'])
 @login_required
 def createDrawing():
-    # id, title, rows, date_created
     form = DrawingForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -56,15 +55,24 @@ def createDrawing():
 # edit a drawing
 @drawing_routes.route('/', methods=['PUT'])
 @login_required
-def editDrawing(drawing):
-    # destructure id...
+def editDrawing(drawing_id):
+    form = DrawingForm()
+    drawing = Drawing.query.get(drawing_id)
+    if form.validate_on_submit():
+        drawing.title = form.title.data,
+        drawing.rows = form.rows.data
+        # ,
+        # date_created=form.date_created.data  
+        db.session.commit()
+        return drawing.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
-
-    return
 
 # delete a drawing
 @drawing_routes.route('/', methods=['DELETE'])
 @login_required
-def deleteDrawing():
-    
-    return
+def deleteDrawing(drawing_id):
+    drawing = Drawing.query.get(drawing_id)
+    db.session.delete(drawing)
+    db.session.commit()   
+    return drawing.to_dict()

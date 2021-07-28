@@ -7,4 +7,4 @@ from wtforms.validators import DataRequired, ValidationError
 class DrawingForm(FlaskForm):
     title = StringField('title', validators=[DataRequired()])
     rows = StringField('rows', validators=[DataRequired()])
-    date_created = DateField('date_created', validators=[DataRequired()])
+    # date_created = DateField('date_created', validators=[DataRequired()])
