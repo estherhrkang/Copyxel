@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router';
+import styles from '../css-modules/Results.module.css';
 
 export default function Results() {
     const history = useHistory();

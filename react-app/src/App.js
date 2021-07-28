@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Home from './components/Home';
 import LoginForm from './components/auth/LoginForm';
-import SignUpForm from './components/auth/SignUpForm';
+import SignupForm from './components/auth/SignupForm';
 import SampleDrawing from './components/SampleDrawing';
 import Canvas from './components/Canvas';
 import NavBar from './components/NavBar';
@@ -37,7 +37,7 @@ export default function App() {
           <LoginForm />
         </Route>
         <Route path='/signup' exact={true}>
-          <SignUpForm />
+          <SignupForm />
         </Route>
         <ProtectedRoute path='/drawing' exact={true}>
           <SampleDrawing />

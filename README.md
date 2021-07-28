@@ -97,7 +97,7 @@ hurt to run it again.
       heroku container:release web -a {NAME_OF_HEROKU_APP}
       ```
 
-10. set up your database
+10. set up your database ----------------------------GETTING ERROR ON THIS STEP
 
       ```bash
       heroku run -a {NAME_OF_HEROKU_APP} flask db upgrade

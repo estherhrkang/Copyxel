@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router';
+import styles from '../css-modules/Canvas.module.css';
 
 export default function Canvas() {
     const history = useHistory();

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { login } from '../../store/session';
+import styles from '../../css-modules/LoginForm.module.css';
 
 export default function LoginForm() {
   const [errors, setErrors] = useState([]);
