@@ -8,10 +8,6 @@ export default function Home() {
     const history = useHistory();
     const user = useSelector(state => state.session.user);
 
-    useEffect(() => {
-        
-    }, [])
-
     const handlePlayBtn = (e) => {
         e.preventDefault();
         if (user) {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { createDrawing, deleteDrawing } from '../../store/drawing';
@@ -12,17 +12,49 @@ export default function Drawing() {
     const history = useHistory();
     const dispatch = useDispatch();
     const [title, setTitle] = useState('');
-    const [colorChoice, setColorChoice] = useState('#607d8b');
-
-    const colors = [
-        ['#fff', '#fff', '#fff', '#fff', '#fff'],
-        ['#fff', '#fff', '#fff', '#fff', '#fff'],
-        ['#fff', '#fff', '#fff', '#fff', '#fff'],
-        ['#fff', '#fff', '#fff', '#fff', '#fff'],
-        ['#fff', '#fff', '#fff', '#fff', '#fff']
-    ]
+    
+    
+    // set initial canvas color to #fff
+    let colors = [];
+    for (let i = 0; i < 5; i++) {
+        colors.push([]);
+        for (let j = 0; j < 5; j++) {
+            colors[i].push('#fff');
+        };
+    };
+    
+    const allColors = useRef(colors);
+    // keeps in object
+    // use it when you don't want your component to reload if it's changed
+    
     const [canvas, setCanvas] = useState(colors);
-    console.log('CANVAS-----', canvas);
+    console.log('allColors', allColors);
+
+    // selected color
+    const [colorChoice, setColorChoice] = useState('#607d8b');
+    // selected row/pixel
+    const updateColors = (r, p, obj) => {
+        const copy = obj.current.map(row => row.slice())
+        copy[r][p] = colorChoice
+        obj.current = copy
+    }
+
+    // create rows
+    let rows = [];
+    for (let i = 0; i < 5; i++) {
+        rows.push(
+            <Row 
+                key={i} 
+                rowIdx={i}
+                // canvas={canvas} 
+                setCanvas={setCanvas}
+                // colors={colors} 
+                allColors={allColors}
+                colorChoice={colorChoice}
+                updateColors={updateColors}
+            />
+        )
+    }
 
     const handleSubmit = async () => {
         const payload = {
@@ -31,78 +63,6 @@ export default function Drawing() {
         }
         await dispatch(createDrawing(payload))
         history.push('/results')
-    }
-
-    let rows = [];
-
-    for (let i = 0; i < 5; i++) {
-        rows.push(
-            <Row 
-                key={i} 
-                rowIdx={i}
-                canvas={canvas} 
-                setCanvas={setCanvas} 
-                colorChoice={colorChoice}
-            />
-        )
-        
-        // ---
-
-        // setRow(`${i}`)
-
-        // rowsDB[i] = [];
-        // rows[i] = [];
-
-        // 2)
-        // rows.push(
-        //     <div className={styles.row}>
-        //     {pixels}
-        //     </div>
-        // )
-
-        // for (let j = 0; j < 5; j++) {
-            // rowsDB[i][j] = j;
-
-            // 3)
-            // rows[i] = (
-            //     <div className={styles.row}>
-            //          {rows[i][j] = (
-            //             <div className={styles.pixel}
-            //                 onClick={applyColor}
-            //                 onMouseEnter={changeColorOnHover}
-            //                 onMouseLeave={resetColor}
-            //                 style={{ backgroundColor: pixelColor }}
-            //             >
-            //             </div>
-            //          )}
-            //     </div>
-            // )
-            
-            // 2)
-            // pixels.push(
-            //     <div className={styles.pixel}
-            //         onClick={applyColor}
-            //         onMouseEnter={changeColorOnHover}
-            //         onMouseLeave={resetColor}
-            //         style={{ backgroundColor: pixelColor }}
-            //     >
-            //     </div>
-            // )
-
-            // 1)
-            // rows[i][j] = (
-            //     <div className={styles.row}>
-            //          <div className={styles.pixel}
-            //             onClick={applyColor}
-            //             onMouseEnter={changeColorOnHover}
-            //             onMouseLeave={resetColor}
-            //             style={{ backgroundColor: pixelColor }}
-            //         >
-            //         </div>
-            //     </div>
-            // )
-
-        // }
     }
 
     return (
@@ -125,7 +85,6 @@ export default function Drawing() {
                     Erase<RiEraserLine />
                 </div>
             </div>
-
             {/* if no color on canvas, disable see results button */}
             <button type='button' onClick={handleSubmit}>See results</button>
             <button type='button' onClick={() => history.push('/drawing')}>Choose a different drawing</button>
