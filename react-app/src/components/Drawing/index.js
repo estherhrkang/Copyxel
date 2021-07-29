@@ -19,18 +19,59 @@ export default function Drawing() {
     let [row, setRow] = useState('');
     let [pixel, setPixel] = useState('');
 
-    // useEffect(() => {
-    //     // if
-    // }, [colorChoice, row, pixel]);
+    // colors (#)
+    // row 0
+    const [rp00, setRp00] = useState('fff')
+    const [rp01, setRp01] = useState('fff')
+    const [rp02, setRp02] = useState('fff')
+    const [rp03, setRp03] = useState('fff')
+    const [rp04, setRp04] = useState('fff')
+    // row 1
+    const [rp10, setRp10] = useState('fff')
+    const [rp11, setRp11] = useState('fff')
+    const [rp12, setRp12] = useState('fff')
+    const [rp13, setRp13] = useState('fff')
+    const [rp14, setRp14] = useState('fff')
+    // row 1
+    const [rp20, setRp20] = useState('fff')
+    const [rp21, setRp21] = useState('fff')
+    const [rp22, setRp22] = useState('fff')
+    const [rp23, setRp23] = useState('fff')
+    const [rp24, setRp24] = useState('fff')
+    // row 1
+    const [rp30, setRp30] = useState('fff')
+    const [rp31, setRp31] = useState('fff')
+    const [rp32, setRp32] = useState('fff')
+    const [rp33, setRp33] = useState('fff')
+    const [rp34, setRp34] = useState('fff')
+    // row 1
+    const [rp40, setRp40] = useState('fff')
+    const [rp41, setRp41] = useState('fff')
+    const [rp42, setRp42] = useState('fff')
+    const [rp43, setRp43] = useState('fff')
+    const [rp44, setRp44] = useState('fff')
+
+    let canvas = [
+        [rp00, rp01, rp02, rp03, rp04],
+        [rp10, rp11, rp12, rp13, rp14],
+        [rp20, rp21, rp22, rp23, rp24],
+        [rp30, rp31, rp32, rp33, rp34],
+        [rp40, rp41, rp42, rp43, rp44]
+    ]
+
+    console.log('RP00-----', rp00);
+    console.log('CANVAS-----', canvas);
 
     const handleSubmit = async () => {
         const payload = {
             title,
-            rows
+            rows: canvas // <- canvas
         }
         await dispatch(createDrawing(payload))
         history.push('/drawing/results')
     }
+
+    // ---
 
     // const [pixelColor, setPixelColor] = useState('#fff');
     // const [oldColor, setOldColor] = useState(pixelColor);
@@ -52,10 +93,10 @@ export default function Drawing() {
     // };
 
     
-
-
+    // ---
 
     let rows = []; // <-defined above 
+    let rows2 =[];
     // let pixels = [];
 
     // let rowsDB = [
@@ -68,6 +109,15 @@ export default function Drawing() {
     // let pixelsDB = [];
 
     for (let i = 0; i < 5; i++) {
+        // 0) working code
+        rows.push(<Row key={i} row={row} pixel={pixel} setPixel={setPixel} colorChoice={colorChoice}/>)
+        // rows.push(<Row key={i} row={rowsDB[i]} colorChoice={colorChoice}/>)
+
+        // experiment...
+        rows2.push(<Row key={i} canvas={canvas} setRp00={setRp00} colorChoice={colorChoice}/>)
+
+        // ---
+
         // setRow(`${i}`)
 
         // rowsDB[i] = [];
@@ -123,10 +173,6 @@ export default function Drawing() {
             // )
 
         // }
-
-        // 0) working code
-        rows.push(<Row row={row} pixel={pixel} setPixel={setPixel} colorChoice={colorChoice}/>)
-        // rows.push(<Row key={i} row={rowsDB[i]} colorChoice={colorChoice}/>)
     }
 
     // console.log('ROWS', rows);
@@ -151,6 +197,9 @@ export default function Drawing() {
                 <div className={styles.drawingPanel}>
                     <div className={styles.pixels} ref={canvasRef}>{rows}</div>
                 </div>
+                <div>
+                    {rows2}
+                </div>
                 <CirclePicker className={styles.colorPicker} color={colorChoice} onChangeComplete={(color) => setColorChoice(color.hex)}/>
                 <div onClick={() => setColorChoice('#fff')}>
                     Erase<RiEraserLine />
@@ -160,9 +209,9 @@ export default function Drawing() {
             {/* if no color on canvas, disable see results button */}
             <button type='button' onClick={handleSubmit}>See results</button>
             <button type='button' onClick={() => history.push('/drawing')}>Choose a different drawing</button>
-            <button type='button' onClick={() => exportComponentAsPNG(canvasRef)}>
+            {/* <button type='button' onClick={() => exportComponentAsPNG(canvasRef)}>
                 Export as PNG
-            </button>
+            </button> */}
         </div>
     )
 }

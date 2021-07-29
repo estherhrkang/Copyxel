@@ -47,6 +47,10 @@ export default function Profile() {
     return(
         <div className={styles.profile}>
             <div className={styles.editForm}>
+                <div>
+                    <h1>Hi, {user.username}!</h1>
+                    <img src={profileImg} alt='default'/>
+                </div>
                 {showEditForm ? (
                     <>
                         <form onSubmit={onSave}>
@@ -95,9 +99,7 @@ export default function Profile() {
                     </>
                 ) : (
                     <>
-                        <div>Hi, {user.username}!</div>
-                        <div><img src={profileImg} alt='default'/></div>
-                        <div>Email: {user.email}</div>
+                        <div>{user.email}</div>
                         <button type='button' onClick={() => setShowEditForm(true)}>Edit</button>
                         {/* <button type='button'>Delete</button> */}
                     </>
