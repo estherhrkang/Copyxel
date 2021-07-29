@@ -9,6 +9,7 @@ class Comment(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     drawing_id = db.Column(db.Integer, db.ForeignKey('drawings.id'), nullable=False)
 
+    # one-to-many (many)
     user = db.relationship('User', back_populates='comments')
     drawing = db.relationship('Drawing', back_populates='comments')
 
