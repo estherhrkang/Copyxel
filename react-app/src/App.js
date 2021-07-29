@@ -49,10 +49,12 @@ export default function App() {
         <ProtectedRoute path='/drawing/new' exact={true}>
           <Drawing />
         </ProtectedRoute>
-        <ProtectedRoute path='/drawing/results' exact={true}>
+        <ProtectedRoute path='/results' exact={true}>
           <Results />
         </ProtectedRoute>
-
+        <Route>
+          <h1>page does not exist</h1>
+        </Route>
       </Switch>
     </BrowserRouter>
   );

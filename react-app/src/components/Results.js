@@ -6,8 +6,9 @@ export default function Results() {
     const history = useHistory();
 
     return (
-        <div className={styles.results}>
+        <div className={styles.resultsContainer}>
             <h1>Show sample drawing and user's drawing</h1>
+            <div className={styles.results}>two drawings</div>
             <button type='button' onClick={() => history.push('/')}>See friends' drawings</button>
             <button type='button' onClick={() => history.push('/drawing')}>Draw again?</button>
         </div>

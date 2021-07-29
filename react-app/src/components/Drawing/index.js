@@ -68,7 +68,7 @@ export default function Drawing() {
             rows: canvas // <- canvas
         }
         await dispatch(createDrawing(payload))
-        history.push('/drawing/results')
+        history.push('/results')
     }
 
     // ---

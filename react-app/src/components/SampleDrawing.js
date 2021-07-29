@@ -7,8 +7,9 @@ export default function SampleDrawing() {
     const history = useHistory();
 
     return(
-        <div className={styles.sampleDrawing}>
-            <h1>Sample Drawing</h1>
+        <div className={styles.sampleDrawingContainer}>
+            <h1>Sample Drawing Title</h1>
+            <div className={styles.sampleDrawing}>Sample Drawing</div>
             <button type='button' onClick={() => history.push('/drawing/new')}>Begin drawing</button>
         </div>
     )

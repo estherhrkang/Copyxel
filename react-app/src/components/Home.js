@@ -23,7 +23,7 @@ export default function Home() {
 
     return (
         <div className={styles.home}>
-            <h1>home: display list of drawing results by all users</h1>
+            <h1>display sliding carousel of drawing results by all users</h1>
             <button type='button' onClick={handlePlayBtn}>Play?</button>
         </div>
     );
