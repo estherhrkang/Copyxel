@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from '../../css-modules/Pixel.module.css';
 
-export default function Pixel({ row, colorChoice }) {
+export default function Pixel({ row, pixel, colorChoice }) {
     const [pixelColor, setPixelColor] = useState('#fff');
     const [oldColor, setOldColor] = useState(pixelColor);
     const [canChangeColor, setCanChangeColor] = useState(true);

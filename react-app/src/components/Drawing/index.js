@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { createDrawing, deleteDrawing } from '../../store/drawing';
 import Row from './Row';
-
+import { exportComponentAsPNG } from 'react-component-export-image';
 import { CirclePicker } from 'react-color';
 import { RiEraserLine } from 'react-icons/ri';
 import styles from '../../css-modules/Drawing.module.css';
@@ -12,8 +12,16 @@ import styles from '../../css-modules/Drawing.module.css';
 export default function Drawing() {
     const history = useHistory();
     const dispatch = useDispatch();
+    const canvasRef = useRef();
     const [title, setTitle] = useState('');
+
     const [colorChoice, setColorChoice] = useState('#607d8b');
+    let [row, setRow] = useState('');
+    let [pixel, setPixel] = useState('');
+
+    // useEffect(() => {
+    //     // if
+    // }, [colorChoice, row, pixel]);
 
     const handleSubmit = async () => {
         const payload = {
@@ -43,13 +51,25 @@ export default function Drawing() {
     //     setCanChangeColor(true);
     // };
 
+    
+
+
+
     let rows = []; // <-defined above 
     // let pixels = [];
 
-    let rowsDB = [];
+    // let rowsDB = [
+    //     ['0', '0', '0', '0', '0'],
+    //     ['0', '0', '0', '0', '0'],
+    //     ['0', '0', '0', '0', '0'],
+    //     ['0', '0', '0', '0', '0'],
+    //     ['0', '0', '0', '0', '0']
+    // ];
     // let pixelsDB = [];
 
     for (let i = 0; i < 5; i++) {
+        // setRow(`${i}`)
+
         // rowsDB[i] = [];
         // rows[i] = [];
 
@@ -105,7 +125,8 @@ export default function Drawing() {
         // }
 
         // 0) working code
-        rows.push(<Row key={i} colorChoice={colorChoice}/>)
+        rows.push(<Row row={row} pixel={pixel} setPixel={setPixel} colorChoice={colorChoice}/>)
+        // rows.push(<Row key={i} row={rowsDB[i]} colorChoice={colorChoice}/>)
     }
 
     // console.log('ROWS', rows);
@@ -128,7 +149,7 @@ export default function Drawing() {
                     />
                 </form>
                 <div className={styles.drawingPanel}>
-                    <div className={styles.pixels}>{rows}</div>
+                    <div className={styles.pixels} ref={canvasRef}>{rows}</div>
                 </div>
                 <CirclePicker className={styles.colorPicker} color={colorChoice} onChangeComplete={(color) => setColorChoice(color.hex)}/>
                 <div onClick={() => setColorChoice('#fff')}>
@@ -139,6 +160,9 @@ export default function Drawing() {
             {/* if no color on canvas, disable see results button */}
             <button type='button' onClick={handleSubmit}>See results</button>
             <button type='button' onClick={() => history.push('/drawing')}>Choose a different drawing</button>
+            <button type='button' onClick={() => exportComponentAsPNG(canvasRef)}>
+                Export as PNG
+            </button>
         </div>
     )
 }
