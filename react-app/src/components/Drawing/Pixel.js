@@ -1,15 +1,17 @@
 import { useState } from 'react';
 import styles from '../../css-modules/Pixel.module.css';
 
-export default function Pixel({ row, pixel, canvas, setRp00, colorChoice }) {
+export default function Pixel({ rowIdx, pixelIdx, canvas, setCanvas, colorChoice }) {
     const [pixelColor, setPixelColor] = useState('#fff');
     const [oldColor, setOldColor] = useState(pixelColor);
     const [canChangeColor, setCanChangeColor] = useState(true);
+    //
 
     function applyColor() {
         setPixelColor(colorChoice);
-        setRp00(colorChoice)
         setCanChangeColor(false);
+        // if clicked on row/pixel, change setCanvas at row/pixel
+        // setCanvas
     };
 
     function changeColorOnHover() {

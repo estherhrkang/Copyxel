@@ -2,17 +2,21 @@
 import styles from '../../css-modules/Row.module.css';
 import Pixel from './Pixel';
 
-export default function Row({ row, pixel, setPixel, canvas, setRp00, colorChoice }) {
+export default function Row({ rowIdx, pixel, canvas, setCanvas, colorChoice }) {
 
     let pixels = [];
-    let pixels2 = [];
 
     for (let j = 0; j < 5; j++) {
-        // setPixel(`${j}`)
-        // pixel = j;
-        pixels.push(<Pixel key={j} row={row} pixel={pixel} setRp00={setRp00} colorChoice={colorChoice}/>)
-    
-        pixels2.push(<Pixel key={j} canvas={canvas}/>)
+        pixels.push(
+            <Pixel 
+                key={j} 
+                rowIdx={rowIdx} 
+                pixelIdx={j} 
+                canvas={canvas} 
+                setCanvas={setCanvas} 
+                colorChoice={colorChoice}
+            />
+        )
     }
 
     return (

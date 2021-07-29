@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { createDrawing, deleteDrawing } from '../../store/drawing';
 import Row from './Row';
-import { exportComponentAsPNG } from 'react-component-export-image';
 import { CirclePicker } from 'react-color';
 import { RiEraserLine } from 'react-icons/ri';
 import styles from '../../css-modules/Drawing.module.css';
@@ -12,54 +11,17 @@ import styles from '../../css-modules/Drawing.module.css';
 export default function Drawing() {
     const history = useHistory();
     const dispatch = useDispatch();
-    const canvasRef = useRef();
     const [title, setTitle] = useState('');
-
     const [colorChoice, setColorChoice] = useState('#607d8b');
-    let [row, setRow] = useState('');
-    let [pixel, setPixel] = useState('');
 
-    // colors (#)
-    // row 0
-    const [rp00, setRp00] = useState('fff')
-    const [rp01, setRp01] = useState('fff')
-    const [rp02, setRp02] = useState('fff')
-    const [rp03, setRp03] = useState('fff')
-    const [rp04, setRp04] = useState('fff')
-    // row 1
-    const [rp10, setRp10] = useState('fff')
-    const [rp11, setRp11] = useState('fff')
-    const [rp12, setRp12] = useState('fff')
-    const [rp13, setRp13] = useState('fff')
-    const [rp14, setRp14] = useState('fff')
-    // row 1
-    const [rp20, setRp20] = useState('fff')
-    const [rp21, setRp21] = useState('fff')
-    const [rp22, setRp22] = useState('fff')
-    const [rp23, setRp23] = useState('fff')
-    const [rp24, setRp24] = useState('fff')
-    // row 1
-    const [rp30, setRp30] = useState('fff')
-    const [rp31, setRp31] = useState('fff')
-    const [rp32, setRp32] = useState('fff')
-    const [rp33, setRp33] = useState('fff')
-    const [rp34, setRp34] = useState('fff')
-    // row 1
-    const [rp40, setRp40] = useState('fff')
-    const [rp41, setRp41] = useState('fff')
-    const [rp42, setRp42] = useState('fff')
-    const [rp43, setRp43] = useState('fff')
-    const [rp44, setRp44] = useState('fff')
-
-    let canvas = [
-        [rp00, rp01, rp02, rp03, rp04],
-        [rp10, rp11, rp12, rp13, rp14],
-        [rp20, rp21, rp22, rp23, rp24],
-        [rp30, rp31, rp32, rp33, rp34],
-        [rp40, rp41, rp42, rp43, rp44]
+    const colors = [
+        ['#fff', '#fff', '#fff', '#fff', '#fff'],
+        ['#fff', '#fff', '#fff', '#fff', '#fff'],
+        ['#fff', '#fff', '#fff', '#fff', '#fff'],
+        ['#fff', '#fff', '#fff', '#fff', '#fff'],
+        ['#fff', '#fff', '#fff', '#fff', '#fff']
     ]
-
-    console.log('RP00-----', rp00);
+    const [canvas, setCanvas] = useState(colors);
     console.log('CANVAS-----', canvas);
 
     const handleSubmit = async () => {
@@ -71,51 +33,19 @@ export default function Drawing() {
         history.push('/results')
     }
 
-    // ---
-
-    // const [pixelColor, setPixelColor] = useState('#fff');
-    // const [oldColor, setOldColor] = useState(pixelColor);
-    // const [canChangeColor, setCanChangeColor] = useState(true);
-
-    // function applyColor() {
-    //     setPixelColor(colorChoice);
-    //     setCanChangeColor(false);
-    // };
-
-    // function changeColorOnHover() {
-    //     setOldColor(pixelColor);
-    //     setPixelColor(colorChoice);
-    // };
-
-    // function resetColor() {
-    //     if (canChangeColor) setPixelColor(oldColor);
-    //     setCanChangeColor(true);
-    // };
-
-    
-    // ---
-
-    let rows = []; // <-defined above 
-    let rows2 =[];
-    // let pixels = [];
-
-    // let rowsDB = [
-    //     ['0', '0', '0', '0', '0'],
-    //     ['0', '0', '0', '0', '0'],
-    //     ['0', '0', '0', '0', '0'],
-    //     ['0', '0', '0', '0', '0'],
-    //     ['0', '0', '0', '0', '0']
-    // ];
-    // let pixelsDB = [];
+    let rows = [];
 
     for (let i = 0; i < 5; i++) {
-        // 0) working code
-        rows.push(<Row key={i} row={row} pixel={pixel} setPixel={setPixel} colorChoice={colorChoice}/>)
-        // rows.push(<Row key={i} row={rowsDB[i]} colorChoice={colorChoice}/>)
-
-        // experiment...
-        rows2.push(<Row key={i} canvas={canvas} setRp00={setRp00} colorChoice={colorChoice}/>)
-
+        rows.push(
+            <Row 
+                key={i} 
+                rowIdx={i}
+                canvas={canvas} 
+                setCanvas={setCanvas} 
+                colorChoice={colorChoice}
+            />
+        )
+        
         // ---
 
         // setRow(`${i}`)
@@ -175,13 +105,6 @@ export default function Drawing() {
         // }
     }
 
-    // console.log('ROWS', rows);
-    // console.log('DRAWING', drawing);
-
-    // console.log('rowsDB----------', rowsDB);
-    // console.log('pixelsDB----------', pixelsDB);
-
-
     return (
         <div className={styles.drawingContainer}>
             <h1>Begin drawing!</h1>
@@ -195,10 +118,7 @@ export default function Drawing() {
                     />
                 </form>
                 <div className={styles.drawingPanel}>
-                    <div className={styles.pixels} ref={canvasRef}>{rows}</div>
-                </div>
-                <div>
-                    {rows2}
+                    <div className={styles.pixels}>{rows}</div>
                 </div>
                 <CirclePicker className={styles.colorPicker} color={colorChoice} onChangeComplete={(color) => setColorChoice(color.hex)}/>
                 <div onClick={() => setColorChoice('#fff')}>
@@ -209,9 +129,6 @@ export default function Drawing() {
             {/* if no color on canvas, disable see results button */}
             <button type='button' onClick={handleSubmit}>See results</button>
             <button type='button' onClick={() => history.push('/drawing')}>Choose a different drawing</button>
-            {/* <button type='button' onClick={() => exportComponentAsPNG(canvasRef)}>
-                Export as PNG
-            </button> */}
         </div>
     )
 }
