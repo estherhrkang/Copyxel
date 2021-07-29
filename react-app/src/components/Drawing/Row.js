@@ -1,19 +1,16 @@
-import Pixel from './Pixel';
+import Column from './Column';
 import styles from '../../css-modules/Row.module.css';
 
-export default function Row({ rowIdx, canvas, setCanvas, colors, allColors, colorChoice, updateColors }) {
+export default function Row({ rowIdx, allColors, colorChoice, updateColors }) {
 
-    // create pixels(columns)
-    let pixels = [];
-    for (let j = 0; j < 5; j++) {
-        pixels.push(
-            <Pixel 
+    // creates Column components to display
+    let columns = [];
+    for (let j = 0; j < 10; j++) {
+        columns.push(
+            <Column 
                 key={j} 
                 rowIdx={rowIdx} 
-                pixelIdx={j} 
-                // canvas={canvas} 
-                setCanvas={setCanvas}
-                // colors={colors}
+                columnIdx={j}
                 allColors={allColors}
                 colorChoice={colorChoice}
                 updateColors={updateColors}
@@ -23,7 +20,7 @@ export default function Row({ rowIdx, canvas, setCanvas, colors, allColors, colo
 
     return (
         <div className={styles.row}>
-            {pixels}
+            {columns}
         </div>
     );
 };

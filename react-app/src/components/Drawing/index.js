@@ -12,43 +12,41 @@ export default function Drawing() {
     const history = useHistory();
     const dispatch = useDispatch();
     const [title, setTitle] = useState('');
+    const [colorChoice, setColorChoice] = useState('#607d8b');
     
-    
-    // set initial canvas color to #fff
+    // set initial colors of canvas in 2d array with '#fff' value
     let colors = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 10; i++) {
         colors.push([]);
-        for (let j = 0; j < 5; j++) {
+        for (let j = 0; j < 10; j++) {
             colors[i].push('#fff');
         };
     };
-    
-    const allColors = useRef(colors);
-    // keeps in object
-    // use it when you don't want your component to reload if it's changed
-    
-    const [canvas, setCanvas] = useState(colors);
-    console.log('allColors', allColors);
 
-    // selected color
-    const [colorChoice, setColorChoice] = useState('#607d8b');
-    // selected row/pixel
-    const updateColors = (r, p, obj) => {
-        const copy = obj.current.map(row => row.slice())
-        copy[r][p] = colorChoice
+    // using useRef so component doesn't reload every time to reflect changes
+    // useRef keeps element in an object
+    const allColors = useRef(colors);
+    // console.log('allColors', allColors);
+    // prints { [ [], [], [] ... ], [ [], [], [] ... ] ... }
+
+    // function used @ Column component when user clicks
+    // r = rowIdx, c = columnIdx, obj = allColors
+    const updateColors = (r, c, obj) => {
+        // make a copy of allColors
+        const copy = obj.current.map(row => row.slice());
+        // change color value at [rowIdx][columnIdx] be clicked color
+        copy[r][c] = colorChoice
+        // set allColors equal to modified copy
         obj.current = copy
     }
 
-    // create rows
+    // creates rows of Row components to display
     let rows = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 10; i++) {
         rows.push(
             <Row 
                 key={i} 
                 rowIdx={i}
-                // canvas={canvas} 
-                setCanvas={setCanvas}
-                // colors={colors} 
                 allColors={allColors}
                 colorChoice={colorChoice}
                 updateColors={updateColors}
@@ -59,7 +57,7 @@ export default function Drawing() {
     const handleSubmit = async () => {
         const payload = {
             title,
-            rows: canvas // <- canvas
+            rows // <- should be renamed: pixels?
         }
         await dispatch(createDrawing(payload))
         history.push('/results')
