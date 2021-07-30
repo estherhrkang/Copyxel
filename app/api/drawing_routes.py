@@ -38,7 +38,6 @@ def oneDrawing(id):
 @drawing_routes.route('/', methods=['POST'])
 @login_required
 def createDrawing():
-    print('got to createDrawing backend?-------------------')
     form = DrawingForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -47,7 +46,6 @@ def createDrawing():
             colors=form.colors.data,
             date_created=form.date_created.data
         )
-        print('---drawing---', drawing)
         db.session.add(drawing)
         db.session.commit()
         return drawing.to_dict()
@@ -62,9 +60,8 @@ def editDrawing(drawing_id):
     drawing = Drawing.query.get(drawing_id)
     if form.validate_on_submit():
         drawing.title = form.title.data,
-        drawing.colors = form.colors.data
-        # ,
-        # date_created=form.date_created.data  
+        drawing.colors = form.colors.data,
+        drawing.date_created=form.date_created.data  
         db.session.commit()
         return drawing.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401

@@ -55,6 +55,10 @@ export default function Drawing() {
         );
     };
 
+    // const string = JSON.stringify(allColors['current'])
+    // console.log('---stringified allColors---', string)
+    // console.log('---parsed----', JSON.parse(string))
+
     const handleSubmit = async () => {
         function formatToday() {
             const today = new Date();
@@ -67,7 +71,9 @@ export default function Drawing() {
         // console.log('today?', today);
         const payload = {
             title,
-            colors: allColors['current'],
+            // colors: allColors['current'],
+            // instead send as a string to be parsed when displaying
+            colors: JSON.stringify(allColors['current']),
             date_created: today
         }
         const data = await dispatch(createDrawing(payload))
