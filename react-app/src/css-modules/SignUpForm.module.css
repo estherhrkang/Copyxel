@@ -9,3 +9,9 @@
     display: flex;
     justify-content: space-between;
 }
+
+.signupForm__errors {
+    display: flex;
+    flex-direction: column;
+    color: #eb2158;
+}

@@ -9,20 +9,20 @@ export default function NavBar() {
 
   return (
     <nav className={styles.navBar}>
-        <ul>
-            <li>
+        <div>
+            <div>
               <NavLink to='/' exact={true} className={styles.navLink} activeClassName='active'>
                 Home
               </NavLink>
-            </li>
+            </div>
             {user && (
-              <li>
+              <div>
                 <NavLink to='/profile' exact={true} className={styles.navLink} activeClassName='active'>
                   Profile
                 </NavLink>
-              </li>
+              </div>
             )}
-        </ul>
+        </div>
     </nav>
   );
 }

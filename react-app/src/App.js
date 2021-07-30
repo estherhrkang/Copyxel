@@ -9,6 +9,7 @@ import SampleDrawing from './components/SampleDrawing';
 import Drawing from './components/Drawing';
 import NavBar from './components/NavBar';
 import Results from './components/Results';
+import Footer from './components/Footer';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import { authenticate } from './store/session';
 
@@ -56,6 +57,7 @@ export default function App() {
           <h1>page does not exist</h1>
         </Route>
       </Switch>
+      <Footer />
     </BrowserRouter>
   );
 }

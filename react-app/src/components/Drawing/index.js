@@ -12,8 +12,9 @@ export default function Drawing() {
     const history = useHistory();
     const dispatch = useDispatch();
     const [title, setTitle] = useState('');
+    const [errors, setErrors] = useState([]);
     const [colorChoice, setColorChoice] = useState('#607d8b');
-    
+
     // set initial colors of canvas in 2d array with '#fff' value
     let colors = [];
     for (let i = 0; i < 10; i++) {
@@ -26,7 +27,7 @@ export default function Drawing() {
     // using useRef so component doesn't reload every time to reflect changes
     // useRef keeps element in an object
     const allColors = useRef(colors);
-    console.log('allColors', allColors); // to see all colors on canvas (2d array)
+    console.log('---allColors---', allColors); // to see all colors on canvas (2d array)
     // prints { [ [], [], [] ... ], [ [], [], [] ... ] ... }
 
     // function used @ Column component when user clicks
@@ -51,23 +52,42 @@ export default function Drawing() {
                 colorChoice={colorChoice}
                 updateColors={updateColors}
             />
-        )
-    }
+        );
+    };
 
     const handleSubmit = async () => {
+        function formatToday() {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = `-${today.getMonth() + 1}`;
+            const day = `-${today.getDate()}`
+            return year+month+day
+        }
+        const today = formatToday();
+        // console.log('today?', today);
         const payload = {
             title,
-            rows // <- should be renamed: pixels?
+            colors: allColors['current'],
+            date_created: today
         }
-        await dispatch(createDrawing(payload))
-        history.push('/results')
-    }
+        const data = await dispatch(createDrawing(payload))
+        if (data) {
+            setErrors(data);
+        } else {
+            history.push('/results');
+        };
+    };
 
     return (
         <div className={styles.drawingContainer}>
             <h1>Begin drawing!</h1>
             <div className={styles.drawing}>
                 <form>
+                    <div>
+                        {errors.map((error, ind) => (
+                            <div key={ind}>{error}</div>
+                        ))}
+                    </div>
                     <input 
                         type='text'
                         placeholder='Name your drawing!'

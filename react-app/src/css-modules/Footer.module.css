@@ -1,0 +1,17 @@
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.footer img {
+    max-height: 30px;
+    max-width: 30px;
+    margin: 5px;
+    align-self: center;
+}
+
+.footer img:hover {
+    cursor: pointer;
+}

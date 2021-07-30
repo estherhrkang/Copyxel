@@ -9,7 +9,7 @@ class Drawing(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    rows = db.Column(db.String, nullable=False)
+    colors = db.Column(db.String, nullable=False)
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     # many-to-many thru association table
@@ -22,6 +22,6 @@ class Drawing(db.Model):
         return {
             'id': self.id,
             'title': self.title,
-            'rows': self.rows,
+            'colors': self.colors,
             'date_created': self.date_created
         }

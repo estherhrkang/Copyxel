@@ -39,6 +39,7 @@ export const createDrawing = (drawing) => async (dispatch) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(drawing)
     });
+    console.log('what is response?', response);
     if (response.ok) {
         const data = await response.json();
         dispatch(setDrawing(data));
@@ -57,6 +58,8 @@ export const editDrawing = (drawing) => async (dispatch) => {
         const data = await response.json();
         dispatch(setDrawing(data));
     } else {
+        const data = await response.json();
+        console.log('checking what is in data', data)
         return ['An error occurred. Please try again.']
     }
 

@@ -1,14 +1,11 @@
-.navBar ul {
-    list-style: none;
+.navBar div {
     display: flex;
     justify-content: space-around;
-    
 }
 
 .navLink {
     text-decoration: none;
     color: #7ca2cf;
-
 }
 
 .navLink:hover {

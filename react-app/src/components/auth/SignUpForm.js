@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect, useHistory } from 'react-router-dom';
 import { signUp } from '../../store/session';
@@ -30,7 +30,7 @@ export default function SignupForm() {
     <div className={styles.signupForm}>
       <h1>put logo here</h1>
       <form onSubmit={onSignUp}>
-        <div>
+        <div className={styles.signupForm__errors}>
           {errors.map((error, ind) => (
             <div key={ind}>{error}</div>
           ))}

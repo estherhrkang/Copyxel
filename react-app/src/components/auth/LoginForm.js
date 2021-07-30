@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
@@ -12,7 +12,7 @@ export default function LoginForm() {
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
   const history = useHistory();
-  
+
   if (user) return <Redirect to='/'/>
 
   const onLogin = async (e) => {
@@ -36,7 +36,7 @@ export default function LoginForm() {
     <div className={styles.loginForm}>
       <h1>put logo here</h1>
       <form onSubmit={onLogin}>
-        <div>
+        <div className={styles.loginForm__errors}>
           {errors.map((error, ind) => (
             <div key={ind}>{error}</div>
           ))}
