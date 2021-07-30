@@ -1,7 +1,7 @@
 .home {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
     
 }
 
@@ -12,14 +12,12 @@
 }
 
 .swiperSlide {
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   background-color:transparent;
+  text-align: center;
+
+
 }
 

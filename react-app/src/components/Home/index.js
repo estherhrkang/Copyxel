@@ -57,7 +57,7 @@ export default function Home() {
 
     return (
         <div className={styles.home}>
-            <Swiper slidesPerView={3} keyboard={true} mousewheel={true} spaceBetween={30} 
+            <Swiper slidesPerView={4} keyboard={true} mousewheel={true} spaceBetween={30} 
                 pagination={{ "clickable": true }} className={styles.swiperContainer}>
                 {slides}
             </Swiper>
