@@ -35,7 +35,7 @@ export default function Home() {
     // const drawingsArray = useSelector(state => state.drawing.drawing['drawings']);
     // console.log('whats in drawings store with drawings key?', drawingsArray);
 
-    console.log('whats in drawingsobj . drawings ?', drawingsObj?.drawings);
+    // console.log('whats in drawingsobj.drawings?', drawingsObj?.drawings);
 
     const slides = [];
     const drawingsArray = drawingsObj?.drawings;

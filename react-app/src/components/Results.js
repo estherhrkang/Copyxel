@@ -5,6 +5,9 @@ import styles from '../css-modules/Results.module.css';
 export default function Results() {
     const history = useHistory();
 
+    // use drawing/display component! 
+    // this component is to be used by home/slide component
+
     return (
         <div className={styles.resultsContainer}>
             <h1>Show sample drawing and user's drawing</h1>

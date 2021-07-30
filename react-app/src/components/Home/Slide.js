@@ -11,13 +11,31 @@ export default function Slide({ drawing }) {
         return `${dayOfWk} ${month} ${day} ${year}`
     }
 
+    // 1) parse drawing.colors
+    // console.log('NOT parsed---', drawing.colors);
+    // console.log('parsed---', JSON.parse(drawing.colors)); // breaks!
+
+    // 2) loop through row, loop through column
+    // 3) grab each color value in row/column
+    // 4) use Drawing(Row, Column) components to create canvas reflecting color value 
+
+    // OR
+
+    // ** use Results component! **
+
     return (
-        <div>
-            <div>{drawing.title}</div>
-            <div>
-                {/* {drawing.colors} */}
+        <div className={styles.cardContainer}>
+            <div className={styles.card}>
+                <div className={styles.card__front}>
+                    <div>{drawing.title}</div>
+                </div>
+                <div className={styles.card__back}>
+                    <div>
+                        {/* {drawing.colors} */}
+                    </div>
+                    <div>{changeDateFormat(drawing.date_created)}</div>
+                </div>
             </div>
-            <div>{changeDateFormat(drawing.date_created)}</div>
         </div>
     )
 }

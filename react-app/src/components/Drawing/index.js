@@ -24,11 +24,13 @@ export default function Drawing() {
         };
     };
 
+
     // using useRef so component doesn't reload every time to reflect changes
     // useRef keeps element in an object
     const allColors = useRef(colors);
     console.log('---allColors---', allColors); // to see all colors on canvas (2d array)
     // prints { [ [], [], [] ... ], [ [], [], [] ... ] ... }
+
 
     // function used @ Column component when user clicks
     // r = rowIdx, c = columnIdx, obj = allColors
@@ -40,6 +42,7 @@ export default function Drawing() {
         // set allColors equal to modified copy
         obj.current = copy
     }
+
 
     // creates rows of Row components to display
     let rows = [];
@@ -68,7 +71,7 @@ export default function Drawing() {
             return year+month+day
         }
         const today = formatToday();
-        // console.log('today?', today);
+
         const payload = {
             title,
             // colors: allColors['current'],
@@ -77,6 +80,7 @@ export default function Drawing() {
             date_created: today
         }
         const data = await dispatch(createDrawing(payload))
+        
         if (data) {
             setErrors(data);
         } else {
