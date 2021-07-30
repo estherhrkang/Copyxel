@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllDrawings, getDrawing, deleteDrawing } from '../../store/drawing';
+import Row from './Row';
 import styles from '../../css-modules/Display.module.css';
 
 export default function Display() {    
@@ -45,11 +46,20 @@ export default function Display() {
 
     // (3) create columns first, create rows 
     // set its background color to corresponding color value in 2d array
-
+    let rows = [];
+    for (let i = 0; i < currentDrawingColorsArray.length; i++) {
+        rows.push(
+            <Row 
+                key={i}
+                rowIdx={i}
+                currentDrawingColorsArray={currentDrawingColorsArray}
+            />
+        )
+    }
 
     return(
         <div>
-            display component pass in columns
+            {rows}
         </div>
     );
 };
