@@ -30,24 +30,3 @@
 .pixels {
     margin-bottom: 2rem;
 }
-
-
-
-
-
-
-/* from row component */
-.row {
-    display: flex;
-    width: fit-content;
-}
-
-/* from pixel component */
-.pixel {
-    width: 1.5rem;
-    height: 1.5rem;
-}
-
-.pixel:hover {
-    cursor: pointer;
-}

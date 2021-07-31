@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllDrawings, getDrawing, deleteDrawing } from '../../store/drawing';
-import Row from './Row';
+import DisplayRow from './DisplayRow';
 import styles from '../../css-modules/Display.module.css';
 
 export default function Display() {    
@@ -50,7 +50,7 @@ export default function Display() {
     let rows = [];
     for (let i = 0; i < currentDrawingColorsArray?.length; i++) {
         rows.push(
-            <Row 
+            <DisplayRow 
                 key={i}
                 rowIdx={i}
                 currentDrawingColorsArray={currentDrawingColorsArray}
@@ -58,9 +58,20 @@ export default function Display() {
         )
     }
 
+
+    function changeDateFormat(date) {
+        const dayOfWk = date.slice(0, 4)
+        const day = date.slice(5, 7)
+        const month = date.slice(8, 11)
+        const year = date.slice(12, 16)
+        return `${dayOfWk} ${month} ${day} ${year}`
+    }
+
     return(
-        <div>
-            {rows}
+        <div className={styles.drawingPanel}>
+            <div className={styles.pixels}>
+                {rows}
+            </div>
         </div>
     );
 };

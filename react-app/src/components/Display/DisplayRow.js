@@ -1,12 +1,12 @@
-import Column from './Column';
-// import styles?
+import DisplayColumn from './DisplayColumn';
+import styles from '../../css-modules/DisplayRow.module.css';
 
-export default function Row({ rowIdx, currentDrawingColorsArray }) {
+export default function DisplayRow({ rowIdx, currentDrawingColorsArray }) {
 
     let columns = [];
     for (let j = 0; j < currentDrawingColorsArray[rowIdx].length; j++) {
         columns.push(
-            <Column
+            <DisplayColumn
                 key={j}
                 rowIdx={rowIdx}
                 columnIdx={j}
@@ -16,7 +16,7 @@ export default function Row({ rowIdx, currentDrawingColorsArray }) {
     }
 
     return (
-        <div>
+        <div className={styles.row}>
             {columns}
         </div>
     )
