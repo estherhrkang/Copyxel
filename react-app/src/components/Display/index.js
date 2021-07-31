@@ -31,6 +31,7 @@ export default function Display() {
     // (1) for each drawing in drawingsArray,
     // find one where its id matches the id passed into this component
     const fakeDrawingIdToBePassedInAsProp = 6;
+    
     const currentDrawing = drawingsArray?.find(each => each['id'] === fakeDrawingIdToBePassedInAsProp)
     console.log('currentDrawing', currentDrawing)
 
