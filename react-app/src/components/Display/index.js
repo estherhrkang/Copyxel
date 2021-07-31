@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllDrawings, getDrawing, deleteDrawing } from '../../store/drawing';
 import DisplayRow from './DisplayRow';
@@ -30,17 +30,18 @@ export default function Display() {
 
     // (1) for each drawing in drawingsArray,
     // find one where its id matches the id passed into this component
-    const fakeDrawingIdToBePassedInAsProp = 6;
-    
-    const currentDrawing = drawingsArray?.find(each => each['id'] === fakeDrawingIdToBePassedInAsProp)
-    console.log('currentDrawing', currentDrawing)
-
+    const fakeDrawingIdToBePassedInAsProp = 6;    
     // (1.5) to randomize what's shown:
     // get all drawings
     // filter out that's owned by current user
     // generate random number up to length of all drawings - 1
     // set it as id to find currentDrawing
+    const randomIdx = Math.floor(Math.random() * drawingsArray?.length);
+    console.log('---random index---', randomIdx);
 
+    const currentDrawing = drawingsArray?.find(each => each['id'] === fakeDrawingIdToBePassedInAsProp)
+    console.log('currentDrawing', currentDrawing)
+    
     // (2) for that drawing, parse allColors 2d array
     const currentDrawingColorsArray = currentDrawing && JSON.parse(currentDrawing['colors'])
     console.log('currentDrawingColorsArray', currentDrawingColorsArray)
