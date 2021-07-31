@@ -41,13 +41,14 @@ export default function Display() {
     // set it as id to find currentDrawing
 
     // (2) for that drawing, parse allColors 2d array
-    const currentDrawingColorsArray = JSON.parse(currentDrawing['colors'])
+    const currentDrawingColorsArray = currentDrawing && JSON.parse(currentDrawing['colors'])
     console.log('currentDrawingColorsArray', currentDrawingColorsArray)
+    
 
     // (3) create columns first, create rows 
     // set its background color to corresponding color value in 2d array
     let rows = [];
-    for (let i = 0; i < currentDrawingColorsArray.length; i++) {
+    for (let i = 0; i < currentDrawingColorsArray?.length; i++) {
         rows.push(
             <Row 
                 key={i}
