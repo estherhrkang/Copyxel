@@ -10,6 +10,7 @@ export default function Display() {
     // use getDrawing to display one drawing
     // use this component on sample drawing and results components
     
+
     // 1) if drawing id can be passed in as a prop, 
     // use useParams to get id and find currentDrawing
 
@@ -22,13 +23,10 @@ export default function Display() {
         // dispatch(getDrawing(drawing)) // id, title, colors, date_created
     }, [dispatch])
     
-    // drawing store obj
-    // { drawings: [ {colors: stringified allColors...}, {colors: ...}, ... ] }
-    const drawingsArray = useSelector(state => state.drawing.drawings);
-    console.log('---drawingsObj---', drawingsArray);
+    // drawing store 
     // [ {colors: stringified allColors...}, {colors: stringified allColors...} ... ]
-    // const drawingsArray = drawingsObj?.drawings;
-    // console.log('---drawingsArray---', drawingsArray);    
+    const drawingsArray = useSelector(state => state.drawing.drawings);
+    console.log('---drawingsArray---', drawingsArray);
     // console.log('parsed?', JSON.parse(drawingsArray[6]['colors']))
     
 
@@ -37,7 +35,7 @@ export default function Display() {
     // ((1)) fixed max
     // const randomIdxWithFixedMax = useRef(Math.floor(Math.random() * 10));
     // ((2)) random Id based on the length of drawingsArray
-    const randomIdx = useRef(Math.floor(Math.random() * drawingsArray?.length - 1));
+    const randomIdx = useRef(Math.floor(Math.random() * (drawingsArray.length - 1)));
     console.log('---random index---', randomIdx);
 
 
@@ -46,7 +44,8 @@ export default function Display() {
     // ((1))
     // const currentDrawing = drawingsArray?.find(each => Number(each['id']) === Number(randomIdxWithFixedMax.current)) // BREAKS HERE---!!! undefined
     // ((2)))
-    const currentDrawing = drawingsArray?.find(each => each['id'] === randomIdx.current)
+    const currentDrawing = drawingsArray[randomIdx.current];
+    // const currentDrawing = drawingsArray?.find(each => each['id'] === randomIdx.current)
     console.log('---currentDrawing---', currentDrawing)
 
     // if (!currentDrawing) {

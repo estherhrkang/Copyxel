@@ -115,7 +115,7 @@ export default function Drawing() {
             </div>
             {/* if no color on canvas, disable see results button */}
             <button type='button' onClick={handleSubmit}>See results</button>
-            <button type='button' onClick={() => history.push('/drawing')}>Choose a different drawing</button>
+            {/* <button type='button' onClick={() => history.push('/drawing')}>Choose a different drawing</button> */}
         </div>
     )
 }
