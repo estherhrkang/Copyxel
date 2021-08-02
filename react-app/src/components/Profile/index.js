@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { useHistory } from 'react-router';
 import { editUser, deleteUser } from '../../store/session';
 import LogoutButton from '../auth/LogoutButton';
 import UserHistory from './UserHistory';
@@ -11,7 +10,6 @@ import profileImg from '../../assets/profile-img.png';
 export default function Profile() {
     const user = useSelector(state => state.session.user);
     const dispatch = useDispatch();
-    const history = useHistory();
     const [showEditForm, setShowEditForm] = useState(false);
 
     const [errors, setErrors] = useState([]);

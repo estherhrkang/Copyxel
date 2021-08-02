@@ -63,14 +63,14 @@ export default function Drawing() {
     // console.log('---parsed----', JSON.parse(string))
 
     const handleSubmit = async () => {
-        function formatToday() {
+        function formatDate() {
             const today = new Date();
             const year = today.getFullYear();
             const month = `-${today.getMonth() + 1}`;
             const day = `-${today.getDate()}`
             return year+month+day
         }
-        const today = formatToday();
+        const today = formatDate();
 
         const payload = {
             title,

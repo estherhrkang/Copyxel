@@ -1,5 +1,11 @@
+const SET_ALL_DRAWINGS = 'drawing/SET_ALL_DRAWINGS';
 const SET_DRAWING = 'drawing/SET_DRAWING';
 const REMOVE_DRAWING = 'drawing/REMOVE_DRAWING';
+
+const setAllDrawings = (drawings) => ({
+    type: SET_ALL_DRAWINGS,
+    payload: drawings
+});
 
 const setDrawing = (drawing) => ({
     type: SET_DRAWING,
@@ -17,7 +23,7 @@ export const getAllDrawings = () => async (dispatch) => {
     const response = await fetch('/api/drawings/');
     if (response.ok) {
         const data = await response.json();
-        dispatch(setDrawing(data));
+        dispatch(setAllDrawings(data.drawings));
     } else {
         return ['An error occurred. Please try again.']
     }
@@ -81,10 +87,12 @@ export const deleteDrawing = (drawing) => async (dispatch) => {
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
+        case SET_ALL_DRAWINGS:
+            return { drawings: action.payload }
         case SET_DRAWING:
-            return { drawing: action.payload }
+            return { ...state, currentDrawing: action.payload }
         case REMOVE_DRAWING:
-            return { drawing: null }
+            return { ...state, currentDrawing: null }
         default:
             return state;
     };

@@ -25,8 +25,8 @@ export default function Home() {
     
     // drawing store obj
     // { drawings: [ {colors: stringified allColors...}, {colors: ...}, ... ] }
-    const drawingsObj = useSelector(state => state.drawing.drawing);
-    console.log('whats in drawings store', drawingsObj);
+    // const drawingsObj = useSelector(state => state.drawing.drawing);
+    // console.log('whats in drawings store', drawingsObj);
     
     // after keying into drawing store obj -> breaks!
     // [ {colors: stringified allColors...}, {colors: stringified allColors...} ... ]
@@ -38,7 +38,8 @@ export default function Home() {
     // console.log('whats in drawingsobj.drawings?', drawingsObj?.drawings);
 
     const slides = [];
-    const drawingsArray = drawingsObj?.drawings;
+    // const drawingsArray = drawingsObj?.drawings;
+    const drawingsArray = useSelector(state => state.drawing.drawings);
     for (let i = 0; i < drawingsArray?.length; i++) {
         slides.push(
             <SwiperSlide key={i} className={styles.swiperSlide}>
