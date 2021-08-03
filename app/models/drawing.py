@@ -1,6 +1,5 @@
 from .db import db
 from .users_drawings import users_drawings
-from .likes import likes
 from datetime import datetime
 
 

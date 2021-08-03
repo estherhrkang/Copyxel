@@ -18,10 +18,10 @@ def likes_by_user(id):
     return {'likes': [like.to_dict() for like in likes]}
 
 
-# get likes by user for drawing
-@like_routes.route('/<int:id>/drawing/<int:drawingid>')
-def like_for_drawing(id, drawingid):
-    likes = Like.query.filter(Like.user_id == id, Like.drawing_id == drawingid).all()
+# get a specific like by user for drawing
+@like_routes.route('/<int:id>/drawing/<int:drawing_id>')
+def like_for_drawing(id, drawing_id):
+    likes = Like.query.filter(Like.user_id == id, Like.drawing_id == drawing_id).all()
     return {'likes': [like.to_dict() for like in likes]}
 
 
@@ -40,8 +40,8 @@ def create_like():
 
 # delete a specific like
 @like_routes.route('/<int:id>', methods=['DELETE'])
-def delete_like(id):
-    like = Like.query.filter(Like.id == id)
+def delete_like(like_id):
+    like = Like.query.filter(Like.id == like_id)
     db.session.delete(like)
     db.session.commit()
     return like.to_dict()
