@@ -9,13 +9,16 @@ body {
 }
 
 body button {
+    display: flex;
+    justify-content: center;
     font-family: 'Roboto', sans-serif;
-    padding: 5px;
-    margin: 5px;
-    /* border-radius: 50px;
-    border: none;
-    background-color: #eb2158;
-    color: #fff; */
+    font-size: 12px;
+    font-weight: 500;
+    padding: 12px 28px;
+    margin-top: 20px;
+    border-radius: 23px;
+    background-color: transparent;
+    border: 1px solid #c0d9ef;
 
 }
 

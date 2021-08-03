@@ -4,9 +4,11 @@ import { getAllDrawings, getDrawing } from '../../store/drawing';
 import DisplayRow from './DisplayRow';
 import styles from '../../css-modules/Display.module.css';
 
+
+
 export default function Display() {    
     const [loading, setLoading] = useState(false);
-    
+
     // use getDrawing to display one drawing
     // use this component on sample drawing and results components
     

@@ -44,6 +44,7 @@ def createDrawing():
         drawing = Drawing(
             title=form.title.data,
             colors=form.colors.data,
+            sample_colors=form.sample_colors.data,
             date_created=form.date_created.data
         )
         db.session.add(drawing)
@@ -61,6 +62,7 @@ def editDrawing(drawing_id):
     if form.validate_on_submit():
         drawing.title = form.title.data,
         drawing.colors = form.colors.data,
+        drawing.sample_colors = form.sample_colors.data,
         drawing.date_created=form.date_created.data  
         db.session.commit()
         return drawing.to_dict()

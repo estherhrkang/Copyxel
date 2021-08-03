@@ -47,12 +47,12 @@ export default function App() {
         <ProtectedRoute path='/drawing' exact={true}>
           <SampleDrawing />
         </ProtectedRoute>
-        <ProtectedRoute path='/drawing/new' exact={true}>
+        {/* <ProtectedRoute path='/drawing/new' exact={true}>
           <Drawing />
         </ProtectedRoute>
         <ProtectedRoute path='/results' exact={true}>
           <Results />
-        </ProtectedRoute>
+        </ProtectedRoute> */}
         <Route>
           <h1>page does not exist</h1>
         </Route>

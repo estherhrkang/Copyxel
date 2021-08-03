@@ -20,6 +20,10 @@
     margin-bottom: 1.5rem !important;
 }
 
+.eraseColor:hover {
+    cursor: pointer;
+}
+
 .drawingPanel {
     display: flex;
     flex-direction: column;

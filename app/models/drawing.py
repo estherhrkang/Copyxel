@@ -10,6 +10,7 @@ class Drawing(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     colors = db.Column(db.String, nullable=False)
+    sample_colors = db.Column(db.String, nullable=False)
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     # many-to-many thru association table
@@ -23,5 +24,6 @@ class Drawing(db.Model):
             'id': self.id,
             'title': self.title,
             'colors': self.colors,
+            'sample_colors': self.sample_colors,
             'date_created': self.date_created
         }

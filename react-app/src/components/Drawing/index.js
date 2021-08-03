@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useHistory } from 'react-router';
+import { useHistory, Redirect } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { createDrawing, deleteDrawing } from '../../store/drawing';
 import Row from './Row';
+import Results from '../Results';
 import { CirclePicker } from 'react-color';
 import { RiEraserLine } from 'react-icons/ri';
 import styles from '../../css-modules/Drawing.module.css';
@@ -14,6 +15,7 @@ export default function Drawing() {
     const [title, setTitle] = useState('');
     const [errors, setErrors] = useState([]);
     const [colorChoice, setColorChoice] = useState('#607d8b');
+    const [showResults, setShowResults] = useState(false);
 
     // set initial colors of canvas in 2d array with '#fff' value
     let colors = [];
@@ -58,10 +60,6 @@ export default function Drawing() {
         );
     };
 
-    // const string = JSON.stringify(allColors['current'])
-    // console.log('---stringified allColors---', string)
-    // console.log('---parsed----', JSON.parse(string))
-
     const handleSubmit = async () => {
         function formatDate() {
             const today = new Date();
@@ -74,9 +72,10 @@ export default function Drawing() {
 
         const payload = {
             title,
-            // colors: allColors['current'],
-            // instead send as a string to be parsed when displaying
             colors: JSON.stringify(allColors['current']),
+            // 
+            sample_colors: JSON.stringify(allColors['current']),
+            // 
             date_created: today
         }
         const data = await dispatch(createDrawing(payload))
@@ -84,38 +83,48 @@ export default function Drawing() {
         if (data) {
             setErrors(data);
         } else {
-            history.push('/results');
+            setShowResults(true);
         };
     };
 
     return (
-        <div className={styles.drawingContainer}>
-            <h1>Begin drawing!</h1>
-            <div className={styles.drawing}>
-                <form>
-                    <div>
-                        {errors.map((error, ind) => (
-                            <div key={ind}>{error}</div>
-                        ))}
-                    </div>
-                    <input 
-                        type='text'
-                        placeholder='Name your drawing!'
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                    />
-                </form>
-                <div className={styles.drawingPanel}>
-                    <div className={styles.pixels}>{rows}</div>
-                </div>
-                <CirclePicker className={styles.colorPicker} color={colorChoice} onChangeComplete={(color) => setColorChoice(color.hex)}/>
-                <div onClick={() => setColorChoice('#fff')}>
-                    Erase<RiEraserLine />
-                </div>
+        <>
+        { showResults ? (
+            <div>
+                {/* pass down sample drawing id */}
+                <Results colorsArray={allColors.current} drawingTitle={title}/>
             </div>
-            {/* if no color on canvas, disable see results button */}
-            <button type='button' onClick={handleSubmit}>See results</button>
-            {/* <button type='button' onClick={() => history.push('/drawing')}>Choose a different drawing</button> */}
-        </div>
+        ) :(
+            <div className={styles.drawingContainer}>
+                <h1>Begin drawing!</h1>
+                <div className={styles.drawing}>
+                    <form>
+                        <div>
+                            {errors.map((error, ind) => (
+                                <div key={ind}>{error}</div>
+                            ))}
+                        </div>
+                        <input 
+                            type='text'
+                            placeholder='Name your drawing!'
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                        />
+                    </form>
+                    <div className={styles.drawingPanel}>
+                        <div className={styles.pixels}>{rows}</div>
+                    </div>
+                    <CirclePicker className={styles.colorPicker} color={colorChoice} onChangeComplete={(color) => setColorChoice(color.hex)}/>
+                    <div className={styles.eraseColor} onClick={() => setColorChoice('#fff')}>
+                        Erase<RiEraserLine />
+                    </div>
+                </div>
+                {/* if no color on canvas, disable see results button */}
+                <button type='button' onClick={handleSubmit}>See results</button>
+                {/* <button type='button' onClick={handleStartOver}>Start over!</button> */}
+                {/* <button type='button' onClick={() => {return <Redirect to='/drawing' />}}>Choose a different drawing</button> */}
+            </div>
+        )}
+        </>
     )
 }
