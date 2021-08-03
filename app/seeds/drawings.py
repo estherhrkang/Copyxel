@@ -15,8 +15,7 @@ def seed_drawings():
             ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"], 
             ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"]
         ],
-        date_created='2021-07-25',
-        title='masterpiece'
+        date_created='2021-07-25'
     )
 
     db.session.add(masterpiece)

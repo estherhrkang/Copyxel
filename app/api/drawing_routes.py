@@ -21,7 +21,7 @@ def validation_errors_to_error_messages(validation_errors):
 # get all drawings by all users
 @drawing_routes.route('/')
 # @login_required
-def allDrawings():
+def all_drawings():
     drawings = Drawing.query.all()
     return {'drawings': [drawing.to_dict() for drawing in drawings]}
 
@@ -29,7 +29,7 @@ def allDrawings():
 # get a drawing
 @drawing_routes.route('/<int:id>')
 @login_required
-def oneDrawing(id):
+def one_drawing(id):
     drawing = Drawing.query.filter(Drawing.id == id).all()
     return drawing.to_dict()
 
@@ -37,12 +37,11 @@ def oneDrawing(id):
 # create a drawing
 @drawing_routes.route('/', methods=['POST'])
 @login_required
-def createDrawing():
+def create_drawing():
     form = DrawingForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         drawing = Drawing(
-            title=form.title.data,
             colors=form.colors.data,
             sample_colors=form.sample_colors.data,
             date_created=form.date_created.data
@@ -56,11 +55,10 @@ def createDrawing():
 # edit a drawing
 @drawing_routes.route('/<int:id>', methods=['PUT'])
 @login_required
-def editDrawing(drawing_id):
+def edit_drawing(drawing_id):
     form = DrawingForm()
     drawing = Drawing.query.get(drawing_id)
     if form.validate_on_submit():
-        drawing.title = form.title.data,
         drawing.colors = form.colors.data,
         drawing.sample_colors = form.sample_colors.data,
         drawing.date_created=form.date_created.data  
@@ -72,7 +70,7 @@ def editDrawing(drawing_id):
 # delete a drawing
 @drawing_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
-def deleteDrawing(drawing_id):
+def delete_drawing(drawing_id):
     drawing = Drawing.query.get(drawing_id)
     db.session.delete(drawing)
     db.session.commit()   

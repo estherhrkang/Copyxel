@@ -46,7 +46,7 @@ export default function Profile() {
         <div className={styles.profile}>
             <div className={styles.editForm}>
                 <div>
-                    <h1>Hi, {user.username}!</h1>
+                    <h2>Hi, {user.username}!</h2>
                     <img src={profileImg} alt='default'/>
                 </div>
                 {showEditForm ? (

@@ -38,12 +38,10 @@ export default function SampleDrawing() {
             </div>
         ) : (
             <div className={styles.sampleDrawingContainer}>
-                    <h1>Sample Drawing Title</h1>
-                    <h3>Get ready to copy this drawing in {seconds} seconds!</h3>
+                    <h2>Remember this drawing in {seconds} seconds!</h2>
                     <div className={styles.sampleDrawing}>
                         {/* Sample Drawing
                         <Display /> */}
-                        Random Sample Drawing
                         <RandomSampleDrawing />
                     </div>
                     {/* <button type='button' onClick={() => history.push('/drawing/new')}>Begin drawing</button> */}

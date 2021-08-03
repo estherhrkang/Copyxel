@@ -8,8 +8,7 @@
 .sampleDrawing {
     background-color: #f4f3f0;
     border-radius: 0.25rem;
-    padding: 1rem 4rem 2rem 4rem;
-    margin-top: 2rem;
+    padding: 2em 4rem 2rem 4rem;
     box-shadow: 10px 10px 0 #c0d9ef;
 
     display: flex;

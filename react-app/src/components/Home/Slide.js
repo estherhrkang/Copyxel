@@ -41,15 +41,15 @@ export default function Slide({ drawing }) {
         <div className={styles.cardContainer}>
             <div className={styles.card}>
                 <div className={styles.card__front}>
-                    <div>{drawing.title}</div>
-                    <div className={styles.drawingPanel}>
+                    <div className={styles.title}>{drawing.title}</div>
+                    <div className={styles.canvas}>
                         <div className={styles.pixels}>
                             {rows}
                         </div>
                     </div>
                 </div>
                 <div className={styles.card__back}>
-                    <div>{changeDateFormat(drawing.date_created)}</div>
+                    <div className={styles.date}>{changeDateFormat(drawing.date_created)}</div>
                 </div>
             </div>
         </div>

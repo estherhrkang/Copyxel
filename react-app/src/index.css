@@ -5,25 +5,27 @@ html {
 
 body {
     background-color: #ddf0fc;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'VT323', monospace;
+    font-size: 2rem;
 }
 
 body button {
     display: flex;
     justify-content: center;
-    font-family: 'Roboto', sans-serif;
-    font-size: 12px;
+    font-family: 'VT323', monospace;
+    font-size: 1.5rem;
     font-weight: 500;
-    padding: 12px 28px;
+    padding: 10px 28px;
     margin-top: 20px;
     border-radius: 23px;
     background-color: transparent;
-    border: 1px solid #c0d9ef;
+    border: 2px solid #c0d9ef;
 
 }
 
 body button:hover {
     cursor: pointer;
+    background-color: #c0d9ef;
 
 }
 

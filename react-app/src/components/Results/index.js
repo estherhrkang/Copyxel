@@ -24,7 +24,7 @@ export default function Results({ colorsArray, drawingTitle }) {
 
     return (
         <div className={styles.resultsContainer}>
-            <h1>Show sample drawing and user's drawing</h1>
+            <h1>Results page</h1>
             {/* sample: use passed down sample drawing id */}
             {/* drawing: use display component? grab last drawing id from store */}
             <div className={styles.results}>

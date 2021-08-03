@@ -24,7 +24,7 @@ def user(id):
 # update a specific user
 @user_routes.route('/<int:id>', methods=['PUT'])
 @login_required
-def updateUser(id):
+def update_user(id):
     data = request.get_json()
     user = User.query.get(id)
     user.username = data['username']
@@ -38,7 +38,7 @@ def updateUser(id):
 # delete a specific user
 @user_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
-def deleteUser(id):
+def delete_user(id):
     user = User.query.get(id)
     db.session.delete(user)
     db.session.commit()

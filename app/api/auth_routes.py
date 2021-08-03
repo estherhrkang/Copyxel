@@ -29,7 +29,7 @@ def authenticate():
 
 
 @auth_routes.route('/login', methods=['POST'])
-def login():
+def log_in():
     """
     Logs a user in
     """
@@ -46,7 +46,7 @@ def login():
 
 
 @auth_routes.route('/logout')
-def logout():
+def log_out():
     """
     Logs a user out
     """

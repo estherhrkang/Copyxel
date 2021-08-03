@@ -12,7 +12,6 @@ import styles from '../../css-modules/Drawing.module.css';
 export default function Drawing() {
     const history = useHistory();
     const dispatch = useDispatch();
-    const [title, setTitle] = useState('');
     const [errors, setErrors] = useState([]);
     const [colorChoice, setColorChoice] = useState('#607d8b');
     const [showResults, setShowResults] = useState(false);
@@ -71,7 +70,6 @@ export default function Drawing() {
         const today = formatDate();
 
         const payload = {
-            title,
             colors: JSON.stringify(allColors['current']),
             // 
             sample_colors: JSON.stringify(allColors['current']),
@@ -92,11 +90,11 @@ export default function Drawing() {
         { showResults ? (
             <div>
                 {/* pass down sample drawing id */}
-                <Results colorsArray={allColors.current} drawingTitle={title}/>
+                <Results colorsArray={allColors.current} />
             </div>
         ) :(
             <div className={styles.drawingContainer}>
-                <h1>Begin drawing!</h1>
+                <h2>Begin drawing!</h2>
                 <div className={styles.drawing}>
                     <form>
                         <div>
@@ -104,12 +102,6 @@ export default function Drawing() {
                                 <div key={ind}>{error}</div>
                             ))}
                         </div>
-                        <input 
-                            type='text'
-                            placeholder='Name your drawing!'
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
-                        />
                     </form>
                     <div className={styles.drawingPanel}>
                         <div className={styles.pixels}>{rows}</div>
@@ -120,7 +112,7 @@ export default function Drawing() {
                     </div>
                 </div>
                 {/* if no color on canvas, disable see results button */}
-                <button type='button' onClick={handleSubmit}>See results</button>
+                <button type='button' onClick={handleSubmit}>Compare drawings</button>
                 {/* <button type='button' onClick={handleStartOver}>Start over!</button> */}
                 {/* <button type='button' onClick={() => {return <Redirect to='/drawing' />}}>Choose a different drawing</button> */}
             </div>
