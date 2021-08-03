@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { reduceTime } from '../../store/time';
 import Display from '../Display';
@@ -30,18 +30,22 @@ export default function SampleDrawing() {
         }
     }, [seconds]);
 
+    // const randomIdx = useRef(Math.floor(Math.random() * (samples.length - 1)));
+
     return(
         <>
         { beginDrawing ? (
             <div>
+                {/* pass down randomIdx here */}
                 <Drawing />
             </div>
         ) : (
             <div className={styles.sampleDrawingContainer}>
                     <h2>Remember this drawing in {seconds} seconds!</h2>
                     <div className={styles.sampleDrawing}>
-                        {/* Sample Drawing
-                        <Display /> */}
+                        {/* Sample Drawing */}
+                        {/* <Display /> */}
+                        {/* pass down randomIdx here */}
                         <RandomSampleDrawing />
                     </div>
                     {/* <button type='button' onClick={() => history.push('/drawing/new')}>Begin drawing</button> */}

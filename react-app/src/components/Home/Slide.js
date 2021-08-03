@@ -1,7 +1,22 @@
-import styles from '../../css-modules/Slide.module.css';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import DisplayRow from '../Display/DisplayRow';
+import { getAllDrawings } from '../../store/drawing';
+import { getAllLikes, getLike, createLike, deleteLike } from '../../store/like';
+import { FaRegHeart, FaHeart } from 'react-icons/fa';
+import styles from '../../css-modules/Slide.module.css';
 
 export default function Slide({ drawing }) {
+    const dispatch = useDispatch();
+    const user = useSelector(state => state.session.user);
+    const drawingsArray = useSelector(state => state.drawing.drawings);
+    // const likes = useSelector(state => state.like.likes);
+    // console.log('---likes---', likes);
+
+    useEffect(() => {
+        dispatch(getAllDrawings());
+        // dispatch(getAllLikes());
+    }, [dispatch])
 
     // drawing.date_created -> Fri, 30 Jul 2021 00:00:00 GMT 
     function changeDateFormat(date) {
@@ -10,14 +25,13 @@ export default function Slide({ drawing }) {
         const month = date.slice(8, 11)
         const year = date.slice(12, 16)
         return `${dayOfWk} ${month} ${day} ${year}`
-    }
+    };
 
     // 1) parse drawing.colors
-    // console.log('NOT parsed---', drawing.colors);
-    // console.log('parsed---', JSON.parse(drawing['colors'])); // breaks!
     const currentDrawingColorsArray = JSON.parse(drawing['colors']);
-
     // 2) loop through row, loop through column
+    // 3) grab color value at [row][column]
+    // 4) use DisplayRow/Column components to create canvas reflecting color value 
     let rows = [];
     for (let i = 0; i < currentDrawingColorsArray?.length; i++) {
         rows.push(
@@ -26,16 +40,10 @@ export default function Slide({ drawing }) {
                 rowIdx={i}
                 currentDrawingColorsArray={currentDrawingColorsArray}
             />
-        )
-    }
-           
-
-    // 3) grab each color value in row/column
-    // 4) use Drawing(Row, Column) components to create canvas reflecting color value 
-
+        );
+    };
     // OR
-
-    // ** use Results component! **
+    // use Results component!?
 
     return (
         <div className={styles.cardContainer}>
@@ -49,9 +57,12 @@ export default function Slide({ drawing }) {
                     </div>
                 </div>
                 <div className={styles.card__back}>
-                    <div className={styles.date}>{changeDateFormat(drawing.date_created)}</div>
+                    <div>{changeDateFormat(drawing.date_created)}</div>
+
+                    <FaRegHeart className={styles.likeButton}/>
+                    <FaHeart className={styles.likeButton} style={{ color: 'red' }}/>
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};

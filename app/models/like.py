@@ -6,7 +6,7 @@ class Like(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    drawing_id = db.Column(db.Integer, db.ForeignKey('posts.id'), ondelete='CASCADE', nullable=False)
+    drawing_id = db.Column(db.Integer, db.ForeignKey('drawings.id'), nullable=False)
 
     user = db.relationship('User', back_populates='likes')
     drawing = db.relationship('Drawing', back_populates='likes')

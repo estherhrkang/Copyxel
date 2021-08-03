@@ -45,11 +45,12 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('likes',
+    sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('drawing_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['drawing_id'], ['drawings.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('user_id', 'drawing_id')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('users_drawings',
     sa.Column('user_id', sa.Integer(), nullable=False),
