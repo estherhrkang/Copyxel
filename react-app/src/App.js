@@ -3,20 +3,18 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Home from './components/Home';
 import LoginForm from './components/auth/LoginForm';
-import SignupForm from './components/auth/SignupForm';
+// import SignupForm from './components/auth/SignupForm';
 import Profile from './components/Profile';
 import SampleDrawing from './components/SampleDrawing';
-import Drawing from './components/Drawing';
 import NavBar from './components/NavBar';
-import Results from './components/Results';
 import Footer from './components/Footer';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import { authenticate } from './store/session';
 
 // \/
-// import { useSelector } from 'react-redux'
-// import { Redirect, useHistory } from 'react-router-dom';
-// import { signUp } from '../src/store/session';
+import { useSelector } from 'react-redux'
+import { Redirect, useHistory } from 'react-router-dom';
+import { signUp } from '../src/store/session';
 // /\
 
 export default function App() {
@@ -24,23 +22,23 @@ export default function App() {
   const dispatch = useDispatch();
   
   // \/
-  // const [errors, setErrors] = useState([]);
-  // const [username, setUsername] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-  // const [repeatPassword, setRepeatPassword] = useState('');
-  // const user = useSelector(state => state.session.user);
-  // const history = useHistory();
+  const [errors, setErrors] = useState([]);
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [repeatPassword, setRepeatPassword] = useState('');
+  const user = useSelector(state => state.session.user);
+  const history = useHistory();
 
-  // const onSignUp = async (e) => {
-  //   e.preventDefault();
-  //   if (password === repeatPassword) {
-  //     const data = await dispatch(signUp(username, email, password));
-  //     if (data) {
-  //       setErrors(data)
-  //     }
-  //   }
-  // };
+  const onSignUp = async (e) => {
+    e.preventDefault();
+    if (password === repeatPassword) {
+      const data = await dispatch(signUp(username, email, password));
+      if (data) {
+        setErrors(data)
+      }
+    }
+  };
   // /\
 
   useEffect(() => {
@@ -65,9 +63,9 @@ export default function App() {
           <LoginForm />
         </Route>
         <Route path='/signup' exact={true}>
-          <SignupForm />
+          {/* <SignupForm /> */}
           {/* \/ */}
-          {/* <div>
+          <div>
             <h1>put logo here</h1>
             <form onSubmit={onSignUp}>
               <div>
@@ -118,7 +116,7 @@ export default function App() {
               Already have an account?
               <button type='button' onClick={() => history.push('/login')}>Log in</button>
             </div>
-          </div> */}
+          </div>
           {/* /\ */}
         </Route>
         <ProtectedRoute path='/profile' exact={true}>
@@ -127,14 +125,8 @@ export default function App() {
         <ProtectedRoute path='/drawing' exact={true}>
           <SampleDrawing />
         </ProtectedRoute>
-        {/* <ProtectedRoute path='/drawing/new' exact={true}>
-          <Drawing />
-        </ProtectedRoute>
-        <ProtectedRoute path='/results' exact={true}>
-          <Results />
-        </ProtectedRoute> */}
         <Route>
-          <h1>page does not exist</h1>
+          <h1>404! Page does not exist</h1>
         </Route>
       </Switch>
       <Footer />
