@@ -33,7 +33,11 @@
 
     border: none;
     border-radius: 5px;
-    overflow:hidden
+    overflow:hidden;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .card__front {

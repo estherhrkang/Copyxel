@@ -59,8 +59,11 @@ export default function Slide({ drawing }) {
                 <div className={styles.card__back}>
                     <div>{changeDateFormat(drawing.date_created)}</div>
 
+                    {/* if logged in user, show empty/filled heart button */}
+                    {/* if guest user, show filled heart with count of total likes for the drawing */}
                     <FaRegHeart className={styles.likeButton}/>
                     <FaHeart className={styles.likeButton} style={{ color: 'red' }}/>
+
                 </div>
             </div>
         </div>

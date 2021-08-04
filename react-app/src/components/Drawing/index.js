@@ -1,16 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useHistory, Redirect } from 'react-router';
+import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createDrawing, deleteDrawing } from '../../store/drawing';
 import Row from './Row';
 import Results from '../Results';
+import sampleDrawings from '../../sampleData/sampleDrawings.json';
 import { CirclePicker } from 'react-color';
 import { RiEraserLine } from 'react-icons/ri';
 import styles from '../../css-modules/Drawing.module.css';
 
 
-export default function Drawing() {
-    const history = useHistory();
+export default function Drawing({ randomIdx }) {
     const dispatch = useDispatch();
     const [errors, setErrors] = useState([]);
     const [colorChoice, setColorChoice] = useState('#607d8b');
@@ -25,11 +24,10 @@ export default function Drawing() {
         };
     };
 
-
     // using useRef so component doesn't reload every time to reflect changes
     // useRef keeps element in an object
     const allColors = useRef(colors);
-    console.log('---allColors---', allColors); // to see all colors on canvas (2d array)
+    // console.log('---allColors---', allColors); // to see all colors on canvas (2d array)
     // prints { [ [], [], [] ... ], [ [], [], [] ... ] ... }
 
 
@@ -42,8 +40,7 @@ export default function Drawing() {
         copy[r][c] = colorChoice
         // set allColors equal to modified copy
         obj.current = copy
-    }
-
+    };
 
     // creates rows of Row components to display
     let rows = [];
@@ -71,9 +68,8 @@ export default function Drawing() {
 
         const payload = {
             colors: JSON.stringify(allColors['current']),
-            // 
-            sample_colors: JSON.stringify(allColors['current']),
-            // 
+            sample_colors: JSON.stringify(sampleDrawings[randomIdx]),
+            // sample_colors: JSON.stringify(allColors['current']),
             date_created: today
         }
         const data = await dispatch(createDrawing(payload))

@@ -1,15 +1,34 @@
 import { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import styles from '../../css-modules/Results.module.css';
+import { getAllDrawings, getDrawing } from '../../store/drawing';
 import ResultsRow from './ResultsRow';
-import Display from '../Display';
-import RandomSampleDrawing from '../SampleDrawing/RandomSampleDrawing';
+import styles from '../../css-modules/Results.module.css';
 
-export default function Results({ colorsArray, drawingTitle }) {
+export default function Results({ colorsArray }) {
     const history = useHistory();
+    const dispatch = useDispatch();
 
-    // use drawing/display component! 
-    // this component is to be used by home/slide component
+    const drawingsArray = useSelector(state => state.drawing.drawings);
+    const currentDrawing = drawingsArray.find(drawing => drawing['colors'] == colorsArray);
+    console.log('---currentDrawing---', currentDrawing);
+    const sampleColorsArray = JSON.parse(currentDrawing['sample_colors']);
+    console.log('---sampleColorsArray---', sampleColorsArray);
+
+    useEffect(() => {
+        dispatch(getAllDrawings());
+    }, [dispatch]);
+
+    let sampleRows = [];
+    for (let i = 0; i < sampleColorsArray?.length; i++) {
+        sampleRows.push(
+            <ResultsRow 
+                key={i}
+                rowIdx={i}
+                colorsArray={sampleColorsArray}
+            />
+        );
+    };
 
     let rows = [];
     for (let i = 0; i < colorsArray?.length; i++) {
@@ -19,8 +38,8 @@ export default function Results({ colorsArray, drawingTitle }) {
                 rowIdx={i}
                 colorsArray={colorsArray}
             />
-        )
-    }
+        );
+    };
 
     return (
         <div className={styles.resultsContainer}>
@@ -28,14 +47,10 @@ export default function Results({ colorsArray, drawingTitle }) {
             {/* sample: use passed down sample drawing id */}
             {/* drawing: use display component? grab last drawing id from store */}
             <div className={styles.results}>
-                <div>
-                    {/* <div>sample</div>
-                    <div><Display /></div> */}
-                    <div>random sample drawing</div>
-                    <div><RandomSampleDrawing /></div>
+                <div className={styles.drawingPanel}>
+                    <div className={styles.pixels}>{sampleRows}</div>
                 </div>
                 <div className={styles.drawingPanel}>
-                    <div>{drawingTitle}</div>
                     <div className={styles.pixels}>{rows}</div>
                 </div>
             </div>
