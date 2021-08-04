@@ -11,7 +11,7 @@ export default function SampleDrawing() {
     const [beginDrawing, setBeginDrawing] = useState(false);
 
     useEffect(() => {
-        if (seconds > 0) {
+        if (seconds > 0 && window.location.pathname === '/drawing') {
             setTimeout(() => setSeconds((prev) => prev - 1), 1000);
         } else {
             clearTimeout();

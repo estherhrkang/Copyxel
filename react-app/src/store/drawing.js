@@ -17,8 +17,6 @@ const removeDrawing = (drawing) => ({
     payload: drawing
 });
 
-const initialState = { drawing: null };
-
 export const getAllDrawings = () => async (dispatch) => {
     const response = await fetch('/api/drawings/');
     if (response.ok) {
@@ -26,7 +24,17 @@ export const getAllDrawings = () => async (dispatch) => {
         dispatch(setAllDrawings(data.drawings));
     } else {
         return ['An error occurred. Please try again.']
-    }
+    };
+};
+
+export const getAllDrawingsByUser = (userId) => async (dispatch) => {
+    const response = await fetch(`/api/drawings/user/${userId}`);
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(setAllDrawings(data.drawings));
+    } else {
+        return ['An error occurred. Please try again.']
+    };
 };
 
 export const getDrawing = (drawing) => async (dispatch) => {
@@ -47,8 +55,8 @@ export const createDrawing = (drawing) => async (dispatch) => {
     });
     console.log('what is response?', response);
     if (response.ok) {
-        const data = await response.json();
-        dispatch(setDrawing(data));
+        const drawing = await response.json();
+        dispatch(setDrawing(drawing));
     } else {
         return ['An error occurred. Please try again.']
     }
@@ -79,20 +87,23 @@ export const deleteDrawing = (drawing) => async (dispatch) => {
     });
     if (response.ok) {
         const data = await response.json();
-        dispatch(removeDrawing(data));
+        // dispatch(removeDrawing(data));
+        dispatch(setAllDrawings(data));
     } else {
         return ['An error occurred. Please try again.']
     }
 };
+
+const initialState = { drawing: null };
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case SET_ALL_DRAWINGS:
             return { drawings: action.payload }
         case SET_DRAWING:
-            return { ...state, currentDrawing: action.payload }
-        case REMOVE_DRAWING:
-            return { ...state, currentDrawing: null }
+            return { ...state, drawing: action.payload }
+        // case REMOVE_DRAWING:
+        //     return { ...state, drawing: null }
         default:
             return state;
     };

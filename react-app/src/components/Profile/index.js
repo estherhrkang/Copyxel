@@ -11,6 +11,7 @@ export default function Profile() {
     const user = useSelector(state => state.session.user);
     const dispatch = useDispatch();
     const [showEditForm, setShowEditForm] = useState(false);
+    const [showHistory, setShowHistory] = useState(true);
 
     const [errors, setErrors] = useState([]);
     const [username, setUsername] = useState(user?.username);
@@ -104,8 +105,17 @@ export default function Profile() {
                 )}
                 <div><LogoutButton /></div>
             </div>
-            <div><UserLikes /></div>
-            <div><UserHistory /></div>
+            <div className={styles.switch}>
+                <button onClick={() => setShowHistory(true)}>History</button>
+                <button onClick={() => setShowHistory(false)}>Likes</button>
+            </div>
+            <div>
+                {showHistory ? (
+                    <UserHistory />
+                ) : (
+                    <UserLikes />
+                )}
+            </div>
         </div> 
     );
 };

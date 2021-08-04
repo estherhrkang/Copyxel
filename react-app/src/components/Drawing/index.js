@@ -72,8 +72,8 @@ export default function Drawing({ randomIdx }) {
             // sample_colors: JSON.stringify(allColors['current']),
             date_created: today
         }
-        const data = await dispatch(createDrawing(payload))
-        
+
+        const data = await dispatch(createDrawing(payload));
         if (data) {
             setErrors(data);
         } else {
@@ -85,7 +85,7 @@ export default function Drawing({ randomIdx }) {
         <>
         { showResults ? (
             <div>
-                {/* pass down sample drawing id */}
+                {/* pass down drawingId ? */}
                 <Results colorsArray={allColors.current} />
             </div>
         ) :(

@@ -27,11 +27,7 @@ export default function Slide({ drawing }) {
         return `${dayOfWk} ${month} ${day} ${year}`
     };
 
-    // 1) parse drawing.colors
     const currentDrawingColorsArray = JSON.parse(drawing['colors']);
-    // 2) loop through row, loop through column
-    // 3) grab color value at [row][column]
-    // 4) use DisplayRow/Column components to create canvas reflecting color value 
     let rows = [];
     for (let i = 0; i < currentDrawingColorsArray?.length; i++) {
         rows.push(
@@ -42,8 +38,18 @@ export default function Slide({ drawing }) {
             />
         );
     };
-    // OR
-    // use Results component!?
+
+    const currentSampleDrawingColorsArray = JSON.parse(drawing['sample_colors']);
+    let sampleRows = [];
+    for (let i = 0; i < currentSampleDrawingColorsArray?.length; i++) {
+        sampleRows.push(
+            <DisplayRow 
+                key={i}
+                rowIdx={i}
+                currentDrawingColorsArray={currentSampleDrawingColorsArray}
+            />
+        );
+    };
 
     return (
         <div className={styles.cardContainer}>
@@ -57,13 +63,20 @@ export default function Slide({ drawing }) {
                     </div>
                 </div>
                 <div className={styles.card__back}>
+                    {/* how to show user name accordingly? */}
                     <div>{changeDateFormat(drawing.date_created)}</div>
-
+                    <div className={styles.title}>{drawing.title}</div>
+                    <div className={styles.canvas}>
+                        <div className={styles.pixels}>
+                            {sampleRows}
+                        </div>
+                    </div>
+                    <div>
                     {/* if logged in user, show empty/filled heart button */}
                     {/* if guest user, show filled heart with count of total likes for the drawing */}
-                    <FaRegHeart className={styles.likeButton}/>
-                    <FaHeart className={styles.likeButton} style={{ color: 'red' }}/>
-
+                        <FaRegHeart className={styles.likeButton}/>
+                        <FaHeart className={styles.likeButton} style={{ color: 'red' }}/>
+                    </div>
                 </div>
             </div>
         </div>

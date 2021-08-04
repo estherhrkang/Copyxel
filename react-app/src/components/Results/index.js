@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory, Redirect } from 'react-router';
 import { getAllDrawings, getDrawing } from '../../store/drawing';
 import ResultsRow from './ResultsRow';
 import styles from '../../css-modules/Results.module.css';
@@ -10,14 +10,22 @@ export default function Results({ colorsArray }) {
     const dispatch = useDispatch();
 
     const drawingsArray = useSelector(state => state.drawing.drawings);
-    const currentDrawing = drawingsArray.find(drawing => drawing['colors'] == colorsArray);
-    console.log('---currentDrawing---', currentDrawing);
-    const sampleColorsArray = JSON.parse(currentDrawing['sample_colors']);
-    console.log('---sampleColorsArray---', sampleColorsArray);
+    console.log('---drawingsArray---', drawingsArray);
+
+    // compare stringified arrays
+    const currentDrawing = drawingsArray?.find(drawing => drawing['colors'] == JSON.stringify(colorsArray));
 
     useEffect(() => {
         dispatch(getAllDrawings());
     }, [dispatch]);
+
+    let sampleColorsArray;
+    if (currentDrawing) {
+        sampleColorsArray = JSON.parse(currentDrawing['sample_colors']);
+        console.log('---sampleColorsArray---', sampleColorsArray);
+    } else {
+        sampleColorsArray = [];
+    };
 
     let sampleRows = [];
     for (let i = 0; i < sampleColorsArray?.length; i++) {
@@ -41,6 +49,10 @@ export default function Results({ colorsArray }) {
         );
     };
 
+    // const playAgain = () => {
+    //     return <Redirect to='/drawing'/>
+    // }
+
     return (
         <div className={styles.resultsContainer}>
             <h1>Results page</h1>
@@ -48,14 +60,17 @@ export default function Results({ colorsArray }) {
             {/* drawing: use display component? grab last drawing id from store */}
             <div className={styles.results}>
                 <div className={styles.drawingPanel}>
+                    Sample drawing
                     <div className={styles.pixels}>{sampleRows}</div>
                 </div>
                 <div className={styles.drawingPanel}>
+                    Your drawing
                     <div className={styles.pixels}>{rows}</div>
                 </div>
             </div>
-            <button type='button' onClick={() => history.push('/')}>See friends' drawings</button>
-            {/* <button type='button' onClick={() => history.push('/drawing')}>Start over!</button> */}
+            <button type='button' onClick={() => history.push('/')}>Back to Home</button>
+            {/* <button type='button' onClick={() => history.push('/drawing')}>Play again?</button> */}
+            {/* <button type='button' onClick={playAgain}>Play again?</button> */}
         </div>
     )
 }
