@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Home from './components/Home';
 import LoginForm from './components/auth/LoginForm';
-import SignupForm from './components/auth/SignupForm';
+// import SignupForm from './components/auth/SignupForm';
 import Profile from './components/Profile';
 import SampleDrawing from './components/SampleDrawing';
 import Drawing from './components/Drawing';
@@ -39,7 +39,7 @@ export default function App() {
           <LoginForm />
         </Route>
         <Route path='/signup' exact={true}>
-          <SignupForm />
+          {/* <SignupForm /> */}
         </Route>
         <ProtectedRoute path='/profile' exact={true}>
           <Profile />
