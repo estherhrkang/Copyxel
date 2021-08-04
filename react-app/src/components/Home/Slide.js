@@ -4,6 +4,7 @@ import DisplayRow from '../Display/DisplayRow';
 import { getAllDrawings } from '../../store/drawing';
 import { getAllLikes, getLike, createLike, deleteLike } from '../../store/like';
 import { FaRegHeart, FaHeart } from 'react-icons/fa';
+import { BsFillTrashFill } from 'react-icons/bs';
 import styles from '../../css-modules/Slide.module.css';
 
 export default function Slide({ drawing }) {
@@ -16,7 +17,9 @@ export default function Slide({ drawing }) {
     useEffect(() => {
         dispatch(getAllDrawings());
         // dispatch(getAllLikes());
-    }, [dispatch])
+    }, [dispatch]);
+
+    // if drawing is owned by current user, show button to delete the drawing
 
     // drawing.date_created -> Fri, 30 Jul 2021 00:00:00 GMT 
     function changeDateFormat(date) {
@@ -71,11 +74,13 @@ export default function Slide({ drawing }) {
                             {sampleRows}
                         </div>
                     </div>
-                    <div>
+                    <div className={styles.buttons}>
                     {/* if logged in user, show empty/filled heart button */}
                     {/* if guest user, show filled heart with count of total likes for the drawing */}
                         <FaRegHeart className={styles.likeButton}/>
                         <FaHeart className={styles.likeButton} style={{ color: 'red' }}/>
+                    {/* if the drawing belongs to the current user, show the button */}
+                        <BsFillTrashFill className={styles.deleteButton}/>
                     </div>
                 </div>
             </div>

@@ -1,3 +1,5 @@
+import { setUser } from './session';
+
 const SET_ALL_DRAWINGS = 'drawing/SET_ALL_DRAWINGS';
 const SET_DRAWING = 'drawing/SET_DRAWING';
 const REMOVE_DRAWING = 'drawing/REMOVE_DRAWING';
@@ -27,15 +29,15 @@ export const getAllDrawings = () => async (dispatch) => {
     };
 };
 
-export const getAllDrawingsByUser = (userId) => async (dispatch) => {
-    const response = await fetch(`/api/drawings/user/${userId}`);
-    if (response.ok) {
-        const data = await response.json();
-        dispatch(setAllDrawings(data.drawings));
-    } else {
-        return ['An error occurred. Please try again.']
-    };
-};
+// export const getAllDrawingsByUser = (userId) => async (dispatch) => {
+//     const response = await fetch(`/api/drawings/user/${userId}`);
+//     if (response.ok) {
+//         const data = await response.json();
+//         dispatch(setAllDrawings(data.drawings));
+//     } else {
+//         return ['An error occurred. Please try again.']
+//     };
+// };
 
 export const getDrawing = (drawing) => async (dispatch) => {
     const response = await fetch(`/api/drawings/${drawing.id}`);
@@ -55,8 +57,9 @@ export const createDrawing = (drawing) => async (dispatch) => {
     });
     console.log('what is response?', response);
     if (response.ok) {
-        const drawing = await response.json();
-        dispatch(setDrawing(drawing));
+        const data = await response.json();
+        dispatch(setDrawing(data.drawing));
+        dispatch(setUser(data.user));
     } else {
         return ['An error occurred. Please try again.']
     }

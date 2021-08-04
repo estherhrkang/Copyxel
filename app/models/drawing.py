@@ -12,10 +12,12 @@ class Drawing(db.Model):
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     # many-to-many thru association table
-    users = db.relationship('User', secondary=users_drawings, back_populates='drawings')
+    users = db.relationship('User', secondary=users_drawings,
+                            cascade='all, delete',  back_populates='drawings')
     # one-to-many (one)
-    likes = db.relationship('Like', back_populates='drawing')
-    comments = db.relationship('Comment', back_populates='drawing')
+    likes = db.relationship('Like', cascade='all, delete', back_populates='drawing')
+    comments = db.relationship(
+        'Comment', cascade='all, delete',  back_populates='drawing')
 
     def to_dict(self):
         return {

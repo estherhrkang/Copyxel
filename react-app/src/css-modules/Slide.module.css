@@ -67,6 +67,11 @@
     
 }
 
-.likeButton:hover {
+/* .buttons {
+    display: flex;
+    justify-content: space-around;
+} */
+
+.likeButton:hover, .deleteButton:hover {
     cursor: pointer;
 }

@@ -61,10 +61,10 @@ def create_drawing():
 
         currentUser = User.query.filter(User.id == current_user.id).first()
         currentUser.drawings.append(drawing)
-        db.session.add(currentUser)
+        # db.session.add(currentUser)
         db.session.commit()
 
-        return drawing.to_dict()
+        return {'drawing': drawing.to_dict(), 'user': currentUser.to_dict()}
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 

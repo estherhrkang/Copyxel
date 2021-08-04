@@ -14,10 +14,13 @@ class User(db.Model, UserMixin):
     profile_img = db.Column(db.String(255), nullable=True)
 
     # many-to-many thru association table
-    drawings = db.relationship('Drawing', secondary=users_drawings, back_populates='users')
+    drawings = db.relationship(
+        'Drawing', secondary=users_drawings, cascade='all, delete', back_populates='users')
     # one-to-many (one)
-    likes = db.relationship('Like', back_populates='user')
-    comments = db.relationship('Comment', back_populates='user')
+    likes = db.relationship(
+        'Like', cascade='all, delete', back_populates='user')
+    comments = db.relationship(
+        'Comment', cascade='all, delete', back_populates='user')
 
     @property
     def password(self):

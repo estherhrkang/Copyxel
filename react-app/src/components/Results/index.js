@@ -69,7 +69,7 @@ export default function Results({ colorsArray }) {
                 </div>
             </div>
             <button type='button' onClick={() => history.push('/')}>Back to Home</button>
-            {/* <button type='button' onClick={() => history.push('/drawing')}>Play again?</button> */}
+            <button type='button' onClick={() => window.location.reload()}>Play again?</button>
             {/* <button type='button' onClick={playAgain}>Play again?</button> */}
         </div>
     )

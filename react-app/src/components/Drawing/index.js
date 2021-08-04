@@ -69,7 +69,6 @@ export default function Drawing({ randomIdx }) {
         const payload = {
             colors: JSON.stringify(allColors['current']),
             sample_colors: JSON.stringify(sampleDrawings[randomIdx]),
-            // sample_colors: JSON.stringify(allColors['current']),
             date_created: today
         }
 
