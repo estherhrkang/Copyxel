@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DisplayRow from '../Display/DisplayRow';
-import { getAllDrawings } from '../../store/drawing';
+import { getAllDrawings, deleteDrawing } from '../../store/drawing';
 import { getAllLikes, getLike, createLike, deleteLike } from '../../store/like';
 import { FaRegHeart, FaHeart } from 'react-icons/fa';
 import { BsFillTrashFill } from 'react-icons/bs';
@@ -54,6 +54,11 @@ export default function Slide({ drawing }) {
         );
     };
 
+    const handleDelete = () => {
+        // drawing
+        dispatch(deleteDrawing( ))
+    };
+
     return (
         <div className={styles.cardContainer}>
             <div className={styles.card}>
@@ -80,7 +85,7 @@ export default function Slide({ drawing }) {
                         <FaRegHeart className={styles.likeButton}/>
                         <FaHeart className={styles.likeButton} style={{ color: 'red' }}/>
                     {/* if the drawing belongs to the current user, show the button */}
-                        <BsFillTrashFill className={styles.deleteButton}/>
+                        <BsFillTrashFill onClick={handleDelete} className={styles.deleteButton}/>
                     </div>
                 </div>
             </div>
