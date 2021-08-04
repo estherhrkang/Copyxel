@@ -65,22 +65,21 @@ export const createDrawing = (drawing) => async (dispatch) => {
     }
 };
 
-export const editDrawing = (drawing) => async (dispatch) => {
-    const response = await fetch(`/api/drawings/${drawing.id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(drawing)
-    });
-    if (response.ok) {
-        const data = await response.json();
-        dispatch(setDrawing(data));
-    } else {
-        const data = await response.json();
-        console.log('checking what is in data', data)
-        return ['An error occurred. Please try again.']
-    }
-
-};
+// export const editDrawing = (drawing) => async (dispatch) => {
+//     const response = await fetch(`/api/drawings/${drawing.id}`, {
+//         method: 'PUT',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify(drawing)
+//     });
+//     if (response.ok) {
+//         const data = await response.json();
+//         dispatch(setDrawing(data));
+//     } else {
+//         const data = await response.json();
+//         console.log('checking what is in data', data)
+//         return ['An error occurred. Please try again.']
+//     }
+// };
 
 export const deleteDrawing = (drawing) => async (dispatch) => {
     const response = await fetch(`/api/drawings/${drawing.id}`, {

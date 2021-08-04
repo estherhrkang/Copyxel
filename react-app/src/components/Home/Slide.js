@@ -19,8 +19,6 @@ export default function Slide({ drawing }) {
         // dispatch(getAllLikes());
     }, [dispatch]);
 
-    // if drawing is owned by current user, show button to delete the drawing
-
     // drawing.date_created -> Fri, 30 Jul 2021 00:00:00 GMT 
     function changeDateFormat(date) {
         const dayOfWk = date.slice(0, 4)
@@ -54,8 +52,9 @@ export default function Slide({ drawing }) {
         );
     };
 
+    // if drawing is owned by current user, show button to delete the drawing
     const handleDelete = () => {
-        // drawing
+        // drawing            \/
         dispatch(deleteDrawing( ))
     };
 
