@@ -20,12 +20,18 @@ export default function UserLikes() {
         );
     };
 
-    return(
-        <div className={styles.userLike}>display user's liked drawings
-            <Swiper slidesPerView={4} keyboard={true} mousewheel={true} spaceBetween={30} 
-                pagination={{ "clickable": true }} className={styles.swiperContainer}>
-                {slides}
-            </Swiper>
-        </div>
-    );
+    if (likedDrawingsArray.length) {
+        return(
+            <div className={styles.userLike}>
+                <Swiper slidesPerView={4} keyboard={true} mousewheel={true} spaceBetween={30} 
+                    pagination={{ "clickable": true }} className={styles.swiperContainer}>
+                    {slides}
+                </Swiper>
+            </div>
+        );
+    } else {
+        return(
+            <div className={styles.emptyLike}>You have not liked any drawings yet!</div>
+        )
+    }
 };

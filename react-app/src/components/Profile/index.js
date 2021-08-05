@@ -48,7 +48,7 @@ export default function Profile() {
             <div className={styles.editForm}>
                 <div>
                     <h2>Hi, {user.username}!</h2>
-                    <img src={profileImg} alt='default'/>
+                    {/* <img src={profileImg} alt='default'/> */}
                 </div>
                 {showEditForm ? (
                     <>
@@ -98,16 +98,15 @@ export default function Profile() {
                     </>
                 ) : (
                     <>
-                        <div>{user.email}</div>
-                        <button type='button' onClick={() => setShowEditForm(true)}>Edit</button>
+                        <button type='button' onClick={() => setShowEditForm(true)}>Edit profile</button>
+                        <LogoutButton />
                         {/* <button type='button'>Delete</button> */}
                     </>
                 )}
-                <div><LogoutButton /></div>
             </div>
             <div className={styles.switch}>
-                <button onClick={() => setShowHistory(true)}>History</button>
-                <button onClick={() => setShowHistory(false)}>Likes</button>
+                <button onClick={() => setShowHistory(true)}>My drawings</button>
+                <button onClick={() => setShowHistory(false)}>Liked drawings</button>
             </div>
             <div className={styles.usersDrawings}>
                 {showHistory ? (

@@ -17,7 +17,7 @@ export default function NavBar() {
       {user && (
         <div>
           <NavLink to='/profile' exact={true} className={styles.navLink} activeClassName='active'>
-            Profile
+            My profile
           </NavLink>
         </div>
       )}
