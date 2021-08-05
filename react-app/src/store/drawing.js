@@ -99,7 +99,7 @@ export const deleteLike = (drawing) => async (dispatch) => {
     };
 };
 
-const initialState = { drawing: null };
+const initialState = { drawing: null, drawings: null, likes:null };
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {

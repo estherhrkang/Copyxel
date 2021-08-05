@@ -10,12 +10,18 @@ import styles from '../../css-modules/Slide.module.css';
 export default function Slide({ drawing }) {
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
-    const drawingsArray = useSelector(state => state.drawing.drawings);
+    const usersDrawingsArray = user?.drawings;
+    // const drawingsArray = useSelector(state => state.drawing.drawings);
     const [showDelete, setShowDelete] = useState(false);
 
     useEffect(() => {
-        dispatch(getAllDrawings());
-    }, [dispatch]);
+        // dispatch(getAllDrawings());
+        for (let i = 0; i < usersDrawingsArray?.length; i++) {
+            if (usersDrawingsArray[i].id === drawing.id) {
+                setShowDelete(true);
+            };
+        };
+    }, [dispatch, drawing, user]);
 
     // drawing.date_created -> Fri, 30 Jul 2021 00:00:00 GMT 
     function changeDateFormat(date) {
@@ -58,10 +64,6 @@ export default function Slide({ drawing }) {
         dispatch(createLike(drawing));
     };
 
-    // only if drawing is owned by current user, show button to delete the drawing
-    // if (user.id == drawing['user_id']) {
-    //     setShowDelete(true);
-    // }
     const handleDelete = () => {
         dispatch(deleteDrawing(drawing));
     };
@@ -91,9 +93,9 @@ export default function Slide({ drawing }) {
                             <>
                                 <FaHeart onClick={handleUnlike} className={styles.likeButton} style={{ color: 'red' }}/>
                                 <FaRegHeart onClick={handleLike} className={styles.likeButton}/>  
-                                {/* {showDelete &&  */}
+                                {showDelete && 
                                     <BsFillTrashFill onClick={handleDelete} className={styles.deleteButton}/>
-                                {/* } */}
+                                }
                             </>
                         }
                     </div>
