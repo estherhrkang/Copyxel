@@ -63,8 +63,7 @@ def create_like(drawing_id):
     drawing = Drawing.query.filter(Drawing.id == drawing_id).first()
     currentUser = User.query.filter(User.id == current_user.id).first()
     currentUser.liked_drawings.append(drawing)
-    # print('---drawing---', drawing.to_dict())
-    # print('---currentUser---', currentUser.to_dict())
+    db.session.commit()
     return {'drawing': drawing.to_dict(), 'user': currentUser.to_dict()}
 
 
@@ -79,6 +78,7 @@ def delete_drawing(drawing_id):
     currentUser = User.query.filter(User.id == current_user.id).first()
     # currentUser.drawings.remove(drawing)
     # db.session.commit()
+
     # get updated drawings list
     drawings = Drawing.query.all()
     return {'drawings': [drawing.to_dict() for drawing in drawings], 'user': currentUser.to_dict()}
@@ -90,6 +90,12 @@ def delete_drawing(drawing_id):
 def delete_like(drawing_id):
     drawing = Drawing.query.filter(Drawing.id == drawing_id).first()
     currentUser = User.query.filter(User.id == current_user.id).first()
+
     # remove the association between drawing and current user
-    currentUser.liked_drawings = None
-    return drawing.to_dict()
+    # currentUser.liked_drawings = None
+    currentUser.liked_drawings.remove(drawing)
+    db.session.commit()
+    
+    drawings = Drawing.query.all()
+    # return drawing.to_dict()
+    return {'drawings': [drawing.to_dict() for drawing in drawings], 'user': currentUser.to_dict()}

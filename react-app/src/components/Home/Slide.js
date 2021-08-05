@@ -11,14 +11,19 @@ export default function Slide({ drawing }) {
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
     const usersDrawingsArray = user?.drawings;
-    // const drawingsArray = useSelector(state => state.drawing.drawings);
+    const usersLikedDrawingsArray = user?.liked_drawings;
     const [showDelete, setShowDelete] = useState(false);
+    const [showLike, setShowLike] = useState(false);
 
     useEffect(() => {
-        // dispatch(getAllDrawings());
         for (let i = 0; i < usersDrawingsArray?.length; i++) {
             if (usersDrawingsArray[i].id === drawing.id) {
                 setShowDelete(true);
+            };
+        };
+        for (let i = 0; i < usersLikedDrawingsArray?.length; i++) {
+            if (usersLikedDrawingsArray[i].id === drawing.id) {
+                setShowLike(true);
             };
         };
     }, [dispatch, drawing, user]);
@@ -91,8 +96,11 @@ export default function Slide({ drawing }) {
                     <div className={styles.buttons}>
                         {user && 
                             <>
-                                <FaHeart onClick={handleUnlike} className={styles.likeButton} style={{ color: 'red' }}/>
-                                <FaRegHeart onClick={handleLike} className={styles.likeButton}/>  
+                                {showLike ? (
+                                    <FaHeart onClick={handleUnlike} className={styles.likeButton} style={{ color: 'red' }}/>
+                                ) : (
+                                    <FaRegHeart onClick={handleLike} className={styles.likeButton}/>  
+                                )}
                                 {showDelete && 
                                     <BsFillTrashFill onClick={handleDelete} className={styles.deleteButton}/>
                                 }

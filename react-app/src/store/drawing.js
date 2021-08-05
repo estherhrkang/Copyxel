@@ -3,6 +3,7 @@ import { setUser } from './session';
 const SET_ALL_DRAWINGS = 'drawing/SET_ALL_DRAWINGS';
 const SET_DRAWING = 'drawing/SET_DRAWING';
 // const REMOVE_DRAWING = 'drawing/REMOVE_DRAWING';
+const SET_LIKE = 'drawing/SET_LIKE';
 
 const setAllDrawings = (drawings) => ({
     type: SET_ALL_DRAWINGS,
@@ -18,6 +19,11 @@ const setDrawing = (drawing) => ({
 //     type: REMOVE_DRAWING,
 //     payload: drawing
 // });
+
+const setLike = (drawing) => ({
+    type: SET_LIKE,
+    payload: drawing
+});
 
 export const getAllDrawings = () => async (dispatch) => {
     const response = await fetch('/api/drawings/');
@@ -62,8 +68,9 @@ export const createLike = (drawing) => async (dispatch) => {
     });
     if (response.ok) {
         const data = await response.json();
-        dispatch(setDrawing(data.drawings));
+        dispatch(setLike(data.drawings));
         dispatch(setUser(data.user));
+        return 'liked'
     } else {
         return ['An error occurred. Please try again.']
     };
@@ -81,7 +88,7 @@ export const deleteDrawing = (drawing) => async (dispatch) => {
         dispatch(setUser(data.user));
     } else {
         return ['An error occurred. Please try again.']
-    }
+    };
 };
 
 export const deleteLike = (drawing) => async (dispatch) => {
@@ -92,14 +99,19 @@ export const deleteLike = (drawing) => async (dispatch) => {
     });
     if (response.ok) {
         const data = await response.json();
-        dispatch(setDrawing(data.drawing));
+        dispatch(setLike(data.drawings));
         dispatch(setUser(data.user));
+        return 'unliked'
     } else {
         return ['An error occurred. Please try again.']
     };
 };
 
-const initialState = { drawing: null, drawings: null, likes:null };
+const initialState = { 
+    drawing: null, drawings: null, 
+    like: null
+};
+// const initialState = { drawing: null };
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
@@ -109,6 +121,8 @@ export default function reducer(state = initialState, action) {
             return { ...state, drawing: action.payload }
         // case REMOVE_DRAWING:
         //     return { ...state, drawing: null }
+        case SET_LIKE:
+            return { ...state, like: action.payload }
         default:
             return state;
     };

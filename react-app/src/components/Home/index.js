@@ -21,39 +21,24 @@ export default function Home() {
 
     useEffect(() => {
         dispatch(getAllDrawings());
-    }, [dispatch])
+    }, [dispatch]);
     
-    // drawing store obj
-    // { drawings: [ {colors: stringified allColors...}, {colors: ...}, ... ] }
-    // const drawingsObj = useSelector(state => state.drawing.drawing);
-    // console.log('whats in drawings store', drawingsObj);
-    
-    // after keying into drawing store obj -> breaks!
-    // [ {colors: stringified allColors...}, {colors: stringified allColors...} ... ]
-    // const drawingsArray = useSelector(state => Object.values(state.drawing.drawing));
-    // --or--
-    // const drawingsArray = useSelector(state => state.drawing.drawing['drawings']);
-    // console.log('whats in drawings store with drawings key?', drawingsArray);
-
-    // console.log('whats in drawingsobj.drawings?', drawingsObj?.drawings);
-
     const slides = [];
-    // const drawingsArray = drawingsObj?.drawings;
     const drawingsArray = useSelector(state => state.drawing.drawings);
     for (let i = 0; i < drawingsArray?.length; i++) {
         slides.push(
             <SwiperSlide key={i} className={styles.swiperSlide}>
                 <Slide drawing={drawingsArray[i]}/>
             </SwiperSlide>
-        )
-    }
+        );
+    };
 
     const handlePlayButton = () => {
         if (user) {
             history.push('/drawing')
         } else {
             history.push('/login');
-        }
+        };
     };
 
     return (
