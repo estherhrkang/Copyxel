@@ -13,7 +13,7 @@ import { authenticate } from './store/session';
 
 // \/
 import { useSelector } from 'react-redux'
-import { Redirect, useHistory } from 'react-router-dom';
+import { Redirect, useHistory, NavLink } from 'react-router-dom';
 import { signUp } from '../src/store/session';
 // /\
 
@@ -27,8 +27,6 @@ export default function App() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
-  const user = useSelector(state => state.session.user);
-  const history = useHistory();
 
   const onSignUp = async (e) => {
     e.preventDefault();
@@ -114,7 +112,8 @@ export default function App() {
             </form>
             <div>
               Already have an account?
-              <button type='button' onClick={() => history.push('/login')}>Log in</button>
+              <NavLink to='/login'>Log in</NavLink>
+              {/* <button type='button' onClick={() => history.push('/login')}>Log in</button> */}
             </div>
           </div>
           {/* /\ */}

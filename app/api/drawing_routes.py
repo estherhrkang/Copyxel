@@ -41,6 +41,7 @@ def create_drawing():
     form = DrawingForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        print('-----form.colors.data-----', form.colors.data)
         drawing = Drawing(
             colors=form.colors.data,
             sample_colors=form.sample_colors.data,

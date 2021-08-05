@@ -3,6 +3,10 @@
     justify-content: space-around;
 }
 
+.navBar img {
+    max-height: 40px;
+}
+
 .navLink {
     text-decoration: none;
     color: #7ca2cf;

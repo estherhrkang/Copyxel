@@ -1,6 +1,8 @@
 from flask.cli import AppGroup
 from .users import seed_users, undo_users
 from .drawings import seed_drawings, undo_drawings
+# from .users_drawings import seed_users_drawings
+# from .likes import seed_likes
 
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
@@ -12,6 +14,8 @@ seed_commands = AppGroup('seed')
 def seed():
     seed_users()
     # seed_drawings()
+    # seed_users_drawings()
+    # seed_likes()
     # Add other seed functions here
 
 
