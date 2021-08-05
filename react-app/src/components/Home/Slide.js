@@ -53,9 +53,9 @@ export default function Slide({ drawing }) {
     };
 
     // if drawing is owned by current user, show button to delete the drawing
-    const handleDelete = () => {
-        // drawing            \/
-        dispatch(deleteDrawing( ))
+    const handleDelete = async (e) => {
+        e.preventDefault();
+        await dispatch(deleteDrawing(drawing))
     };
 
     return (
