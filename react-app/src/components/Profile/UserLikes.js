@@ -21,7 +21,7 @@ export default function UserLikes() {
     };
 
     return(
-        <div className={styles.userHistory}>display user's liked drawings
+        <div className={styles.userLike}>display user's liked drawings
             <Swiper slidesPerView={4} keyboard={true} mousewheel={true} spaceBetween={30} 
                 pagination={{ "clickable": true }} className={styles.swiperContainer}>
                 {slides}

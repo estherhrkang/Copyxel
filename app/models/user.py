@@ -17,8 +17,6 @@ class User(db.Model, UserMixin):
     # many-to-many thru association table
     drawings = db.relationship('Drawing', secondary=users_drawings, back_populates='users')
     liked_drawings = db.relationship('Drawing', secondary=likes, back_populates='liked_users')
-    # one-to-many (one)
-    comments = db.relationship('Comment', back_populates='user', cascade='all, delete-orphan')
 
     @property
     def password(self):

@@ -15,8 +15,6 @@ class Drawing(db.Model):
     # many-to-many thru association table
     users = db.relationship('User', secondary=users_drawings, back_populates='drawings')
     liked_users = db.relationship('User', secondary=likes, back_populates='liked_drawings')
-    # one-to-many (one)
-    comments = db.relationship( 'Comment', back_populates='drawing', cascade='all, delete-orphan')
 
     def to_dict(self):
         return {
