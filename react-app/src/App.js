@@ -6,6 +6,7 @@ import LoginForm from './components/auth/LoginForm';
 // import SignupForm from './components/auth/SignupForm';
 import Profile from './components/Profile';
 import SampleDrawing from './components/SampleDrawing';
+import PageNotFound from './components/PageNotFound';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import ProtectedRoute from './components/auth/ProtectedRoute';
@@ -126,7 +127,7 @@ export default function App() {
           <SampleDrawing />
         </ProtectedRoute>
         <Route>
-          <h1>404! Page does not exist</h1>
+          <PageNotFound />
         </Route>
       </Switch>
       <Footer />
