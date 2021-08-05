@@ -1,5 +1,6 @@
 from .db import db
 from .users_drawings import users_drawings
+from .likes import likes
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
@@ -14,13 +15,10 @@ class User(db.Model, UserMixin):
     profile_img = db.Column(db.String(255), nullable=True)
 
     # many-to-many thru association table
-    drawings = db.relationship(
-        'Drawing', secondary=users_drawings, cascade='all, delete', back_populates='users')
+    drawings = db.relationship('Drawing', secondary=users_drawings, back_populates='users')
+    liked_drawings = db.relationship('Drawing', secondary=likes, back_populates='liked_users')
     # one-to-many (one)
-    likes = db.relationship(
-        'Like', cascade='all, delete', back_populates='user')
-    comments = db.relationship(
-        'Comment', cascade='all, delete', back_populates='user')
+    comments = db.relationship('Comment', back_populates='user', cascade='all, delete-orphan')
 
     @property
     def password(self):

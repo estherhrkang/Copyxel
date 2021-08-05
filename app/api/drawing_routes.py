@@ -26,21 +26,13 @@ def all_drawings():
     return {'drawings': [drawing.to_dict() for drawing in drawings]}
 
 
-# get all drawings by a specific user
-# @drawing_routes.route('/user/<int:user_id>')
-# @login_required
-# def all_drawings_by_user(user_id):
-#     # \/ not sure about: Drawing.users.user_id \/
-#     drawings = Drawing.query.filter(Drawing.users.user_id == user_id).all()
-#     # drawings = Drawing.query.join(users_drawings).join(User).filter((users_drawings.c.user_id == User.id) & (users_drawings.c.user_id == user_id)).all()
-#     return {'drawings': [drawing.to_dict() for drawing in drawings]}
-
-
 # get a drawing
 @drawing_routes.route('/<int:id>')
 @login_required
 def one_drawing(id):
     drawing = Drawing.query.filter(Drawing.id == id).all()
+    # likes = 
+    # get likes of a drawing
     return drawing.to_dict()
 
 
@@ -68,21 +60,6 @@ def create_drawing():
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
-# edit a drawing
-# @drawing_routes.route('/<int:id>', methods=['PUT'])
-# @login_required
-# def edit_drawing(drawing_id):
-#     form = DrawingForm()
-#     drawing = Drawing.query.get(drawing_id)
-#     if form.validate_on_submit():
-#         drawing.colors = form.colors.data,
-#         drawing.sample_colors = form.sample_colors.data,
-#         drawing.date_created=form.date_created.data  
-#         db.session.commit()
-#         return drawing.to_dict()
-#     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
-
-
 # delete a drawing
 @drawing_routes.route('/<int:drawing_id>', methods=['DELETE'])
 @login_required
@@ -93,3 +70,12 @@ def delete_drawing(drawing_id):
 
     drawings = Drawing.query.all()
     return {'drawings': [drawing.to_dict() for drawing in drawings]}
+
+
+# create a like on a drawing
+
+
+
+# delete a like on a drawing
+
+

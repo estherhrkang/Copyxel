@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 6b7a09977581
+Revision ID: 904908f318ff
 Revises: 
-Create Date: 2021-08-04 10:04:42.595465
+Create Date: 2021-08-05 08:37:52.554067
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '6b7a09977581'
+revision = '904908f318ff'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -45,18 +45,17 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('likes',
-    sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('drawing_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['drawing_id'], ['drawings.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id')
+    sa.ForeignKeyConstraint(['drawing_id'], ['drawings.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'),
+    sa.PrimaryKeyConstraint('user_id', 'drawing_id')
     )
     op.create_table('users_drawings',
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('drawing_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['drawing_id'], ['drawings.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['drawing_id'], ['drawings.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('user_id', 'drawing_id')
     )
     # ### end Alembic commands ###

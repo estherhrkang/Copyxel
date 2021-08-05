@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DisplayRow from '../Display/DisplayRow';
 import { getAllDrawings, deleteDrawing } from '../../store/drawing';
-import { getAllLikes, getLike, createLike, deleteLike } from '../../store/like';
 import { FaRegHeart, FaHeart } from 'react-icons/fa';
 import { BsFillTrashFill } from 'react-icons/bs';
 import styles from '../../css-modules/Slide.module.css';
@@ -11,12 +10,9 @@ export default function Slide({ drawing }) {
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
     const drawingsArray = useSelector(state => state.drawing.drawings);
-    // const likes = useSelector(state => state.like.likes);
-    // console.log('---likes---', likes);
 
     useEffect(() => {
         dispatch(getAllDrawings());
-        // dispatch(getAllLikes());
     }, [dispatch]);
 
     // drawing.date_created -> Fri, 30 Jul 2021 00:00:00 GMT 

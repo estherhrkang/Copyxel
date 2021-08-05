@@ -2,12 +2,10 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import session from './session';
 import drawing from './drawing';
-import like from './like';
 
 const rootReducer = combineReducers({
   session,
-  drawing,
-  like
+  drawing
 });
 
 
