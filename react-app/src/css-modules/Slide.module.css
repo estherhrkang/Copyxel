@@ -67,11 +67,16 @@
     
 }
 
-/* .buttons {
-    display: flex;
-    justify-content: space-around;
-} */
+.likeButton, .deleteButton {
+    margin: 10px 20px;
+}
 
-.likeButton:hover, .deleteButton:hover {
+.likeButton:hover {
     cursor: pointer;
+    color: red;
+}
+
+.deleteButton:hover {
+    cursor: pointer;
+    color: black;
 }

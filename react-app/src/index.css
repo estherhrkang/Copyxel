@@ -19,13 +19,13 @@ body button {
     margin-top: 20px;
     border-radius: 23px;
     background-color: transparent;
-    border: 2px solid #c0d9ef;
+    border: 2px solid #80a6d1;
 
 }
 
 body button:hover {
     cursor: pointer;
-    background-color: #c0d9ef;
+    background-color: #80a6d1;
 
 }
 

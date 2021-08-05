@@ -15,6 +15,7 @@ import { authenticate } from './store/session';
 import { useSelector } from 'react-redux'
 import { Redirect, useHistory, NavLink } from 'react-router-dom';
 import { signUp } from '../src/store/session';
+import styles from './App.module.css';
 // /\
 
 export default function App() {
@@ -63,10 +64,10 @@ export default function App() {
         <Route path='/signup' exact={true}>
           {/* <SignupForm /> */}
           {/* \/ */}
-          <div>
+          <div className={styles.signupForm}>
             <h1>put logo here</h1>
             <form onSubmit={onSignUp}>
-              <div>
+              <div className={styles.signupForm__errors}>
                 {errors.map((error, ind) => (
                   <div key={ind}>{error}</div>
                 ))}
@@ -108,11 +109,11 @@ export default function App() {
                   required={true}
                 ></input>
               </div>
-              <button type='submit'>Sign up</button>
+              <button className={styles.signupButton} type='submit'>Sign up</button>
             </form>
             <div>
               Already have an account?
-              <NavLink to='/login'>Log in</NavLink>
+              <NavLink className={styles.loginButton} to='/login'>Log in</NavLink>
               {/* <button type='button' onClick={() => history.push('/login')}>Log in</button> */}
             </div>
           </div>

@@ -1,6 +1,7 @@
-.navBar div {
+.navBar {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
+    font-size: 40px;
 }
 
 .navBar img {

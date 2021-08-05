@@ -93,7 +93,7 @@ export default function Profile() {
                                 />
                             </div>
                             <button type='submit'>Save</button>
-                            <button type='button' onClick={() => setShowEditForm(false)}>Cancel</button>
+                            <button className={styles.cancelButton} type='button' onClick={() => setShowEditForm(false)}>Cancel</button>
                         </form>
                     </>
                 ) : (
@@ -109,7 +109,7 @@ export default function Profile() {
                 <button onClick={() => setShowHistory(true)}>History</button>
                 <button onClick={() => setShowHistory(false)}>Likes</button>
             </div>
-            <div>
+            <div className={styles.usersDrawings}>
                 {showHistory ? (
                     <UserHistory />
                 ) : (

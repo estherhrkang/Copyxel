@@ -21,7 +21,7 @@ export default function UserHistory() {
     };
 
     return(
-        <div className={styles.userHistory}>display user's drawing history
+        <div className={styles.userHistory}>History
             <Swiper slidesPerView={4} keyboard={true} mousewheel={true} spaceBetween={30} 
                 pagination={{ "clickable": true }} className={styles.swiperContainer}>
                 {slides}

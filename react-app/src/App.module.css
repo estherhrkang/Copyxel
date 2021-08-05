@@ -1,0 +1,48 @@
+.signupForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.signupForm div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.signupForm__errors {
+    display: flex;
+    flex-direction: column;
+    color: #eb2158;
+}
+
+.signupForm input {
+    border: none;
+    margin: 3px 5px;
+    width: 200px;
+}
+
+.signupButton {
+
+}
+
+.loginButton {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    justify-content: center;
+    font-family: 'VT323', monospace;
+    font-size: 1.5rem;
+    font-weight: 500;
+    padding: 10px 28px;
+    margin-top: 20px;
+    border-radius: 23px;
+    background-color: transparent;
+    border: 2px solid #80a6d1;
+}
+
+.loginButton:hover {
+    cursor: pointer;
+    background-color: #80a6d1;
+
+}

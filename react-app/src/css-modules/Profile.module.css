@@ -8,7 +8,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    
 }
 
 .editForm img {
@@ -21,10 +20,23 @@
     flex-direction: row; */
 }
 
+.cancelButton {
+    border: none;
+}
+
+.cancelButton:hover {
+    background-color: transparent;
+}
+
 .switch {
     display: flex;
+    justify-content: center;
 }
 
 .switch button:focus {
-    background-color: #c0d9ef;
+    background-color: #80a6d1;
+}
+
+.usersDrawings {
+
 }
