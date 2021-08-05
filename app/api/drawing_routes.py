@@ -30,9 +30,7 @@ def all_drawings():
 @drawing_routes.route('/<int:id>')
 @login_required
 def one_drawing(id):
-    drawing = Drawing.query.filter(Drawing.id == id).all()
-    # likes = 
-    # get likes of a drawing
+    drawing = Drawing.query.filter(Drawing.id == id).first()
     return drawing.to_dict()
 
 
@@ -50,14 +48,24 @@ def create_drawing():
         )
         db.session.add(drawing)
         db.session.commit()
-
+        # also create association btw drawing and current user
         currentUser = User.query.filter(User.id == current_user.id).first()
         currentUser.drawings.append(drawing)
-        # db.session.add(currentUser)
         db.session.commit()
-
         return {'drawing': drawing.to_dict(), 'user': currentUser.to_dict()}
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+# create a like on a drawing
+@drawing_routes.route('/<int:drawing_id>/likes', methods=['POST'])
+@login_required
+def create_like(drawing_id):
+    drawing = Drawing.query.filter(Drawing.id == drawing_id).first()
+    currentUser = User.query.filter(User.id == current_user.id).first()
+    currentUser.liked_drawings.append(drawing)
+    # print('---drawing---', drawing.to_dict())
+    # print('---currentUser---', currentUser.to_dict())
+    return {'drawing': drawing.to_dict(), 'user': currentUser.to_dict()}
 
 
 # delete a drawing
@@ -67,15 +75,21 @@ def delete_drawing(drawing_id):
     drawing = Drawing.query.get(drawing_id)
     db.session.delete(drawing)
     db.session.commit()   
-
+    # remove the row on association table
+    currentUser = User.query.filter(User.id == current_user.id).first()
+    # currentUser.drawings.remove(drawing)
+    # db.session.commit()
+    # get updated drawings list
     drawings = Drawing.query.all()
-    return {'drawings': [drawing.to_dict() for drawing in drawings]}
-
-
-# create a like on a drawing
-
+    return {'drawings': [drawing.to_dict() for drawing in drawings], 'user': currentUser.to_dict()}
 
 
 # delete a like on a drawing
-
-
+@drawing_routes.route('/<int:drawing_id>/likes', methods=['DELETE'])
+@login_required
+def delete_like(drawing_id):
+    drawing = Drawing.query.filter(Drawing.id == drawing_id).first()
+    currentUser = User.query.filter(User.id == current_user.id).first()
+    # remove the association between drawing and current user
+    currentUser.liked_drawings = None
+    return drawing.to_dict()

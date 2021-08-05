@@ -2,7 +2,7 @@ import { setUser } from './session';
 
 const SET_ALL_DRAWINGS = 'drawing/SET_ALL_DRAWINGS';
 const SET_DRAWING = 'drawing/SET_DRAWING';
-const REMOVE_DRAWING = 'drawing/REMOVE_DRAWING';
+// const REMOVE_DRAWING = 'drawing/REMOVE_DRAWING';
 
 const setAllDrawings = (drawings) => ({
     type: SET_ALL_DRAWINGS,
@@ -14,10 +14,10 @@ const setDrawing = (drawing) => ({
     payload: drawing
 });
 
-const removeDrawing = (drawing) => ({
-    type: REMOVE_DRAWING,
-    payload: drawing
-});
+// const removeDrawing = (drawing) => ({
+//     type: REMOVE_DRAWING,
+//     payload: drawing
+// });
 
 export const getAllDrawings = () => async (dispatch) => {
     const response = await fetch('/api/drawings/');
@@ -45,14 +45,28 @@ export const createDrawing = (drawing) => async (dispatch) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(drawing)
     });
-    console.log('what is response?', response);
     if (response.ok) {
         const data = await response.json();
         dispatch(setDrawing(data.drawing));
         dispatch(setUser(data.user));
     } else {
         return ['An error occurred. Please try again.']
-    }
+    };
+};
+
+export const createLike = (drawing) => async (dispatch) => {
+    const response = await fetch(`/api/drawings/${drawing.id}/likes`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(drawing)
+    });
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(setDrawing(data.drawings));
+        dispatch(setUser(data.user));
+    } else {
+        return ['An error occurred. Please try again.']
+    };
 };
 
 export const deleteDrawing = (drawing) => async (dispatch) => {
@@ -63,11 +77,26 @@ export const deleteDrawing = (drawing) => async (dispatch) => {
     });
     if (response.ok) {
         const data = await response.json();
-        // dispatch(removeDrawing(data));
-        dispatch(setAllDrawings(data));
+        dispatch(setAllDrawings(data.drawings));
+        dispatch(setUser(data.user));
     } else {
         return ['An error occurred. Please try again.']
     }
+};
+
+export const deleteLike = (drawing) => async (dispatch) => {
+    const response = await fetch(`/api/drawings/${drawing.id}/likes`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(drawing)
+    });
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(setDrawing(data.drawing));
+        dispatch(setUser(data.user));
+    } else {
+        return ['An error occurred. Please try again.']
+    };
 };
 
 const initialState = { drawing: null };

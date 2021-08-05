@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DisplayRow from '../Display/DisplayRow';
-import { getAllDrawings, deleteDrawing } from '../../store/drawing';
+import { getAllDrawings, deleteDrawing, createLike, deleteLike } from '../../store/drawing';
+
 import { FaRegHeart, FaHeart } from 'react-icons/fa';
 import { BsFillTrashFill } from 'react-icons/bs';
 import styles from '../../css-modules/Slide.module.css';
@@ -10,6 +11,7 @@ export default function Slide({ drawing }) {
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
     const drawingsArray = useSelector(state => state.drawing.drawings);
+    const [showDelete, setShowDelete] = useState(false);
 
     useEffect(() => {
         dispatch(getAllDrawings());
@@ -48,10 +50,20 @@ export default function Slide({ drawing }) {
         );
     };
 
-    // if drawing is owned by current user, show button to delete the drawing
-    const handleDelete = async (e) => {
-        e.preventDefault();
-        await dispatch(deleteDrawing(drawing))
+    // if guest user, show filled heart with count of total likes for the drawing
+    const handleUnlike = () => {
+        dispatch(deleteLike(drawing));
+    };
+    const handleLike = () => {
+        dispatch(createLike(drawing));
+    };
+
+    // only if drawing is owned by current user, show button to delete the drawing
+    // if (user.id == drawing['user_id']) {
+    //     setShowDelete(true);
+    // }
+    const handleDelete = () => {
+        dispatch(deleteDrawing(drawing));
     };
 
     return (
@@ -75,12 +87,15 @@ export default function Slide({ drawing }) {
                         </div>
                     </div>
                     <div className={styles.buttons}>
-                    {/* if logged in user, show empty/filled heart button */}
-                    {/* if guest user, show filled heart with count of total likes for the drawing */}
-                        <FaRegHeart className={styles.likeButton}/>
-                        <FaHeart className={styles.likeButton} style={{ color: 'red' }}/>
-                    {/* if the drawing belongs to the current user, show the button */}
-                        <BsFillTrashFill onClick={handleDelete} className={styles.deleteButton}/>
+                        {user && 
+                            <>
+                                <FaHeart onClick={handleUnlike} className={styles.likeButton} style={{ color: 'red' }}/>
+                                <FaRegHeart onClick={handleLike} className={styles.likeButton}/>  
+                                {/* {showDelete &&  */}
+                                    <BsFillTrashFill onClick={handleDelete} className={styles.deleteButton}/>
+                                {/* } */}
+                            </>
+                        }
                     </div>
                 </div>
             </div>

@@ -9,7 +9,7 @@ import styles from '../../css-modules/SampleDrawing.module.css';
 export default function SampleDrawing() {
     const dispatch = useDispatch();
     // adjust seconds! 
-    const [seconds, setSeconds] = useState(5);
+    const [seconds, setSeconds] = useState(3);
     const [beginDrawing, setBeginDrawing] = useState(false);
 
     useEffect(() => {
