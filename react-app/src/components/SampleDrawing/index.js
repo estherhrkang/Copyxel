@@ -21,7 +21,7 @@ export default function SampleDrawing() {
     }, [seconds]);
 
     const randomIdx = useRef(Math.floor(Math.random() * (sampleDrawings.length)));
-    console.log('---randomIdx in SampleDrawing---', randomIdx);
+    console.log('---randomIdx in SampleDrawing---', randomIdx.current);
 
     return(
         <>

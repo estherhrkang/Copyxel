@@ -16,12 +16,30 @@ export default function SignupForm() {
 
   const onSignUp = async (e) => {
     e.preventDefault();
+    // setErrors([]);
+
+    // let errors = [];
+    // if (username.length < 4) errors.push('Username must be at least 4 characters in length');
+    // if (username.length > 40) errors.push('Username cannot be more than 40 characters in length');
+    // if (password.length < 6) errors.push('Password must be at least 6 characters in length');
+    // if (password !== repeatPassword) errors.push('Passwords do not match');
+
+    // if (!errors.length) {
+    //   const data = await dispatch(signUp(username, email, password));
+    //   if (data) {
+    //     setErrors(data)
+    //   }
+    // } else {
+    //   setErrors(errors);
+    // };
+
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password));
       if (data) {
         setErrors(data)
       }
     }
+    
   };
 
   if (user) return <Redirect to='/' />;
