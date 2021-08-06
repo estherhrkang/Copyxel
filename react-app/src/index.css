@@ -20,7 +20,7 @@ body button {
     border-radius: 23px;
     background-color: transparent;
     border: 2px solid #80a6d1;
-
+    width: 150px;
 }
 
 body button:hover {

@@ -107,7 +107,7 @@ export default function Drawing({ randomIdx }) {
                     </div>
                 </div>
                 {/* if no color on canvas, disable see results button */}
-                <button type='button' onClick={handleSubmit}>Compare drawings</button>
+                <button className={styles.compareButton} type='button' onClick={handleSubmit}>Compare drawings</button>
                 {/* <button type='button' onClick={handleStartOver}>Start over!</button> */}
                 {/* <button type='button' onClick={() => {return <Redirect to='/drawing' />}}>Choose a different drawing</button> */}
             </div>

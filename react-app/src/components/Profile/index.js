@@ -46,7 +46,7 @@ export default function Profile() {
     return(
         <div className={styles.profile}>
             <div className={styles.editForm}>
-                <div>
+                <div className={styles.editForm__message}>
                     <h2>Hi, {user.username}!</h2>
                     {/* <img src={profileImg} alt='default'/> */}
                 </div>
@@ -104,16 +104,18 @@ export default function Profile() {
                     </>
                 )}
             </div>
-            <div className={styles.switch}>
-                <button onClick={() => setShowHistory(true)}>My drawings</button>
-                <button onClick={() => setShowHistory(false)}>Liked drawings</button>
-            </div>
-            <div className={styles.usersDrawings}>
-                {showHistory ? (
-                    <UserHistory />
-                ) : (
-                    <UserLikes />
-                )}
+            <div className={styles.usersDrawingsContainer}>
+                <div className={styles.switch}>
+                    <button onClick={() => setShowHistory(true)}>My drawings</button>
+                    <button onClick={() => setShowHistory(false)}>Liked drawings</button>
+                </div>
+                <div className={styles.usersDrawings}>
+                    {showHistory ? (
+                        <UserHistory />
+                    ) : (
+                        <UserLikes />
+                    )}
+                </div>
             </div>
         </div> 
     );

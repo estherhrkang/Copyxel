@@ -59,18 +59,24 @@ export default function Results({ colorsArray }) {
             {/* sample: use passed down sample drawing id */}
             {/* drawing: use display component? grab last drawing id from store */}
             <div className={styles.results}>
-                <div className={styles.drawingPanel}>
-                    Sample drawing
-                    <div className={styles.pixels}>{sampleRows}</div>
+                <div className={styles.drawing}>
+                    <div className={styles.drawingPanel}>
+                        Sample drawing
+                        <div className={styles.pixels}>{sampleRows}</div>
+                    </div>
                 </div>
-                <div className={styles.drawingPanel}>
-                    Your drawing
-                    <div className={styles.pixels}>{rows}</div>
+                <div className={styles.drawing}>
+                    <div className={styles.drawingPanel}>
+                        Your drawing
+                        <div className={styles.pixels}>{rows}</div>
+                    </div>
                 </div>
             </div>
-            <button type='button' onClick={() => history.push('/')}>Back to Home</button>
-            <button type='button' onClick={() => window.location.reload()}>Play again?</button>
-            {/* <button type='button' onClick={playAgain}>Play again?</button> */}
+            <div className={styles.buttons}>
+                <button type='button' onClick={() => history.push('/')}>Back to Home</button>
+                <button type='button' onClick={() => window.location.reload()}>Play again?</button>
+                {/* <button type='button' onClick={playAgain}>Play again?</button> */}
+            </div>
         </div>
     )
 }

@@ -1,7 +1,6 @@
 .signupForm {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 
     width: 30%;
@@ -17,7 +16,7 @@
 }
 
 .signupForm div {
-    
+    align-items: center;
 }
 
 .signupForm__errors {
@@ -41,15 +40,24 @@
     outline: none; 
 }
 
-.buttons {
+.button {
     display: flex;
     justify-content: center;
+    
 }
 
 .loginButtonContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.loginButtonContainer h5 {
+    margin-bottom: 0;
+}
+
+.loginButtonContainer div {
+    width: 150px;
 }
 
 .loginButton {
@@ -65,7 +73,6 @@
     border-radius: 23px;
     background-color: transparent;
     border: 2px solid #80a6d1;
-    width: 70px;
 }
 
 .loginButton:hover {

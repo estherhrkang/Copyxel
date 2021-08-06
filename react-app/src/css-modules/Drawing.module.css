@@ -36,3 +36,8 @@
 .pixels {
     margin-bottom: 2rem;
 }
+
+.compareButton {
+    margin-top: 30px;
+    width: 250px;
+}

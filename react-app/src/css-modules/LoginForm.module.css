@@ -1,7 +1,6 @@
 .loginForm {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 
     width: 30%;
@@ -43,11 +42,17 @@
 
 .buttons {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 .signupButton {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
+}
+
+.signupButton h5 {
+    margin-bottom: 0;
 }

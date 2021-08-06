@@ -63,7 +63,7 @@ export default function LoginForm() {
           <button type='button' onClick={demoLogin}>Demo</button>
         </div>
         <div className={styles.signupButton}>
-          <h4>Don't have an account?</h4>
+          <h5>Don't have an account?</h5>
           <button type='button' onClick={() => history.push('/signup')}>Sign up</button>
         </div>
       </form>
