@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Home from './components/Home';
-import LoginForm from './components/auth/LoginForm';
-import SignupForm from './components/auth/SignupForm';
+import LoginForm, { SignupForm } from './components/auth/LoginForm';
+// import SignupForm from './components/auth/SignupForm';
 import Profile from './components/Profile';
 import SampleDrawing from './components/SampleDrawing';
 import PageNotFound from './components/PageNotFound';
@@ -70,7 +70,7 @@ export default function App() {
         <Route path='/signup' exact={true}>
           <SignupForm />
           {/* \/ */}
-          <div className={styles.signupForm}>
+          {/* <div className={styles.signupForm}>
             <form onSubmit={onSignUp}>
               <div className={styles.signupForm__errors}>
                 {errors.map((error, ind) => (
@@ -120,10 +120,9 @@ export default function App() {
               <div className={styles.loginButtonContainer}>
                 <h5>Already have an account?</h5>
                 <div><NavLink className={styles.loginButton} to='/login'>Log in</NavLink></div>
-                {/* <button type='button' onClick={() => history.push('/login')}>Log in</button> */}
               </div>
             </form>
-          </div>
+          </div> */}
           {/* /\ */}
         </Route>
         <ProtectedRoute path='/profile' exact={true}>
