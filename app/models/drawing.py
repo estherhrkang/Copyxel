@@ -21,5 +21,6 @@ class Drawing(db.Model):
             'id': self.id,
             'colors': self.colors,
             'sample_colors': self.sample_colors,
-            'date_created': self.date_created
+            'date_created': self.date_created,
+            'comments': [comment.to_dict() for comment in self.comments]
         }

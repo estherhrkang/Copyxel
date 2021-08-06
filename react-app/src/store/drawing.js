@@ -4,6 +4,7 @@ const SET_ALL_DRAWINGS = 'drawing/SET_ALL_DRAWINGS';
 const SET_DRAWING = 'drawing/SET_DRAWING';
 // const REMOVE_DRAWING = 'drawing/REMOVE_DRAWING';
 const SET_LIKE = 'drawing/SET_LIKE';
+const SET_COMMENTS = 'drawing/SET_COMMENTS';
 
 const setAllDrawings = (drawings) => ({
     type: SET_ALL_DRAWINGS,
@@ -23,6 +24,11 @@ const setDrawing = (drawing) => ({
 const setLike = (drawing) => ({
     type: SET_LIKE,
     payload: drawing
+});
+
+const setComments = (comment) => ({
+    type: SET_COMMENTS,
+    payload: comment
 });
 
 export const getAllDrawings = () => async (dispatch) => {
@@ -76,6 +82,36 @@ export const createLike = (drawing) => async (dispatch) => {
     };
 };
 
+export const createComment = ({ content, drawing_id}) => async (dispatch) => {
+    const response = await fetch(`/api/drawings/${drawing_id}/comments`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({content})
+    });
+    if (response.ok) {
+        console.log('---got response.ok---');
+        const data = await response.json();
+        dispatch(setComments(data));
+    } else {
+        console.log('---response not ok---');
+        return ['An error occurred. Please try again.']
+    };
+};
+
+export const editComment = (comment) => async (dispatch) => {
+    const response = await fetch(`/api/comments/${comment.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(comment)
+    });
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(setComments(data.comments));
+    } else {
+        return ['An error occurred. Please try again.']
+    };
+}
+
 export const deleteDrawing = (drawing) => async (dispatch) => {
     const response = await fetch(`/api/drawings/${drawing.id}`, {
         method: 'DELETE',
@@ -107,22 +143,39 @@ export const deleteLike = (drawing) => async (dispatch) => {
     };
 };
 
+export const deleteComment = (comment) => async (dispatch) => {
+    const response = await fetch(`/api/comments/${comment.id}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(comment)
+    });
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(setComments(data.comments));
+    } else {
+        return ['An error occurred. Please try again.']
+    };
+};
+
 const initialState = { 
     drawing: null, drawings: null, 
-    like: null
+    like: null, 
+    comments: null
 };
 // const initialState = { drawing: null };
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case SET_ALL_DRAWINGS:
-            return { drawings: action.payload }
+            return { ...state, drawings: action.payload }
         case SET_DRAWING:
             return { ...state, drawing: action.payload }
         // case REMOVE_DRAWING:
         //     return { ...state, drawing: null }
         case SET_LIKE:
             return { ...state, like: action.payload }
+        case SET_COMMENTS:
+            return { ...state, comments: action.payload }
         default:
             return state;
     };

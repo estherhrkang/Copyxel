@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Home from './components/Home';
 import LoginForm from './components/auth/LoginForm';
-// import SignupForm from './components/auth/SignupForm';
+import SignupForm from './components/auth/SignupForm';
 import Profile from './components/Profile';
 import SampleDrawing from './components/SampleDrawing';
 import PageNotFound from './components/PageNotFound';
@@ -24,6 +24,8 @@ export default function App() {
   const dispatch = useDispatch();
   
   // \/
+  const user = useSelector(state => state.session.user);
+  const history = useHistory();
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -39,14 +41,17 @@ export default function App() {
       }
     }
   };
+  
   // /\
-
+  
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
       setLoaded(true);
     })();
   }, [dispatch]);
+  
+  // if (user) return <Redirect to='/' />
 
   if (!loaded) {
     return null;
@@ -63,7 +68,7 @@ export default function App() {
           <LoginForm />
         </Route>
         <Route path='/signup' exact={true}>
-          {/* <SignupForm /> */}
+          <SignupForm />
           {/* \/ */}
           <div className={styles.signupForm}>
             <form onSubmit={onSignUp}>

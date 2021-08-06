@@ -18,15 +18,10 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 
-# get all comments (of a drawing?)
-@comment_routes.route('/')
-# @login_required
-def all_comments():
-    comments = Comment.query.all()
-    return {'comments': [comment.to_dict() for comment in comments]}
+# get a comment ?
 
 
-# create a comment on a drawing is @ drawing_routes
+# 'create a comment on a drawing' route is @ drawing_routes
 
 
 # edit a comment on a drawing
@@ -40,7 +35,9 @@ def edit_comment(comment_id):
         comment.content=form.content.data
         db.session.commit()
 
+        # return comment.to_dict()
         comments = Comment.query.all()
+        # return drawings!!
         return {'comments': [comment.to_dict() for comment in comments]}
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
@@ -53,5 +50,7 @@ def delete_comment(comment_id):
     db.session.delete(comment)
     db.session.commit()
 
+    # return comment.to_dict()
     comments = Comment.query.all()
+    # return drawings!!
     return {'comments': [comment.to_dict() for comment in comments]}
