@@ -123,14 +123,14 @@ export default function Slide({ drawing }) {
                         <div>
                             {/* <FaRegCommentDots /> */}
                             {/* {commentsArray?.map((comment) => comment.content)} */}
-                            {commentsArray?.map((comment) => (
+                            {/* {commentsArray?.map((comment) => (
                                 <div key={comment.id}>
                                     {comment.content}
-                                    {/* {showDeleteComment &&  */}
+                                    {showDeleteComment &&
                                         <FiDelete onClick={handleDeleteComment} className={styles.deleteButton}/>
-                                    {/* } */}
+                                    }
                                 </div>
-                            ))}
+                            ))} */}
                             
                         </div>
                         {user && 
