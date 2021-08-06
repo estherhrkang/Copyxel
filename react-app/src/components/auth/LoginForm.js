@@ -34,7 +34,6 @@ export default function LoginForm() {
 
   return (
     <div className={styles.loginForm}>
-      <h1>put logo here</h1>
       <form onSubmit={onLogin}>
         <div className={styles.loginForm__errors}>
           {errors.map((error, ind) => (
@@ -42,17 +41,15 @@ export default function LoginForm() {
           ))}
         </div>
         <div>
-          <label htmlFor='username'>Username</label>
           <input
             name='username'
             type='text'
-            placeholder='username'
+            placeholder='Username'
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
         <div>
-          <label htmlFor='password'>Password</label>
           <input
             name='password'
             type='password'
@@ -61,12 +58,12 @@ export default function LoginForm() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div>
+        <div className={styles.buttons}>
           <button type='submit'>Log in</button>
           <button type='button' onClick={demoLogin}>Demo</button>
         </div>
-        <div>
-          Don't have an account?
+        <div className={styles.signupButton}>
+          <h4>Don't have an account?</h4>
           <button type='button' onClick={() => history.push('/signup')}>Sign up</button>
         </div>
       </form>

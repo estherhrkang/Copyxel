@@ -1,17 +1,53 @@
 .loginForm {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+
+    width: 30%;
+    height: auto;
+    padding: 7%;
     
+    text-shadow: 2px 2px white;
+    text-align: center;
+
+    background-color: white;
+    box-shadow: 10px 10px 0 #c0d9ef;
+    border-radius: 5px;
 }
 
 .loginForm div {
-    display: flex;
-    justify-content: space-between;
+    
 }
 
 .loginForm__errors {
     display: flex;
     flex-direction: column;
-    color: #eb2158;
+    color: red;
+    font-size: 70%;
+}
+
+.loginForm input {
+    border: none;
+    box-shadow: 0 5px 0 #c0d9ef;
+    width: 300px;
+    height: 20px;
+    padding: 15px 5px;
+    margin: 5px 0;
+    font-size: 50%;
+}
+
+.loginForm input:focus {
+    outline: none; 
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.signupButton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

@@ -28,7 +28,6 @@ export default function SignupForm() {
 
   return (
     <div className={styles.signupForm}>
-      <h1>put logo here</h1>
       <form onSubmit={onSignUp}>
         <div className={styles.signupForm__errors}>
           {errors.map((error, ind) => (

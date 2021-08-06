@@ -66,7 +66,6 @@ export default function App() {
           {/* <SignupForm /> */}
           {/* \/ */}
           <div className={styles.signupForm}>
-            <h1>put logo here</h1>
             <form onSubmit={onSignUp}>
               <div className={styles.signupForm__errors}>
                 {errors.map((error, ind) => (
@@ -74,49 +73,51 @@ export default function App() {
                 ))}
               </div>
               <div>
-                <label>Username</label>
                 <input
                   type='text'
                   name='username'
+                  placeholder='Username'
                   onChange={(e) => setUsername(e.target.value)}
                   value={username}
                 ></input>
               </div>
               <div>
-                <label>Email</label>
                 <input
                   type='text'
                   name='email'
+                  placeholder='Email'
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
                 ></input>
               </div>
               <div>
-                <label>Password</label>
                 <input
                   type='password'
                   name='password'
+                  placeholder='Password'
                   onChange={(e) => setPassword(e.target.value)}
                   value={password}
                 ></input>
               </div>
               <div>
-                <label>Confirm password</label>
                 <input
                   type='password'
                   name='repeat_password'
+                  placeholder='Confirm password'
                   onChange={(e) => setRepeatPassword(e.target.value)}
                   value={repeatPassword}
                   required={true}
                 ></input>
               </div>
-              <button className={styles.signupButton} type='submit'>Sign up</button>
+              <div className={styles.button}>
+                <button type='submit'>Sign up</button>
+              </div>
+              <div className={styles.loginButtonContainer}>
+                <h5>Already have an account?</h5>
+                <div><NavLink className={styles.loginButton} to='/login'>Log in</NavLink></div>
+                {/* <button type='button' onClick={() => history.push('/login')}>Log in</button> */}
+              </div>
             </form>
-            <div>
-              Already have an account?
-              <NavLink className={styles.loginButton} to='/login'>Log in</NavLink>
-              {/* <button type='button' onClick={() => history.push('/login')}>Log in</button> */}
-            </div>
           </div>
           {/* /\ */}
         </Route>
