@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect, useHistory } from 'react-router-dom';
 import { signUp } from '../../store/session';
-import styles from '../../css-modules/SignupForm.module.css';
+import '../../css-modules/SignupForm.module.css';
 
 export default function SignupForm() {
   const [errors, setErrors] = useState([]);
@@ -45,9 +45,9 @@ export default function SignupForm() {
   if (user) return <Redirect to='/' />;
 
   return (
-    <div className={styles.signupForm}>
+    <div className={'signupForm'}>
       <form onSubmit={onSignUp}>
-        <div className={styles.signupForm__errors}>
+        <div className={'signupForm__errors'}>
           {errors.map((error, ind) => (
             <div key={ind}>{error}</div>
           ))}
