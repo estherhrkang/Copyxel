@@ -26,22 +26,7 @@ def all_comments():
     return {'comments': [comment.to_dict() for comment in comments]}
 
 
-# create a comment on a drawing
-@comment_routes.route('/', methods=['POST'])
-@login_required
-def create_comment():
-    form = CommentForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
-        comment = Comment(
-            content=form.content.data
-        )
-        db.session.add(comment)
-        db.session.commit()
-
-        comments = Comment.query.all()
-        return {'comments': [comment.to_dict() for comment in comments]}
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+# create a comment on a drawing is @ drawing_routes
 
 
 # edit a comment on a drawing

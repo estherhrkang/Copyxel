@@ -1,8 +1,8 @@
 from flask import Blueprint, jsonify, request
 from app import forms
 from flask_login import login_required, current_user
-from app.models import db, Drawing, User
-from app.forms import DrawingForm
+from app.models import db, Drawing, User, Comment
+from app.forms import DrawingForm, CommentForm
 
 drawing_routes = Blueprint('drawings', __name__)
 
@@ -65,6 +65,26 @@ def create_like(drawing_id):
     currentUser.liked_drawings.append(drawing)
     db.session.commit()
     return {'drawing': drawing.to_dict(), 'user': currentUser.to_dict()}
+
+
+# create a comment on a drawing
+@drawing_routes.route('/<int:drawing_id>/comments', methods=['POST'])
+@login_required
+def create_comment(drawing_id):
+    form = CommentForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        comment = Comment(
+            content=form.content.data,
+            user_id=current_user.id,
+            drawing_id=drawing_id
+        )
+        db.session.add(comment)
+        db.session.commit()
+        return comment.to_dict()
+        # comments = Comment.query.all()
+        # return {'comments': [comment.to_dict() for comment in comments]}
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 # delete a drawing
