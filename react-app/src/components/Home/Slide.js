@@ -11,6 +11,7 @@ import styles from '../../css-modules/Slide.module.css';
 
 export default function Slide({ drawing }) {
     const dispatch = useDispatch();
+    const allDrawings = useSelector(state => state.drawing.drawings);
     const user = useSelector(state => state.session.user);
     const usersDrawingsArray = user?.drawings;
     const usersLikedDrawingsArray = user?.liked_drawings;

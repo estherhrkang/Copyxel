@@ -36,9 +36,13 @@ def edit_comment(comment_id):
         db.session.commit()
 
         # return comment.to_dict()
-        comments = Comment.query.all()
+
+        # comments = Comment.query.all()
+        # return {'comments': [comment.to_dict() for comment in comments]}
+
         # return drawings!!
-        return {'comments': [comment.to_dict() for comment in comments]}
+        drawings = Drawing.query.all()
+        return {'drawings': [drawing.to_dict() for drawing in drawings]}
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
@@ -51,6 +55,11 @@ def delete_comment(comment_id):
     db.session.commit()
 
     # return comment.to_dict()
-    comments = Comment.query.all()
+
+    # comments = Comment.query.all()
+    # return {'comments': [comment.to_dict() for comment in comments]}
+
     # return drawings!!
-    return {'comments': [comment.to_dict() for comment in comments]}
+    drawings = Drawing.query.all()
+    return {'drawings': [drawing.to_dict() for drawing in drawings]}
+

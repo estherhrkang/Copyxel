@@ -82,9 +82,13 @@ def create_comment(drawing_id):
         )
         db.session.add(comment)
         db.session.commit()
-        return comment.to_dict()
+
+        # return comment.to_dict()
+
         # comments = Comment.query.all()
         # return {'comments': [comment.to_dict() for comment in comments]}
+        drawings = Drawing.query.all()
+        return {'drawings': [drawing.to_dict() for drawing in drawings]}
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 

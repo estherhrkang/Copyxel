@@ -91,7 +91,7 @@ export const createComment = ({ content, drawing_id}) => async (dispatch) => {
     if (response.ok) {
         console.log('---got response.ok---');
         const data = await response.json();
-        dispatch(setComments(data));
+        dispatch(setAllDrawings(data.drawings));
     } else {
         console.log('---response not ok---');
         return ['An error occurred. Please try again.']
@@ -106,7 +106,7 @@ export const editComment = (comment) => async (dispatch) => {
     });
     if (response.ok) {
         const data = await response.json();
-        dispatch(setComments(data.comments));
+        dispatch(setAllDrawings(data.drawings));
     } else {
         return ['An error occurred. Please try again.']
     };
@@ -151,7 +151,7 @@ export const deleteComment = (comment) => async (dispatch) => {
     });
     if (response.ok) {
         const data = await response.json();
-        dispatch(setComments(data.comments));
+        dispatch(setAllDrawings(data.drawings));
     } else {
         return ['An error occurred. Please try again.']
     };
@@ -174,8 +174,8 @@ export default function reducer(state = initialState, action) {
         //     return { ...state, drawing: null }
         case SET_LIKE:
             return { ...state, like: action.payload }
-        case SET_COMMENTS:
-            return { ...state, comments: action.payload }
+        // case SET_COMMENTS:
+        //     return { ...state, comments: action.payload }
         default:
             return state;
     };
