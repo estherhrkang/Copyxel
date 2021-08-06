@@ -10,9 +10,7 @@ class Comment(db.Model):
     content = db.Column(db.String, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     drawing_id = db.Column(db.Integer, db.ForeignKey('drawings.id', ondelete='CASCADE'), nullable=False)
-    date_created = db.Column(db.DateTime, nullable=False, default=datetime.now)
-    date_updated = db.Column(db.DateTime, nullable=False, default=datetime.now)
-
+ 
     user = db.relationship('User', backref=db.backref('comments'))
     drawing = db.relationship('Drawing', backref=db.backref('comments'), passive_deletes=True)
 
@@ -21,7 +19,5 @@ class Comment(db.Model):
             'id': self.id,
             'content': self.content,
             'user_id': self.user_id,
-            'drawing_id': self.drawing_id,
-            'date_created': self.date_created,
-            'date_updated': self.date_updated
+            'drawing_id': self.drawing_id
         }

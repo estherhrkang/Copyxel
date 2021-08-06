@@ -1,7 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, DateField
-from wtforms.validators import DataRequired, ValidationError
-# from app.models import Drawing
+from wtforms.validators import DataRequired
 
 
 class DrawingForm(FlaskForm):

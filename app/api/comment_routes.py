@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from app import forms
 from flask_login import login_required, current_user
 from app.models import db, Comment, Drawing, User
+from app.forms import CommentForm
 
 comment_routes = Blueprint('comments', __name__)
 
@@ -17,13 +18,55 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 
-# get all comments on a drawing
+# get all comments (of a drawing?)
+@comment_routes.route('/')
+# @login_required
+def all_comments():
+    comments = Comment.query.all()
+    return {'comments': [comment.to_dict() for comment in comments]}
 
 
 # create a comment on a drawing
+@comment_routes.route('/', methods=['POST'])
+@login_required
+def create_comment():
+    form = CommentForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        comment = Comment(
+            content=form.content.data
+        )
+        db.session.add(comment)
+        db.session.commit()
+
+        comments = Comment.query.all()
+        return {'comments': [comment.to_dict() for comment in comments]}
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 # edit a comment on a drawing
+@comment_routes.route('/<int:comment_id>', methods=['PUT'])
+@login_required
+def edit_comment(comment_id):
+    form = CommentForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    comment = Comment.query.get(comment_id)
+    if form.validate_on_submit():
+        comment.content=form.content.data
+        db.session.commit()
+
+        comments = Comment.query.all()
+        return {'comments': [comment.to_dict() for comment in comments]}
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 # delete a comment on a drawing
+@comment_routes.route('/<int:comment_id>', methods=['DELETE'])
+@login_required
+def delete_comment(comment_id):
+    comment = Comment.query.filter(Comment.id == comment_id).first()
+    db.session.delete(comment)
+    db.session.commit()
+
+    comments = Comment.query.all()
+    return {'comments': [comment.to_dict() for comment in comments]}
