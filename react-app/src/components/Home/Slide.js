@@ -107,11 +107,11 @@ export default function Slide({ drawing }) {
 
     const handleUnlike = () => {
         dispatch(deleteLike(drawing));
-        // setShowLike(false);
+        setShowLike(false);
     };
     const handleLike = () => {
         dispatch(createLike(drawing));
-        // setShowLike(true);
+        setShowLike(true);
     };
 
     const handleDeleteDrawing = async () => {

@@ -43,18 +43,42 @@ export default function Home() {
 
     return (
         <div className={styles.home}>
-            <Swiper 
-                slidesPerView={4} 
-                keyboard={true} 
-                mousewheel={true} 
-                scrollbar={true}
-                spaceBetween={30} 
-                pagination={{ "clickable": true }} 
-                className={styles.swiperContainer}
-            >
-                {slides}
-            </Swiper>
-            <button type='button' onClick={handlePlayButton}>Play?</button>
+            {drawingsArray?.length ? (
+                <>
+                    <Swiper 
+                        slidesPerView={4} 
+                        keyboard={true} 
+                        mousewheel={true} 
+                        scrollbar={true}
+                        spaceBetween={30} 
+                        pagination={{ "clickable": true }} 
+                        className={styles.swiperContainer}
+                    >
+                        {slides}
+                    </Swiper>
+                    <button type='button' onClick={handlePlayButton}>Play?</button>
+                </>
+            ) : (
+                <div className={styles.cardContainer}>
+                    <div className={styles.card}>
+                        <div className={styles.card__front}>
+                            <div className={styles.canvas}>
+                                <h2>Welcome!</h2>
+                                Copyxel is a memory game.<br/>
+                                <br/>
+                                You will be given 10 seconds to memorize a drawing.<br/>
+                                <br/>
+                                Then, you may take your time to recall and copy the pattern and color of the drawing you just saw.
+                            </div>
+                        </div>
+                        <div className={styles.card__back} onClick={handlePlayButton}>
+                            <div className={styles.canvas}>
+                                <h1>Play?</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

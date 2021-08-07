@@ -34,7 +34,7 @@ export default function UserHistory() {
     } else {
         return(
             <div className={styles.emptyHistory}>
-                <div>You don't have drawings yet!</div>
+                <div>You don't have any drawings yet!</div>
                 <div>
                     <button type='button' onClick={() => history.push('/drawing')}>Play game?</button>
                 </div>
