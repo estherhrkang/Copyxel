@@ -141,7 +141,8 @@ export default function Slide({ drawing }) {
                             {sampleRows}
                         </div>
                     </div>
-                    {user && 
+                    {user ? 
+                        (
                         <>
                             {/* display or edit comment div */}
                             <div className={styles.commentContainer}>
@@ -174,7 +175,7 @@ export default function Slide({ drawing }) {
                                                 />
                                             </>
                                         }
-                                        {showEditComment ? (
+                                        {showEditComment && 
                                             <>
                                                 <FaRegSave 
                                                     onClick={() => handleEditComment(comment)}
@@ -187,14 +188,7 @@ export default function Slide({ drawing }) {
                                                     Cancel
                                                 </div>
                                             </>
-                                        ) : (
-                                            // <FaRegEdit 
-                                            //     onClick={() => setShowEditComment(true)}
-                                            //     className={styles.editButton}
-                                            // />
-                                            <>
-                                            </>
-                                        )}
+                                        }
                                     </div>
                                 ))}
                             </div>
@@ -243,6 +237,18 @@ export default function Slide({ drawing }) {
                                 }
                             </div>
                         </>
+                        ) : (
+                        <>
+                            {/* display or edit comment div */}
+                            <div className={styles.commentContainer}>
+                                {commentsArray?.map((comment) => (
+                                    <div key={comment.id}>
+                                        {comment.content}
+                                    </div>
+                                ))}
+                            </div>
+                        </>
+                        )
                     }
                 </div>
             </div>

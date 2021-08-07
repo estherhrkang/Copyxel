@@ -63,7 +63,7 @@ export default function Home() {
                     <div className={styles.card}>
                         <div className={styles.card__front}>
                             <div className={styles.canvas}>
-                                <h2>Welcome!</h2>
+                                <h2>Welcome, {user?.username}!</h2>
                                 Copyxel is a memory game.<br/>
                                 <br/>
                                 You will be given 10 seconds to memorize a drawing.<br/>
