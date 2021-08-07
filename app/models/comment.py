@@ -14,6 +14,9 @@ class Comment(db.Model):
     user = db.relationship('User', backref=db.backref('comments'))
     drawing = db.relationship('Drawing', backref=db.backref('comments'), passive_deletes=True)
 
+    # user = db.relationship('User', back_populates='comments')
+    # drawing = db.relationship('Drawing', back_populates='comments')
+
     def to_dict(self):
         return {
             'id': self.id,

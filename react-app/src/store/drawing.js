@@ -1,7 +1,7 @@
 import { setUser } from './session';
 
 const SET_ALL_DRAWINGS = 'drawing/SET_ALL_DRAWINGS';
-const SET_DRAWING = 'drawing/SET_DRAWING';
+// const SET_DRAWING = 'drawing/SET_DRAWING';
 // const REMOVE_DRAWING = 'drawing/REMOVE_DRAWING';
 // const SET_LIKE = 'drawing/SET_LIKE';
 // const SET_COMMENTS = 'drawing/SET_COMMENTS';

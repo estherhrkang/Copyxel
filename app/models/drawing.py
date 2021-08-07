@@ -16,6 +16,8 @@ class Drawing(db.Model):
     users = db.relationship('User', secondary=users_drawings, back_populates='drawings')
     liked_users = db.relationship('User', secondary=likes, back_populates='liked_drawings')
 
+    # comments = db.relationship('Comment', back_populates='drawing')
+
     def to_dict(self):
         return {
             'id': self.id,

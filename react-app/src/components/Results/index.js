@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, Redirect } from 'react-router';
-import { getAllDrawings, getDrawing } from '../../store/drawing';
+import { useHistory } from 'react-router';
+import { getAllDrawings } from '../../store/drawing';
 import ResultsRow from './ResultsRow';
 import styles from '../../css-modules/Results.module.css';
 
@@ -10,10 +10,9 @@ export default function Results({ colorsArray }) {
     const dispatch = useDispatch();
 
     const drawingsArray = useSelector(state => state.drawing.drawings);
-    console.log('---drawingsArray---', drawingsArray);
 
     // compare stringified arrays
-    const currentDrawing = drawingsArray?.find(drawing => drawing['colors'] == JSON.stringify(colorsArray));
+    const currentDrawing = drawingsArray?.find(drawing => drawing['colors'] === JSON.stringify(colorsArray));
 
     useEffect(() => {
         dispatch(getAllDrawings());
@@ -22,7 +21,6 @@ export default function Results({ colorsArray }) {
     let sampleColorsArray;
     if (currentDrawing) {
         sampleColorsArray = JSON.parse(currentDrawing['sample_colors']);
-        console.log('---sampleColorsArray---', sampleColorsArray);
     } else {
         sampleColorsArray = [];
     };

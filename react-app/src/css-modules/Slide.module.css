@@ -64,17 +64,33 @@
 
 /* display or edit comment div */
 
+.commentContainer {
+    overflow: scroll;
+    /* overflow-y: scroll; */
+}
 
 
 /* leave comment div */
 
+.commentBox {
+    width: 200px;
+    height: 20px;
+}
 
-
-/* like or delete comment div */
+/* like or delete drawing div */
 
 
 
 /* buttons */
+
+.commentButton,
+.commentShowButton,
+.likeButton,
+.deleteButton,
+.editButton,
+.cancelButton {
+    margin: 0 5px;
+}
 
 .commentButton:hover {
     cursor: pointer;

@@ -1,12 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
 import Display from '../Display';
 import Drawing from '../Drawing';
 import sampleDrawings from '../../sampleData/sampleDrawings.json';
 import styles from '../../css-modules/SampleDrawing.module.css';
 
 export default function SampleDrawing() {
-    const dispatch = useDispatch();
     // adjust seconds! 
     const [seconds, setSeconds] = useState(10);
     const [beginDrawing, setBeginDrawing] = useState(false);
@@ -21,7 +19,7 @@ export default function SampleDrawing() {
     }, [seconds]);
 
     const randomIdx = useRef(Math.floor(Math.random() * (sampleDrawings.length)));
-    console.log('---randomIdx in SampleDrawing---', randomIdx.current);
+    // console.log('---randomIdx in SampleDrawing---', randomIdx.current);
 
     return(
         <>

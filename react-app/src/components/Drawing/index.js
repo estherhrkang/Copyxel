@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { createDrawing, deleteDrawing } from '../../store/drawing';
+import { useState, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { createDrawing } from '../../store/drawing';
 import Row from './Row';
 import Results from '../Results';
 import sampleDrawings from '../../sampleData/sampleDrawings.json';

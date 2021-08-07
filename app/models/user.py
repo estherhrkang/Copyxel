@@ -18,6 +18,8 @@ class User(db.Model, UserMixin):
     drawings = db.relationship('Drawing', secondary=users_drawings, back_populates='users')
     liked_drawings = db.relationship('Drawing', secondary=likes, back_populates='liked_users')
 
+    # comments = db.relationship('Comment', back_populates='user')
+
     @property
     def password(self):
         return self.hashed_password
