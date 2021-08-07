@@ -90,7 +90,7 @@ export default function Slide({ drawing }) {
 
     const handleDeleteComment = (comment) => {
         dispatch(deleteComment(comment));
-        setContent('');
+        // setContent('');
     };
 
     const handleEditComment = (comment) => {

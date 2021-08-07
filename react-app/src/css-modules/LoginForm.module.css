@@ -1,6 +1,10 @@
 /* LoginForm */
 
 .loginForm {
+    position: relative;
+    top: 50px;
+    left: 33%;
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -59,6 +63,10 @@
 /* SignupForm */
 
 .signupForm {
+    position: relative;
+    top: 50px;
+    left: 33%;
+    
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -11,10 +11,10 @@ const setAllDrawings = (drawings) => ({
     payload: drawings
 });
 
-const setDrawing = (drawing) => ({
-    type: SET_DRAWING,
-    payload: drawing
-});
+// const setDrawing = (drawing) => ({
+//     type: SET_DRAWING,
+//     payload: drawing
+// });
 
 // const removeDrawing = (drawing) => ({
 //     type: REMOVE_DRAWING,
@@ -41,15 +41,15 @@ export const getAllDrawings = () => async (dispatch) => {
     };
 };
 
-export const getDrawing = (drawing) => async (dispatch) => {
-    const response = await fetch(`/api/drawings/${drawing.id}`);
-    if (response.ok) {
-        const data = await response.json();
-        dispatch(setDrawing(data));
-    } else {
-        return ['An error occurred. Please try again.']
-    };
-};
+// export const getDrawing = (drawing) => async (dispatch) => {
+//     const response = await fetch(`/api/drawings/${drawing.id}`);
+//     if (response.ok) {
+//         const data = await response.json();
+//         dispatch(setDrawing(data));
+//     } else {
+//         return ['An error occurred. Please try again.']
+//     };
+// };
 
 export const createDrawing = (drawing) => async (dispatch) => {
     const response = await fetch('/api/drawings/', {
@@ -59,7 +59,8 @@ export const createDrawing = (drawing) => async (dispatch) => {
     });
     if (response.ok) {
         const data = await response.json();
-        dispatch(setDrawing(data.drawing));
+        dispatch(setAllDrawings(data.drawings));
+        // dispatch(setDrawing(data.drawing));
         dispatch(setUser(data.user));
     } else {
         return ['An error occurred. Please try again.']
@@ -137,7 +138,6 @@ export const deleteLike = (drawing) => async (dispatch) => {
         const data = await response.json();
         dispatch(setAllDrawings(data.drawings));
         dispatch(setUser(data.user));
-        return 'unliked'
     } else {
         return ['An error occurred. Please try again.']
     };
@@ -158,18 +158,20 @@ export const deleteComment = (comment) => async (dispatch) => {
 };
 
 const initialState = { 
-    drawing: null, drawings: null, 
-    like: null, 
-    comments: null
+    // drawing: null, 
+    // like: null, 
+    // comments: null,
+    drawings: null 
 };
 // const initialState = { drawing: null };
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case SET_ALL_DRAWINGS:
-            return { ...state, drawings: action.payload }
-        case SET_DRAWING:
-            return { ...state, drawing: action.payload }
+            return { drawings: action.payload }
+            // return { ...state, drawings: action.payload }
+        // case SET_DRAWING:
+        //     return { ...state, drawing: action.payload }
         // case REMOVE_DRAWING:
         //     return { ...state, drawing: null }
         // case SET_LIKE:

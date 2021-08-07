@@ -43,8 +43,15 @@ export default function Home() {
 
     return (
         <div className={styles.home}>
-            <Swiper slidesPerView={4} keyboard={true} mousewheel={true} spaceBetween={30} 
-                pagination={{ "clickable": true }} className={styles.swiperContainer}>
+            <Swiper 
+                slidesPerView={4} 
+                keyboard={true} 
+                mousewheel={true} 
+                scrollbar={true}
+                spaceBetween={30} 
+                pagination={{ "clickable": true }} 
+                className={styles.swiperContainer}
+            >
                 {slides}
             </Swiper>
             <button type='button' onClick={handlePlayButton}>Play?</button>

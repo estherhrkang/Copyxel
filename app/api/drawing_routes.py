@@ -27,11 +27,11 @@ def all_drawings():
 
 
 # get a drawing
-@drawing_routes.route('/<int:id>')
-@login_required
-def one_drawing(id):
-    drawing = Drawing.query.filter(Drawing.id == id).first()
-    return drawing.to_dict()
+# @drawing_routes.route('/<int:id>')
+# @login_required
+# def one_drawing(id):
+#     drawing = Drawing.query.filter(Drawing.id == id).first()
+#     return drawing.to_dict()
 
 
 # create a drawing
@@ -52,7 +52,10 @@ def create_drawing():
         currentUser = User.query.filter(User.id == current_user.id).first()
         currentUser.drawings.append(drawing)
         db.session.commit()
-        return {'drawing': drawing.to_dict(), 'user': currentUser.to_dict()}
+
+        # return {'drawing': drawing.to_dict(), 'user': currentUser.to_dict()}
+        drawings = Drawing.query.all()
+        return {'drawings': [drawing.to_dict() for drawing in drawings], 'user': currentUser.to_dict()}
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
