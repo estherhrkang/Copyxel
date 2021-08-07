@@ -113,56 +113,58 @@ export function SignupForm() {
   if (user) return <Redirect to='/' />;
 
   return (
-    <div className={'signupForm'}>
+    <div className={styles.signupForm}>
       <form onSubmit={onSignUp}>
-        <div className={'signupForm__errors'}>
+        <div className={styles.signupForm__errors}>
           {errors.map((error, ind) => (
             <div key={ind}>{error}</div>
           ))}
         </div>
         <div>
-          <label>Username</label>
           <input
             type='text'
             name='username'
+            placeholder='Username'
             onChange={(e) => setUsername(e.target.value)}
             value={username}
           ></input>
         </div>
         <div>
-          <label>Email</label>
           <input
             type='text'
             name='email'
+            placeholder='Email'
             onChange={(e) => setEmail(e.target.value)}
             value={email}
           ></input>
         </div>
         <div>
-          <label>Password</label>
           <input
             type='password'
             name='password'
+            placeholder='Password'
             onChange={(e) => setPassword(e.target.value)}
             value={password}
           ></input>
         </div>
         <div>
-          <label>Confirm password</label>
           <input
             type='password'
             name='repeat_password'
+            placeholder='Confirm password'
             onChange={(e) => setRepeatPassword(e.target.value)}
             value={repeatPassword}
             required={true}
           ></input>
         </div>
-        <button type='submit'>Sign up</button>
+        <div className={styles.buttons}>
+          <button type='submit'>Sign up</button>
+        </div>
+        <div className={styles.loginButton}>
+          <h5>Already have an account?</h5>
+          <button type='button' onClick={() => history.push('/login')}>Log in</button>
+        </div>
       </form>
-      <div>
-        Already have an account?
-        <button type='button' onClick={() => history.push('/login')}>Log in</button>
-      </div>
     </div>
   );
 };

@@ -1,3 +1,5 @@
+/* LoginForm */
+
 .loginForm {
     display: flex;
     flex-direction: column;
@@ -13,10 +15,6 @@
     background-color: white;
     box-shadow: 10px 10px 0 #c0d9ef;
     border-radius: 5px;
-}
-
-.loginForm div {
-    
 }
 
 .loginForm__errors {
@@ -54,5 +52,63 @@
 }
 
 .signupButton h5 {
+    margin-bottom: 0;
+}
+
+
+/* SignupForm */
+
+.signupForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 20%;
+    height: auto;
+    padding: 7%;
+    
+    text-shadow: 2px 2px white;
+    text-align: center;
+
+    background-color: white;
+    box-shadow: 10px 10px 0 #c0d9ef;
+    border-radius: 5px;
+}
+
+.signupForm__errors {
+    display: flex;
+    flex-direction: column;
+    color: red;
+    font-size: 70%;
+}
+
+.signupForm input {
+    border: none;
+    box-shadow: 0 5px 0 #c0d9ef;
+    width: 300px;
+    height: 20px;
+    padding: 15px 5px;
+    margin: 5px 0;
+    font-size: 50%;
+}
+
+.signupForm input:focus {
+    outline: none; 
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginButton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loginButton h5 {
     margin-bottom: 0;
 }
