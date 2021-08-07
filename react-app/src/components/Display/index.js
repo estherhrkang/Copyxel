@@ -18,7 +18,7 @@ export default function Display({ randomIdx }) {
 
     return(
         <div className={styles.drawingPanel}>
-            <div className={styles.pixels}>
+            <div>
                 {rows}
             </div>
         </div>

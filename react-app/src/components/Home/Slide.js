@@ -102,7 +102,6 @@ export default function Slide({ drawing }) {
         }
     };
 
-    // if guest user, show filled heart with count of total likes for the drawing
     const handleUnlike = () => {
         dispatch(deleteLike(drawing));
     };
@@ -117,6 +116,7 @@ export default function Slide({ drawing }) {
     return (
         <div className={styles.cardContainer}>
             <div className={styles.card}>
+                {/* front side */}
                 <div className={styles.card__front}>
                     <div className={styles.canvas}>
                         <div className={styles.pixels}>
@@ -124,18 +124,18 @@ export default function Slide({ drawing }) {
                         </div>
                     </div>
                 </div>
+                {/* back side */}
                 <div className={styles.card__back}>
-                    {/* how to show user name accordingly? */}
                     <div>{changeDateFormat(drawing.date_created)}</div>
                     <div className={styles.title}>{drawing.title}</div>
                     <div className={styles.canvas}>
-                        <div className={styles.pixels}>
+                        <div>
                             {sampleRows}
                         </div>
                     </div>
-                        <div className={styles.comment}>
-                            {/* <FaRegCommentDots /> */}
-                            {/* {commentsArray?.map((comment) => comment.content)} */}
+                    {user && 
+                        <>
+                            {/* display or edit comment div */}
                             {commentsArray?.map((comment) => (
                                 <div key={comment.id}>
                                     {showEditComment ? (
@@ -152,71 +152,75 @@ export default function Slide({ drawing }) {
                                             {comment.content}
                                         </>
                                     )}
-                                    {/* {showDeleteComment && */}
-                                        <FiDelete 
-                                            onClick={() => handleDeleteComment(comment)} 
-                                            className={styles.deleteButton}
-                                        />
-                                        {showEditComment ? (
-                                            <>
-                                                <FaRegSave 
-                                                    onClick={() => handleEditComment(comment)}
-                                                    className={styles.editButton}
-                                                />
-                                                <div onClick={() => setShowEditComment(false)}>Cancel</div>
-                                            </>
-                                        ) : (
-                                            <FaRegEdit 
-                                                onClick={() => setShowEditComment(true)}
+                                    {/* buttons: delete, save, cancel, showEdit */}
+                                    <FiDelete 
+                                        onClick={() => handleDeleteComment(comment)} 
+                                        className={styles.deleteButton}
+                                    />
+                                    {showEditComment ? (
+                                        <>
+                                            <FaRegSave 
+                                                onClick={() => handleEditComment(comment)}
                                                 className={styles.editButton}
                                             />
-                                        )}
-                                    {/* } */}
+                                            <div 
+                                                onClick={() => setShowEditComment(false)}
+                                                className={styles.cancelButton}
+                                            >Cancel
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <FaRegEdit 
+                                            onClick={() => setShowEditComment(true)}
+                                            className={styles.editButton}
+                                        />
+                                    )}
                                 </div>
                             ))}
-                            
-                        </div>
-                        {user && 
-                            <>  
-                                <div className={styles.commentBox}>
-                                    {errors.map((error, ind) => (<div key={ind}>{error}</div>))}
-                                    <input
-                                        value={content}
-                                        onChange={(e) => setContent(e.target.value)}
+
+                            {/* leave comment div */}
+                            <div>
+                                {errors.map((error, ind) => (<div key={ind}>{error}</div>))}
+                                <input
+                                    value={content}
+                                    placeholder='Leave a comment!'
+                                    onChange={(e) => setContent(e.target.value)}
+                                />
+                                {content ? (
+                                    <FaCommentMedical 
+                                        onClick={handleComment} 
+                                        className={styles.commentButton}
+                                        // disabled={!content}
                                     />
-                                    {content ? (
-                                        <FaCommentMedical 
-                                            onClick={handleComment} 
-                                            className={styles.commentButton}
-                                            // disabled={!content}
-                                        />
-                                    ) : (
-                                        <FaRegCommentDots />
-                                    ) 
-                                    }
-                                </div>
-                                <div>
-                                    {showLike ? (
-                                        <FaHeart 
-                                            onClick={handleUnlike} 
-                                            className={styles.likeButton} 
-                                            style={{ color: 'red' }}
-                                        />
-                                    ) : (
-                                        <FaRegHeart 
-                                            onClick={handleLike} 
-                                            className={styles.likeButton}
-                                        />  
-                                    )}
-                                    {showDeleteDrawing && 
-                                        <BsFillTrashFill 
-                                            onClick={handleDeleteDrawing} 
-                                            className={styles.deleteButton}
-                                        />
-                                    }
-                                </div>  
-                            </>
-                        }
+                                ) : (
+                                    <FaRegCommentDots />
+                                ) 
+                                }
+                            </div>
+
+                            {/* like or delete comment div */}
+                            <div>
+                                {showLike ? (
+                                    <FaHeart 
+                                        onClick={handleUnlike} 
+                                        className={styles.likeButton} 
+                                        style={{ color: 'red' }}
+                                    />
+                                ) : (
+                                    <FaRegHeart 
+                                        onClick={handleLike} 
+                                        className={styles.likeButton}
+                                    />  
+                                )}
+                                {showDeleteDrawing && 
+                                    <BsFillTrashFill 
+                                        onClick={handleDeleteDrawing} 
+                                        className={styles.deleteButton}
+                                    />
+                                }
+                            </div>
+                        </>
+                    }
                 </div>
             </div>
         </div>
