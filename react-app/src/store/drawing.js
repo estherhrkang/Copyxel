@@ -3,8 +3,8 @@ import { setUser } from './session';
 const SET_ALL_DRAWINGS = 'drawing/SET_ALL_DRAWINGS';
 const SET_DRAWING = 'drawing/SET_DRAWING';
 // const REMOVE_DRAWING = 'drawing/REMOVE_DRAWING';
-const SET_LIKE = 'drawing/SET_LIKE';
-const SET_COMMENTS = 'drawing/SET_COMMENTS';
+// const SET_LIKE = 'drawing/SET_LIKE';
+// const SET_COMMENTS = 'drawing/SET_COMMENTS';
 
 const setAllDrawings = (drawings) => ({
     type: SET_ALL_DRAWINGS,
@@ -21,15 +21,15 @@ const setDrawing = (drawing) => ({
 //     payload: drawing
 // });
 
-const setLike = (drawing) => ({
-    type: SET_LIKE,
-    payload: drawing
-});
+// const setLike = (drawing) => ({
+//     type: SET_LIKE,
+//     payload: drawing
+// });
 
-const setComments = (comment) => ({
-    type: SET_COMMENTS,
-    payload: comment
-});
+// const setComments = (comment) => ({
+//     type: SET_COMMENTS,
+//     payload: comment
+// });
 
 export const getAllDrawings = () => async (dispatch) => {
     const response = await fetch('/api/drawings/');
@@ -74,7 +74,7 @@ export const createLike = (drawing) => async (dispatch) => {
     });
     if (response.ok) {
         const data = await response.json();
-        dispatch(setLike(data.drawings));
+        dispatch(setAllDrawings(data.drawings));
         dispatch(setUser(data.user));
         return 'liked'
     } else {
@@ -135,7 +135,7 @@ export const deleteLike = (drawing) => async (dispatch) => {
     });
     if (response.ok) {
         const data = await response.json();
-        dispatch(setLike(data.drawings));
+        dispatch(setAllDrawings(data.drawings));
         dispatch(setUser(data.user));
         return 'unliked'
     } else {
@@ -172,8 +172,8 @@ export default function reducer(state = initialState, action) {
             return { ...state, drawing: action.payload }
         // case REMOVE_DRAWING:
         //     return { ...state, drawing: null }
-        case SET_LIKE:
-            return { ...state, like: action.payload }
+        // case SET_LIKE:
+        //     return { ...state, like: action.payload }
         // case SET_COMMENTS:
         //     return { ...state, comments: action.payload }
         default:

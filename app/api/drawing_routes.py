@@ -64,14 +64,16 @@ def create_like(drawing_id):
     currentUser = User.query.filter(User.id == current_user.id).first()
     currentUser.liked_drawings.append(drawing)
     db.session.commit()
-    return {'drawing': drawing.to_dict(), 'user': currentUser.to_dict()}
+
+    drawings = Drawing.query.all()
+    return {'drawings': [drawing.to_dict() for drawing in drawings], 'user': currentUser.to_dict()}
+    # return {'drawing': drawing.to_dict(), 'user': currentUser.to_dict()}
 
 
 # create a comment on a drawing
 @drawing_routes.route('/<int:drawing_id>/comments', methods=['POST'])
 @login_required
 def create_comment(drawing_id):
-    print('--------------drawing_id-----------------', drawing_id)
     form = CommentForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():

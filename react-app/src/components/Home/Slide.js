@@ -4,7 +4,7 @@ import DisplayRow from '../Display/DisplayRow';
 import { getAllDrawings, deleteDrawing, createLike, deleteLike,
         createComment, editComment, deleteComment } from '../../store/drawing';
 
-import { FaRegHeart, FaHeart, FaCommentMedical, FaRegCommentDots } from 'react-icons/fa';
+import { FaRegHeart, FaHeart, FaCommentMedical, FaRegCommentDots, FaRegEdit, FaRegSave } from 'react-icons/fa';
 import { FiDelete } from 'react-icons/fi';
 import { BsFillTrashFill } from 'react-icons/bs';
 import styles from '../../css-modules/Slide.module.css';
@@ -20,8 +20,10 @@ export default function Slide({ drawing }) {
     const [showDeleteDrawing, setShowDeleteDrawing] = useState(false);
     const [showLike, setShowLike] = useState(false);
     const [showDeleteComment, setShowDeleteComment] = useState(false);
+    const [showEditComment, setShowEditComment] = useState(false);
     const [content, setContent] = useState('');
     const [errors, setErrors] = useState([]);
+    const [editErrors, setEditErrors] = useState([]);
 
     useEffect(() => {
         for (let i = 0; i < usersDrawingsArray?.length; i++) {
@@ -50,6 +52,7 @@ export default function Slide({ drawing }) {
         return `${dayOfWk} ${month} ${day} ${year}`
     };
 
+    // front side
     const currentDrawingColorsArray = JSON.parse(drawing['colors']);
     let rows = [];
     for (let i = 0; i < currentDrawingColorsArray?.length; i++) {
@@ -62,6 +65,7 @@ export default function Slide({ drawing }) {
         );
     };
 
+    // back side
     const currentSampleDrawingColorsArray = JSON.parse(drawing['sample_colors']);
     let sampleRows = [];
     for (let i = 0; i < currentSampleDrawingColorsArray?.length; i++) {
@@ -84,9 +88,18 @@ export default function Slide({ drawing }) {
         setContent('');
     };
 
-    const handleDeleteComment = (e) => {
-        console.log('---comment---', e);
-        // dispatch(deleteComment(comment));
+    const handleDeleteComment = (comment) => {
+        dispatch(deleteComment(comment));
+        setContent('');
+    };
+
+    const handleEditComment = (comment) => {
+        if (!content) {
+            setEditErrors(['Please leave your comment'])
+        } else {
+            dispatch(editComment(comment));
+            setShowEditComment(false);
+        }
     };
 
     // if guest user, show filled heart with count of total likes for the drawing
@@ -120,17 +133,47 @@ export default function Slide({ drawing }) {
                             {sampleRows}
                         </div>
                     </div>
-                        <div>
+                        <div className={styles.comment}>
                             {/* <FaRegCommentDots /> */}
                             {/* {commentsArray?.map((comment) => comment.content)} */}
-                            {/* {commentsArray?.map((comment) => (
+                            {commentsArray?.map((comment) => (
                                 <div key={comment.id}>
-                                    {comment.content}
-                                    {showDeleteComment &&
-                                        <FiDelete onClick={handleDeleteComment} className={styles.deleteButton}/>
-                                    }
+                                    {showEditComment ? (
+                                        <>
+                                            {editErrors.map((error, ind) => (<div key={ind}>{error}</div>))}
+                                            <input
+                                                value={content}
+                                                onChange={(e) => setContent(e.target.value)}
+                                            >
+                                            </input>
+                                        </>
+                                    ) : (
+                                        <>
+                                            {comment.content}
+                                        </>
+                                    )}
+                                    {/* {showDeleteComment && */}
+                                        <FiDelete 
+                                            onClick={() => handleDeleteComment(comment)} 
+                                            className={styles.deleteButton}
+                                        />
+                                        {showEditComment ? (
+                                            <>
+                                                <FaRegSave 
+                                                    onClick={() => handleEditComment(comment)}
+                                                    className={styles.editButton}
+                                                />
+                                                <div onClick={() => setShowEditComment(false)}>Cancel</div>
+                                            </>
+                                        ) : (
+                                            <FaRegEdit 
+                                                onClick={() => setShowEditComment(true)}
+                                                className={styles.editButton}
+                                            />
+                                        )}
+                                    {/* } */}
                                 </div>
-                            ))} */}
+                            ))}
                             
                         </div>
                         {user && 
@@ -141,16 +184,35 @@ export default function Slide({ drawing }) {
                                         value={content}
                                         onChange={(e) => setContent(e.target.value)}
                                     />
-                                    <FaCommentMedical onClick={handleComment} className={styles.commentButton}/>
+                                    {content ? (
+                                        <FaCommentMedical 
+                                            onClick={handleComment} 
+                                            className={styles.commentButton}
+                                            // disabled={!content}
+                                        />
+                                    ) : (
+                                        <FaRegCommentDots />
+                                    ) 
+                                    }
                                 </div>
                                 <div>
                                     {showLike ? (
-                                        <FaHeart onClick={handleUnlike} className={styles.likeButton} style={{ color: 'red' }}/>
+                                        <FaHeart 
+                                            onClick={handleUnlike} 
+                                            className={styles.likeButton} 
+                                            style={{ color: 'red' }}
+                                        />
                                     ) : (
-                                        <FaRegHeart onClick={handleLike} className={styles.likeButton}/>  
+                                        <FaRegHeart 
+                                            onClick={handleLike} 
+                                            className={styles.likeButton}
+                                        />  
                                     )}
                                     {showDeleteDrawing && 
-                                        <BsFillTrashFill onClick={handleDeleteDrawing} className={styles.deleteButton}/>
+                                        <BsFillTrashFill 
+                                            onClick={handleDeleteDrawing} 
+                                            className={styles.deleteButton}
+                                        />
                                     }
                                 </div>  
                             </>
