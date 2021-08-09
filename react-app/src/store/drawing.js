@@ -131,10 +131,8 @@ export const deleteLike = (drawing) => async (dispatch) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(drawing)
     });
-    console.log('-------response---------', response);
     if (response.ok) {
         const data = await response.json();
-        console.log('------data--------', data);
         dispatch(setAllDrawings(data.drawings));
         dispatch(setUser(data.user));
     } else {

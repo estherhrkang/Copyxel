@@ -26,23 +26,26 @@ export default function Slide({ drawing }) {
     const [editErrors, setEditErrors] = useState([]);
 
     useEffect(() => {
-        
+        // if current user is the owner of the drawing, display delete button
         for (let i = 0; i < usersDrawingsArray?.length; i++) {
             if (usersDrawingsArray[i].id === drawing.id) {
                 setShowDeleteDrawing(true);
             };
         };
+
+        // display like, unlike button
         if (!usersLikedDrawingsArray.length) setShowLike(false);
         for (let i = 0; i < usersLikedDrawingsArray?.length; i++) {
             if (usersLikedDrawingsArray[i].id === drawing.id) {
                 setShowLike(true);
             };
         };
+
+        // if current user is the owner of the comment, display delete comment button
+        // right now, it applies to all comments...
         for (let i = 0; i < commentsArray?.length; i++) {
             if (commentsArray[i].user_id === user?.id) {
                 setShowDeleteComment(true);
-            } else {
-                setShowDeleteComment(false);
             };
         };
     }, [dispatch, drawing, user, usersDrawingsArray, usersLikedDrawingsArray, commentsArray]);
@@ -54,6 +57,7 @@ export default function Slide({ drawing }) {
         const month = date.slice(8, 11)
         const year = date.slice(12, 16)
         return `${dayOfWk} ${month} ${day} ${year}`
+        // Fri, Jul 30 2021
     };
 
     // colors of drawing on the front side
@@ -82,6 +86,9 @@ export default function Slide({ drawing }) {
         );
     };
 
+
+    // create, delete, edit comments
+
     const handleComment = async () => {
         const payload = {
             content: content,
@@ -94,7 +101,6 @@ export default function Slide({ drawing }) {
 
     const handleDeleteComment = (comment) => {
         dispatch(deleteComment(comment));
-        // setContent('');
     };
 
     const handleEditComment = (comment) => {
@@ -106,14 +112,19 @@ export default function Slide({ drawing }) {
         }
     };
 
+
+    // like, unlike
+
     const handleUnlike = () => {
         dispatch(deleteLike(drawing));
-        setShowLike(false);
     };
+
     const handleLike = () => {
         dispatch(createLike(drawing));
-        // setShowLike(true);
     };
+
+
+    // delete drawing
 
     const handleDeleteDrawing = async () => {
         for (let i = 0; i < commentsArray.length; i++) {
@@ -121,6 +132,7 @@ export default function Slide({ drawing }) {
         };
         await dispatch(deleteDrawing(drawing));
     };
+
 
     return (
         <div className={styles.cardContainer}>
@@ -149,7 +161,7 @@ export default function Slide({ drawing }) {
                                 <div className={styles.commentContainer}>
                                     {commentsArray?.map((comment) => (
                                         <div key={comment.id}>
-                                            {showEditComment ? (
+                                            {/* {showEditComment ? (
                                                 <>
                                                     {editErrors.map((error, ind) => (<div key={ind}>{error}</div>))}
                                                     <input
@@ -158,11 +170,11 @@ export default function Slide({ drawing }) {
                                                     >
                                                     </input>
                                                 </>
-                                            ) : (
+                                            ) : ( */}
                                                 <>
                                                     {comment.content}
                                                 </>
-                                            )}
+                                            {/* )} */}
                                             {/* buttons: delete, save, cancel, showEdit */}
                                             {showDeleteComment &&
                                                 <>
