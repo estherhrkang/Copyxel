@@ -19,7 +19,7 @@
     background-color: white;
     box-shadow: 10px 10px 0 #c0d9ef;
     border-radius: 5px;
-
+    
     margin-bottom: 30px;
 }
 
@@ -33,7 +33,7 @@
 .loginForm input {
     border: none;
     box-shadow: 0 5px 0 #c0d9ef;
-    width: 300px;
+    width: 100%;
     height: 20px;
     padding: 15px 5px;
     margin: 5px 0;
@@ -97,7 +97,7 @@
 .signupForm input {
     border: none;
     box-shadow: 0 5px 0 #c0d9ef;
-    width: 300px;
+    width: 100%;
     height: 20px;
     padding: 15px 5px;
     margin: 5px 0;

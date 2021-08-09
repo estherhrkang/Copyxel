@@ -25,6 +25,7 @@ def edit_comment(comment_id):
     form = CommentForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     comment = Comment.query.get(comment_id)
+    print('-----form.content.data------', form.content.data)
     if form.validate_on_submit():
         comment.content=form.content.data
         db.session.commit()
