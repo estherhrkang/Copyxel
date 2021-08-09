@@ -176,8 +176,8 @@ export default function Slide({ drawing }) {
                                                 </>
                                             ) : (
                                                 <>
-                                                    { comment.content.length >= 10 ? (
-                                                        `${comment.content.slice(0, 10)}...`
+                                                    { comment.content.length >= 20 ? (
+                                                        `${comment.content.slice(0, 20)}...`
                                                     ) : (
                                                         comment.content
                                                     )}
