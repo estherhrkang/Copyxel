@@ -106,6 +106,7 @@ export const editComment = (comment) => async (dispatch) => {
     if (response.ok) {
         const data = await response.json();
         dispatch(setAllDrawings(data.drawings));
+        dispatch(setUser(data.user));
     } else {
         return ['An error occurred. Please try again.']
     };

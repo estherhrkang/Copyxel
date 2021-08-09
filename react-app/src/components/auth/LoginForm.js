@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, Redirect } from 'react-router-dom';
-import { login, setUser, signUp } from '../../store/session';
+import { login, signUp } from '../../store/session';
 import styles from '../../css-modules/LoginForm.module.css';
 
 export default function LoginForm() {
@@ -65,6 +65,7 @@ export default function LoginForm() {
             onClick={() => {
               setUsername('')
               setPassword('')
+              setErrors([]);
             }}
           >Cancel</button>
           <button type='button' onClick={demoLogin}>Demo</button>
@@ -173,6 +174,7 @@ export function SignupForm() {
               setEmail('')
               setPassword('')
               setRepeatPassword('')
+              setErrors([]);
             }}
           >Cancel</button>
         </div>

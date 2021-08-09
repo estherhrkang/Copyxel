@@ -48,12 +48,12 @@ def create_drawing():
         )
         db.session.add(drawing)
         db.session.commit()
+        
         # also create association btw drawing and current user
         currentUser = User.query.filter(User.id == current_user.id).first()
         currentUser.drawings.append(drawing)
         db.session.commit()
 
-        # return {'drawing': drawing.to_dict(), 'user': currentUser.to_dict()}
         drawings = Drawing.query.all()
         return {'drawings': [drawing.to_dict() for drawing in drawings], 'user': currentUser.to_dict()}
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
@@ -70,7 +70,6 @@ def create_like(drawing_id):
 
     drawings = Drawing.query.all()
     return {'drawings': [drawing.to_dict() for drawing in drawings], 'user': currentUser.to_dict()}
-    # return {'drawing': drawing.to_dict(), 'user': currentUser.to_dict()}
 
 
 # create a comment on a drawing
@@ -88,14 +87,9 @@ def create_comment(drawing_id):
         db.session.add(comment)
         db.session.commit()
 
-        # return comment.to_dict()
-
-        # comments = Comment.query.all()
-        # return {'comments': [comment.to_dict() for comment in comments]}
         drawings = Drawing.query.all()
         currentUser = User.query.filter(User.id == current_user.id).first()
         return {'drawings': [drawing.to_dict() for drawing in drawings], 'user': currentUser.to_dict()}
-        # return {'drawings': [drawing.to_dict() for drawing in drawings]}
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 

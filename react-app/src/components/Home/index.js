@@ -10,9 +10,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/swiper.min.css";
 // import Swiper core and required modules
-import SwiperCore, { Pagination, Mousewheel, Keyboard } from 'swiper/core';
+import SwiperCore, { Pagination, Mousewheel, Keyboard, Scrollbar } from 'swiper/core';
 // install Swiper modules
-SwiperCore.use([Pagination, Mousewheel, Keyboard]);
+SwiperCore.use([Pagination, Mousewheel, Keyboard, Scrollbar]);
 
 export default function Home() {
     const dispatch = useDispatch();

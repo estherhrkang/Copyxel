@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { editUser, deleteUser } from '../../store/session';
 import LogoutButton from '../auth/LogoutButton';
 import UserHistory from './UserHistory';
@@ -18,13 +18,6 @@ export default function Profile() {
     const [email, setEmail] = useState(user?.email);
     const [password, setPassword] = useState(user?.password);
     const [confirmPassword, setConfirmPassword] = useState('');
-
-    // useEffect(() => {
-    //     const errors = [];
-    //     if (!username) errors.push('Please provide a username.');
-    //     if (confirmPassword && password !== confirmPassword) errors.push('Password and confirm password must match.');
-    //     setErrors(errors);
-    // }, [username, email, password, confirmPassword]);
 
     const onSave = async (e) => {
         e.preventDefault();

@@ -32,7 +32,6 @@ def edit_comment(comment_id):
         drawings = Drawing.query.all()
         currentUser = User.query.filter(User.id == current_user.id).first()
         return {'drawings': [drawing.to_dict() for drawing in drawings], 'user': currentUser.to_dict()}
-        # return {'drawings': [drawing.to_dict() for drawing in drawings]}
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
@@ -47,4 +46,3 @@ def delete_comment(comment_id):
     drawings = Drawing.query.all()
     currentUser = User.query.filter(User.id == current_user.id).first()
     return {'drawings': [drawing.to_dict() for drawing in drawings], 'user': currentUser.to_dict()}
-    # return {'drawings': [drawing.to_dict() for drawing in drawings]}

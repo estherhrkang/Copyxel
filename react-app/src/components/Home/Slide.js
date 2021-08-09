@@ -14,7 +14,10 @@ export default function Slide({ drawing }) {
     const user = useSelector(state => state.session.user);
     const usersDrawingsArray = user?.drawings;
     const usersLikedDrawingsArray = user?.liked_drawings;
-    const commentsArray = drawing?.comments;
+    const commentsArray = drawing?.comments.sort((a, b) => b.id - a.id);
+    const usersCommentsArray = user?.comments;
+
+    console.log('usersCommentsArray', usersCommentsArray);
 
     const [showDeleteDrawing, setShowDeleteDrawing] = useState(false);
     const [showLike, setShowLike] = useState(false);
@@ -43,11 +46,11 @@ export default function Slide({ drawing }) {
 
         // if current user is the owner of the comment, display delete comment button
         // right now, it applies to all comments...
-        for (let i = 0; i < commentsArray?.length; i++) {
-            if (commentsArray[i].user_id === user?.id) {
-                setShowDeleteComment(true);
-            };
-        };
+        // for (let i = 0; i < commentsArray?.length; i++) {
+        //     if (commentsArray[i].user_id === user?.id) {
+        //         setShowDeleteComment(true);
+        //     };
+        // };
     }, [dispatch, drawing, user, usersDrawingsArray, usersLikedDrawingsArray, commentsArray]);
 
     // drawing.date_created -> Fri, 30 Jul 2021 00:00:00 GMT 
@@ -85,6 +88,15 @@ export default function Slide({ drawing }) {
             />
         );
     };
+
+    // check if comment is owned by current user
+    const commentOwner = (comment) => {
+        for (let i = 0; i < usersCommentsArray?.length; i++) {
+            if (usersCommentsArray[i].id === comment.id) {
+                return true;
+            }
+        }
+    }
 
 
     // create, delete, edit comments
@@ -160,8 +172,11 @@ export default function Slide({ drawing }) {
                                 {/* display or edit comment div */}
                                 <div className={styles.commentContainer}>
                                     {commentsArray?.map((comment) => (
-                                        <div className={styles.comments} key={comment.id}>
-                                            {/* {showEditComment ? (
+                                        <div className={styles.comment} key={comment.id}>
+                                            {console.log('comment', usersCommentsArray?.includes(comment))}
+                                            {console.log('comment', comment)}
+
+                                            {showEditComment ? (
                                                 <>
                                                     {editErrors.map((error, ind) => (<div key={ind}>{error}</div>))}
                                                     <input
@@ -170,13 +185,18 @@ export default function Slide({ drawing }) {
                                                     >
                                                     </input>
                                                 </>
-                                            ) : ( */}
+                                            ) : (
                                                 <>
-                                                    {comment.content}
+                                                    { comment.content.length >= 10 ? (
+                                                        `${comment.content.slice(0, 10)}...`
+                                                    ) : (
+                                                        comment.content
+                                                    )}
                                                 </>
-                                            {/* )} */}
+                                            )}
+
                                             {/* buttons: delete, save, cancel, showEdit */}
-                                            {showDeleteComment &&
+                                            {commentOwner(comment) &&
                                                 <>
                                                     <FiDelete 
                                                         onClick={() => handleDeleteComment(comment)} 

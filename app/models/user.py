@@ -38,5 +38,6 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'profile_img': self.profile_img,
             'drawings': [drawing.to_dict() for drawing in self.drawings],
-            'liked_drawings': [liked_drawing.to_dict() for liked_drawing in self.liked_drawings]
+            'liked_drawings': [liked_drawing.to_dict() for liked_drawing in self.liked_drawings],
+            'comments': [comment.to_dict() for comment in self.comments]
         }
