@@ -23,7 +23,6 @@ export default function Slide({ drawing }) {
     const [editedContent, setEditedContent] = useState('');
     const [content, setContent] = useState('');
     const [errors, setErrors] = useState([]);
-    const [editErrors, setEditErrors] = useState([]);
 
     useEffect(() => {
         // if current user is the owner of the drawing, display delete button
@@ -106,18 +105,14 @@ export default function Slide({ drawing }) {
     };
 
     const handleEditComment = (comment) => {
-        if (!editedContent) {
-            setEditErrors(['Please leave your comment'])
-        } else {
-            const payload = {
-                content: editedContent,
-                drawing_id: comment.drawing_id,
-                id: comment.id,
-                user_id: comment.user_id
-            }
-            dispatch(editComment(payload));
-            setShowEditComment(false);
+        const payload = {
+            content: editedContent,
+            drawing_id: comment.drawing_id,
+            id: comment.id,
+            user_id: comment.user_id
         }
+        dispatch(editComment(payload));
+        setShowEditComment(false);
     };
 
 
@@ -169,7 +164,6 @@ export default function Slide({ drawing }) {
                                 <div className={styles.commentContainer}>
                                     {commentsArray?.map((comment) => (
                                         <div className={styles.comment} key={comment.id}>
-                                            {console.log(comment)}
                                             {showEditComment ? (
                                                 <>
                                                     <input

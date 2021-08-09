@@ -55,6 +55,7 @@ export default function LoginForm() {
             type='password'
             placeholder='Password'
             value={password}
+            autoComplete='on'
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
@@ -151,6 +152,7 @@ export function SignupForm() {
             type='password'
             name='password'
             placeholder='Password'
+            autoComplete='on'
             onChange={(e) => setPassword(e.target.value)}
             value={password}
           ></input>

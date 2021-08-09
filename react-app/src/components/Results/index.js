@@ -59,7 +59,7 @@ export default function Results({ colorsArray }) {
             <div className={styles.results}>
                 <div className={styles.drawing}>
                     <div className={styles.drawingPanel}>
-                        Sample drawing
+                        Compare this to...
                         <div className={styles.pixels}>{sampleRows}</div>
                     </div>
                 </div>

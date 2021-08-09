@@ -1,11 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { editUser, deleteUser } from '../../store/session';
+import { editUser } from '../../store/session';
 import LogoutButton from '../auth/LogoutButton';
 import UserHistory from './UserHistory';
 import UserLikes from './UserLikes';
 import styles from '../../css-modules/Profile.module.css';
-import profileImg from '../../assets/profile-img.png';
+// import profileImg from '../../assets/profile-img.png';
 
 export default function Profile() {
     const user = useSelector(state => state.session.user);
