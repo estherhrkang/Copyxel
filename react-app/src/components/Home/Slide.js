@@ -160,7 +160,7 @@ export default function Slide({ drawing }) {
                                 {/* display or edit comment div */}
                                 <div className={styles.commentContainer}>
                                     {commentsArray?.map((comment) => (
-                                        <div key={comment.id}>
+                                        <div className={styles.comments} key={comment.id}>
                                             {/* {showEditComment ? (
                                                 <>
                                                     {editErrors.map((error, ind) => (<div key={ind}>{error}</div>))}

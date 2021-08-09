@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, Redirect } from 'react-router-dom';
-import { login, signUp } from '../../store/session';
+import { login, setUser, signUp } from '../../store/session';
 import styles from '../../css-modules/LoginForm.module.css';
 
 export default function LoginForm() {
@@ -60,6 +60,13 @@ export default function LoginForm() {
         </div>
         <div className={styles.buttons}>
           <button type='submit'>Log in</button>
+          <button type='button'
+            className={styles.cancelButton} 
+            onClick={() => {
+              setUsername('')
+              setPassword('')
+            }}
+          >Cancel</button>
           <button type='button' onClick={demoLogin}>Demo</button>
         </div>
         <div className={styles.signupButton}>
@@ -159,6 +166,15 @@ export function SignupForm() {
         </div>
         <div className={styles.buttons}>
           <button type='submit'>Sign up</button>
+          <button type='button'
+            className={styles.cancelButton} 
+            onClick={() => {
+              setUsername('')
+              setEmail('')
+              setPassword('')
+              setRepeatPassword('')
+            }}
+          >Cancel</button>
         </div>
         <div className={styles.loginButton}>
           <h5>Already have an account?</h5>

@@ -8,14 +8,13 @@ export default function PageNotFound() {
         <div className={styles.cardContainer}>
             <div className={styles.card}>
                 <div className={styles.card__front}>
-                    404
                     <div className={styles.canvas}>
-                        Page Not Found!
+                        <h2>404<br/><br/>Page Not Found!</h2>
                     </div>
                 </div>
                 <div className={styles.card__back}  onClick={() => history.push('/')}>
                     <div className={styles.canvas}>
-                        Back to Home?
+                        <h2>Back to Home?</h2>
                     </div>
                 </div>
             </div>

@@ -18,12 +18,6 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 
-# get a comment ?
-
-
-# 'create a comment on a drawing' route is @ drawing_routes
-
-
 # edit a comment on a drawing
 @comment_routes.route('/<int:comment_id>', methods=['PUT'])
 @login_required
@@ -35,14 +29,10 @@ def edit_comment(comment_id):
         comment.content=form.content.data
         db.session.commit()
 
-        # return comment.to_dict()
-
-        # comments = Comment.query.all()
-        # return {'comments': [comment.to_dict() for comment in comments]}
-
-        # return drawings!!
         drawings = Drawing.query.all()
-        return {'drawings': [drawing.to_dict() for drawing in drawings]}
+        currentUser = User.query.filter(User.id == current_user.id).first()
+        return {'drawings': [drawing.to_dict() for drawing in drawings], 'user': currentUser.to_dict()}
+        # return {'drawings': [drawing.to_dict() for drawing in drawings]}
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
@@ -54,12 +44,7 @@ def delete_comment(comment_id):
     db.session.delete(comment)
     db.session.commit()
 
-    # return comment.to_dict()
-
-    # comments = Comment.query.all()
-    # return {'comments': [comment.to_dict() for comment in comments]}
-
-    # return drawings!!
     drawings = Drawing.query.all()
-    return {'drawings': [drawing.to_dict() for drawing in drawings]}
-
+    currentUser = User.query.filter(User.id == current_user.id).first()
+    return {'drawings': [drawing.to_dict() for drawing in drawings], 'user': currentUser.to_dict()}
+    # return {'drawings': [drawing.to_dict() for drawing in drawings]}
