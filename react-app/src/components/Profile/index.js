@@ -16,31 +16,42 @@ export default function Profile() {
     const [errors, setErrors] = useState([]);
     const [username, setUsername] = useState(user?.username);
     const [email, setEmail] = useState(user?.email);
-    const [password, setPassword] = useState('');
+    const [password, setPassword] = useState(user?.password);
     const [confirmPassword, setConfirmPassword] = useState('');
 
-    useEffect(() => {
-        const errors = [];
-        if (!username) errors.push('Please provide a username.');
-        if (confirmPassword && password !== confirmPassword) errors.push('Password and confirm password must match.');
-        setErrors(errors);
-    }, [username, email, password, confirmPassword]);
+    // useEffect(() => {
+    //     const errors = [];
+    //     if (!username) errors.push('Please provide a username.');
+    //     if (confirmPassword && password !== confirmPassword) errors.push('Password and confirm password must match.');
+    //     setErrors(errors);
+    // }, [username, email, password, confirmPassword]);
 
     const onSave = async (e) => {
         e.preventDefault();
-        const payload = {
-            id: user.id,
-            username: username,
-            email: email,
-            password: password,
-            profile_img: ''
-        };
-        const data = await dispatch(editUser(payload));
-        if (data) {
-            setErrors(data);
+        setErrors([]);
+
+        let errors = [];
+        if (!username) errors.push('Please provide a username.');
+        if (!email) errors.push('Please provide an email.');
+        if (confirmPassword && password !== confirmPassword) errors.push('Password and confirm password must match.');
+
+        if (!errors.length) {
+            const payload = {
+                id: user.id,
+                username: username,
+                email: email,
+                password: password,
+                profile_img: ''
+            };
+            const data = await dispatch(editUser(payload));
+            if (data) {
+                setErrors(data);
+            } else {
+                setShowEditForm(false);
+            }
         } else {
-            setShowEditForm(false);
-        }
+            setErrors(errors);
+        };
     };
 
     return(
@@ -52,10 +63,10 @@ export default function Profile() {
                 </div>
                 {showEditForm ? (
                     <>
+                        {errors.map((error, ind) => (
+                            <div key={ind} className={styles.errors}>{error}</div>
+                        ))}
                         <form onSubmit={onSave}>
-                            <div>
-                                {errors.map((error, ind) => (<div key={ind}>{error}</div>))}
-                            </div>
                             <div>
                                 <input
                                     name='username'

@@ -143,111 +143,111 @@ export default function Slide({ drawing }) {
                     </div>
                     {user ? 
                         (
-                        <>
-                            {/* display or edit comment div */}
-                            <div className={styles.commentContainer}>
-                                {commentsArray?.map((comment) => (
-                                    <div key={comment.id}>
-                                        {showEditComment ? (
-                                            <>
-                                                {editErrors.map((error, ind) => (<div key={ind}>{error}</div>))}
-                                                <input
-                                                    value={editedContent}
-                                                    onChange={(e) => setEditedContent(e.target.value)}
-                                                >
-                                                </input>
-                                            </>
-                                        ) : (
-                                            <>
-                                                {comment.content}
-                                            </>
-                                        )}
-                                        {/* buttons: delete, save, cancel, showEdit */}
-                                        {showDeleteComment &&
-                                            <>
-                                                <FiDelete 
-                                                    onClick={() => handleDeleteComment(comment)} 
-                                                    className={styles.deleteButton}
-                                                />
-                                                <FaRegEdit 
-                                                    onClick={() => setShowEditComment(true)}
-                                                    className={styles.editButton}
-                                                />
-                                            </>
-                                        }
-                                        {showEditComment && 
-                                            <>
-                                                <FaRegSave 
-                                                    onClick={() => handleEditComment(comment)}
-                                                    className={styles.editButton}
-                                                />
-                                                <div 
-                                                    onClick={() => setShowEditComment(false)}
-                                                    className={styles.cancelButton}
-                                                >
-                                                    Cancel
-                                                </div>
-                                            </>
-                                        }
-                                    </div>
-                                ))}
-                            </div>
+                            <>
+                                {/* display or edit comment div */}
+                                <div className={styles.commentContainer}>
+                                    {commentsArray?.map((comment) => (
+                                        <div key={comment.id}>
+                                            {showEditComment ? (
+                                                <>
+                                                    {editErrors.map((error, ind) => (<div key={ind}>{error}</div>))}
+                                                    <input
+                                                        value={editedContent}
+                                                        onChange={(e) => setEditedContent(e.target.value)}
+                                                    >
+                                                    </input>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    {comment.content}
+                                                </>
+                                            )}
+                                            {/* buttons: delete, save, cancel, showEdit */}
+                                            {showDeleteComment &&
+                                                <>
+                                                    <FiDelete 
+                                                        onClick={() => handleDeleteComment(comment)} 
+                                                        className={styles.deleteButton}
+                                                    />
+                                                    <FaRegEdit 
+                                                        onClick={() => setShowEditComment(true)}
+                                                        className={styles.editButton}
+                                                    />
+                                                </>
+                                            }
+                                            {showEditComment && 
+                                                <>
+                                                    <FaRegSave 
+                                                        onClick={() => handleEditComment(comment)}
+                                                        className={styles.editButton}
+                                                    />
+                                                    <div 
+                                                        onClick={() => setShowEditComment(false)}
+                                                        className={styles.cancelButton}
+                                                    >
+                                                        Cancel
+                                                    </div>
+                                                </>
+                                            }
+                                        </div>
+                                    ))}
+                                </div>
 
-                            {/* leave comment div */}
-                            <div>
-                                {errors.map((error, ind) => (<div key={ind}>{error}</div>))}
-                                <input
-                                    className={styles.commentBox}
-                                    value={content}
-                                    placeholder='Leave a comment!'
-                                    onChange={(e) => setContent(e.target.value)}
-                                />
-                                {content ? (
-                                    <FaCommentMedical 
-                                        onClick={handleComment} 
-                                        className={styles.commentButton}
+                                {/* leave comment div */}
+                                <div>
+                                    {errors.map((error, ind) => (<div key={ind}>{error}</div>))}
+                                    <input
+                                        className={styles.commentBox}
+                                        value={content}
+                                        placeholder='Leave a comment!'
+                                        onChange={(e) => setContent(e.target.value)}
                                     />
-                                ) : (
-                                    <FaRegCommentDots 
-                                        className={styles.commentShowButton}
-                                    />
-                                ) 
-                                }
-                            </div>
+                                    {content ? (
+                                        <FaCommentMedical 
+                                            onClick={handleComment} 
+                                            className={styles.commentButton}
+                                        />
+                                    ) : (
+                                        <FaRegCommentDots 
+                                            className={styles.commentShowButton}
+                                        />
+                                    ) 
+                                    }
+                                </div>
 
-                            {/* like or delete comment div */}
-                            <div>
-                                {showLike ? (
-                                    <FaHeart 
-                                        onClick={handleUnlike} 
-                                        className={styles.likeButton} 
-                                        style={{ color: 'red' }}
-                                    />
-                                ) : (
-                                    <FaRegHeart 
-                                        onClick={handleLike} 
-                                        className={styles.likeButton}
-                                    />  
-                                )}
-                                {showDeleteDrawing && 
-                                    <BsFillTrashFill 
-                                        onClick={handleDeleteDrawing} 
-                                        className={styles.deleteButton}
-                                    />
-                                }
-                            </div>
-                        </>
+                                {/* like or delete comment div */}
+                                <div>
+                                    {showLike ? (
+                                        <FaHeart 
+                                            onClick={handleUnlike} 
+                                            className={styles.likeButton} 
+                                            style={{ color: 'red' }}
+                                        />
+                                    ) : (
+                                        <FaRegHeart 
+                                            onClick={handleLike} 
+                                            className={styles.likeButton}
+                                        />  
+                                    )}
+                                    {showDeleteDrawing && 
+                                        <BsFillTrashFill 
+                                            onClick={handleDeleteDrawing} 
+                                            className={styles.deleteButton}
+                                        />
+                                    }
+                                </div>
+                            </>
                         ) : (
-                        <>
-                            {/* display or edit comment div */}
-                            <div className={styles.commentContainer}>
-                                {commentsArray?.map((comment) => (
-                                    <div key={comment.id}>
-                                        {comment.content}
-                                    </div>
-                                ))}
-                            </div>
-                        </>
+                            <>
+                                {/* display comment div */}
+                                <div className={styles.commentContainer}>
+                                    {commentsArray?.map((comment) => (
+                                        <div key={comment.id}>
+                                            {comment.content}
+                                        </div>
+                                    ))}
+                                </div>
+                            </>
                         )
                     }
                 </div>
