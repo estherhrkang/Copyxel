@@ -19,6 +19,8 @@
     background-color: white;
     box-shadow: 10px 10px 0 #c0d9ef;
     border-radius: 5px;
+
+    margin-bottom: 30px;
 }
 
 .loginForm__errors {
@@ -81,6 +83,8 @@
     background-color: white;
     box-shadow: 10px 10px 0 #c0d9ef;
     border-radius: 5px;
+
+    margin-bottom: 30px;
 }
 
 .signupForm__errors {

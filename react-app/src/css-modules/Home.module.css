@@ -5,7 +5,7 @@
   height: 90vh;   
 }
 
-/* if drawings.length */
+/* if user */
 
 .swiperContainer {
   width: 100%;
@@ -20,7 +20,7 @@
   text-align: center;
 }
 
-/* if !drawings.length */
+/* if !user */
 
 .cardContainer {
     position: relative;

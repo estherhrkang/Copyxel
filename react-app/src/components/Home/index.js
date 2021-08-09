@@ -43,7 +43,7 @@ export default function Home() {
 
     return (
         <div className={styles.home}>
-            {drawingsArray?.length ? (
+            {user ? (
                 <>
                     <Swiper 
                         slidesPerView={4} 
@@ -63,12 +63,14 @@ export default function Home() {
                     <div className={styles.card}>
                         <div className={styles.card__front}>
                             <div className={styles.canvas}>
-                                <h2>Welcome, {user?.username}!</h2>
+                                <h2>Welcome!</h2>
                                 Copyxel is a memory game.<br/>
                                 <br/>
-                                You will be given 10 seconds to memorize a drawing.<br/>
+                                You will be given 10 seconds to memorize a pixel drawing.<br/>
                                 <br/>
-                                Then, you may take your time to recall and copy the pattern and color of the drawing you just saw.
+                                When the time is up, try your best to recall and copy the pattern and color of the drawing you just saw.<br/>
+                                <br/>
+                                Then, see the results!
                             </div>
                         </div>
                         <div className={styles.card__back} onClick={handlePlayButton}>
