@@ -77,7 +77,6 @@ export const createLike = (drawing) => async (dispatch) => {
         const data = await response.json();
         dispatch(setAllDrawings(data.drawings));
         dispatch(setUser(data.user));
-        return 'liked'
     } else {
         return ['An error occurred. Please try again.']
     };
@@ -90,11 +89,9 @@ export const createComment = ({ content, drawing_id}) => async (dispatch) => {
         body: JSON.stringify({content})
     });
     if (response.ok) {
-        console.log('---got response.ok---');
         const data = await response.json();
         dispatch(setAllDrawings(data.drawings));
     } else {
-        console.log('---response not ok---');
         return ['An error occurred. Please try again.']
     };
 };
@@ -134,8 +131,10 @@ export const deleteLike = (drawing) => async (dispatch) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(drawing)
     });
+    console.log('-------response---------', response);
     if (response.ok) {
         const data = await response.json();
+        console.log('------data--------', data);
         dispatch(setAllDrawings(data.drawings));
         dispatch(setUser(data.user));
     } else {
@@ -168,8 +167,8 @@ const initialState = {
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case SET_ALL_DRAWINGS:
-            return { drawings: action.payload }
-            // return { ...state, drawings: action.payload }
+            // return { drawings: action.payload }
+            return { ...state, drawings: action.payload }
         // case SET_DRAWING:
         //     return { ...state, drawing: action.payload }
         // case REMOVE_DRAWING:

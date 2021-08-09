@@ -11,13 +11,10 @@ import styles from '../../css-modules/Slide.module.css';
 
 export default function Slide({ drawing }) {
     const dispatch = useDispatch();
-    const allDrawings = useSelector(state => state.drawing.drawings);
     const user = useSelector(state => state.session.user);
     const usersDrawingsArray = user?.drawings;
     const usersLikedDrawingsArray = user?.liked_drawings;
     const commentsArray = drawing?.comments;
-
-    const lastComment = commentsArray[commentsArray.length - 1];
 
     const [showDeleteDrawing, setShowDeleteDrawing] = useState(false);
     const [showLike, setShowLike] = useState(false);
@@ -29,11 +26,13 @@ export default function Slide({ drawing }) {
     const [editErrors, setEditErrors] = useState([]);
 
     useEffect(() => {
+        
         for (let i = 0; i < usersDrawingsArray?.length; i++) {
             if (usersDrawingsArray[i].id === drawing.id) {
                 setShowDeleteDrawing(true);
             };
         };
+        if (!usersLikedDrawingsArray.length) setShowLike(false);
         for (let i = 0; i < usersLikedDrawingsArray?.length; i++) {
             if (usersLikedDrawingsArray[i].id === drawing.id) {
                 setShowLike(true);
@@ -42,9 +41,11 @@ export default function Slide({ drawing }) {
         for (let i = 0; i < commentsArray?.length; i++) {
             if (commentsArray[i].user_id === user?.id) {
                 setShowDeleteComment(true);
+            } else {
+                setShowDeleteComment(false);
             };
         };
-    }, [dispatch, drawing, user, allDrawings]);
+    }, [dispatch, drawing, user, usersDrawingsArray, usersLikedDrawingsArray, commentsArray]);
 
     // drawing.date_created -> Fri, 30 Jul 2021 00:00:00 GMT 
     function changeDateFormat(date) {
@@ -111,7 +112,7 @@ export default function Slide({ drawing }) {
     };
     const handleLike = () => {
         dispatch(createLike(drawing));
-        setShowLike(true);
+        // setShowLike(true);
     };
 
     const handleDeleteDrawing = async () => {

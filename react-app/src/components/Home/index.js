@@ -43,7 +43,7 @@ export default function Home() {
 
     return (
         <div className={styles.home}>
-            {user ? (
+            {user && drawingsArray?.length ? (
                 <>
                     <Swiper 
                         slidesPerView={4} 
